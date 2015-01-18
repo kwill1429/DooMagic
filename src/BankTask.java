@@ -33,7 +33,7 @@ public class BankTask extends Node implements Task {
 	@Override
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null) {
-			if(Inventory.getCount() <= 1) {
+			if (!Inventory.contains(FreeAlchemist.idOfItemToAlch)) {
 				return true;
 			}
 		}
@@ -54,13 +54,17 @@ public class BankTask extends Node implements Task {
 
 	private void withdrawMoreOfItemToAlch() {
 		if (Bank.getItem(FreeAlchemist.idOfItemToAlch) != null) {
-			System.out.println("withdrawMoreOfItemToAlch");
-			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 26) {
+			int numOfItems = Bank.getItemCount(FreeAlchemist.idOfItemToAlch);
+			System.out.println("Num of item in bank: "+numOfItems);
+			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 25) 
+			{
 				Bank.withdraw(FreeAlchemist.idOfItemToAlch, 26);
 			}
-			else {
-				Bank.withdraw(FreeAlchemist.idOfItemToAlch, Bank.getItemCount(FreeAlchemist.idOfItemToAlch));
+			else
+			{
+				Bank.withdraw(FreeAlchemist.idOfItemToAlch, Bank.Amount.ALL);
 			}
+			Bank.close();
 		}
 	}
 }
