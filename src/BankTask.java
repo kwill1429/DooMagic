@@ -1,3 +1,4 @@
+
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
@@ -6,9 +7,11 @@ import com.epicbot.api.rs3.methods.widget.Bank;
 
 public class BankTask extends Node implements Task {
 	
+	public static int idNatureRune = 561;
+	public static int idFireRune = 554;
+	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		System.out.println("It's time to bank!");
 		if (Bank.BankLocations.atBank()) {
 			System.out.println("We are in a bank already.");
@@ -22,8 +25,12 @@ public class BankTask extends Node implements Task {
 				else {
 					if (FreeAlchemist.isStaffEquipped()) {
 						System.out.println("Staff is equipped.");
-						withdrawNatureRunesIfNeeded();
+						withdrawRunesIfNeeded(idNatureRune);
 						withdrawMoreOfItemToAlch();
+					}
+					else {
+						withdrawRunesIfNeeded(idNatureRune);
+						withdrawRunesIfNeeded(idFireRune);
 					}
 				}
 			}
@@ -42,23 +49,22 @@ public class BankTask extends Node implements Task {
 	
 	
 	
-	private void withdrawNatureRunesIfNeeded() {
-		if (!Inventory.contains(561)) {
+	private void withdrawRunesIfNeeded(int idOfRunes) {
+		if (!Inventory.contains(idOfRunes)) {
 			System.out.println("No Nature Runes in Inventory");
-			if (Bank.getItem(561) != null) {
+			if (Bank.getItem(idOfRunes) != null) {
 				System.out.println("Nature Runes in Bank");
-				Bank.withdraw(561, Bank.Amount.ALL);
+				Bank.withdraw(idOfRunes, Bank.Amount.ALL);
 			}
 		}
 	}
 
 	private void withdrawMoreOfItemToAlch() {
 		if (Bank.getItem(FreeAlchemist.idOfItemToAlch) != null) {
-			int numOfItems = Bank.getItemCount(FreeAlchemist.idOfItemToAlch);
-			System.out.println("Num of item in bank: "+numOfItems);
-			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 25) 
+			System.out.println("Number of items to alch: "+Bank.getItemCount(true, FreeAlchemist.idOfItemToAlch));
+			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 26) 
 			{
-				Bank.withdraw(FreeAlchemist.idOfItemToAlch, 26);
+				Bank.withdraw(FreeAlchemist.idOfItemToAlch, 27);
 			}
 			else
 			{

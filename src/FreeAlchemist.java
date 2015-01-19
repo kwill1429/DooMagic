@@ -11,7 +11,9 @@ import com.epicbot.event.listeners.PaintListener;
 public class FreeAlchemist extends ActiveScript implements PaintListener 
 {
 	public static int idOfItemToAlch = 62;	
-	
+	private static int idLavaStaff = 3053;
+	private static int idSteamStaff = 11736;
+	private static int idFireStaff = 1387;
 		
 	@Override
 	public boolean onStart() {
@@ -25,14 +27,14 @@ public class FreeAlchemist extends ActiveScript implements PaintListener
 	}
 	
 	public static boolean isStaffEquipped() {
-		if (Equipment.containsOneOf(1387)) {
+		if (Equipment.containsOneOf(idFireStaff) || Equipment.containsOneOf(idLavaStaff) || Equipment.containsOneOf(idSteamStaff) ) {
 			return true;
 		}
 		return false;
 	}
 	
 	public static boolean areNecessaryItemsInInventory() {
-		if (Inventory.contains(561) && Inventory.contains(FreeAlchemist.idOfItemToAlch)) {
+		if (Inventory.contains(BankTask.idNatureRune) && Inventory.contains(FreeAlchemist.idOfItemToAlch)) {
 			return true;
 		}
 		return false;
