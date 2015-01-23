@@ -5,6 +5,7 @@ import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
+import com.epicbot.api.util.paint.Paint;
 import com.epicbot.event.listeners.PaintListener;
 	@Manifest(game=GameType.RS3, name="FreeAlchemist", author="Doomboy5888", description="Handles all your alchemy needs")
 
@@ -18,12 +19,19 @@ public class FreeAlchemist extends ActiveScript implements PaintListener
 	@Override
 	public boolean onStart() {
 		provide(new BankTask());
+		provide(new CastAlchemyTask());
 		return true;
 	}
 
 	@Override
 	public void onRepaint(Graphics2D arg0) {
 		// TODO Auto-generated method stub
+		//arg0.drawRect(291, 584, 200, 277);
+		//arg0.drawRect(575, 277, 200, 277);
+		arg0.drawRect(584, 291, 35, 31);
+		arg0.drawRect(633, 291, 35, 31);
+		arg0.drawRect(682, 291, 35, 31);
+		arg0.drawRect(731, 291, 35, 31);
 	}
 	
 	public static boolean isStaffEquipped() {
