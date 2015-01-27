@@ -1,3 +1,4 @@
+package alchemist;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
@@ -15,17 +16,17 @@ public class CastAlchemyTask extends Node implements Task {
 		Item item;
 		
 		if (Magic.canCastSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY)) {
-			while (FreeAlchemist.areNecessaryItemsInInventory()) {
+			while (AlchemistGlobal.areNecessaryItemsInInventory()) {
 				System.out.println("Casting High Level Alchemy");
 				Magic.castSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY, false);
 			}
 		}
 		else if (Magic.canCastSpell(Magic.Spell.LOW_LEVEL_ALCHEMY)) {
-			if (FreeAlchemist.areNecessaryItemsInInventory()) {
+			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
 				for (int i = 0; i < 28; i++) {
 					item = Inventory.getItemAt(i);
 					if (item != null) {
-						if (item.getID() == FreeAlchemist.idOfItemToAlch) {
+						if (item.getID() == AlchemistGlobal.idOfItemToAlch) {
 							Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
 							
 							try {
@@ -45,7 +46,7 @@ public class CastAlchemyTask extends Node implements Task {
 	@Override
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null) {
-			if (FreeAlchemist.areNecessaryItemsInInventory()) {
+			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
 				System.out.println("Have necessary items in inventory.");
 				return true;
 			}

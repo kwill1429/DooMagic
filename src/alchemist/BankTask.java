@@ -1,3 +1,4 @@
+package alchemist;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
@@ -23,7 +24,7 @@ public class BankTask extends Node implements Task {
 					Bank.setWithdrawNoted(false);
 				}
 				else {
-					if (FreeAlchemist.isStaffEquipped()) {
+					if (AlchemistGlobal.isStaffEquipped()) {
 						System.out.println("Staff is equipped.");
 						withdrawRunesIfNeeded(idNatureRune);
 						withdrawMoreOfItemToAlch();
@@ -41,7 +42,7 @@ public class BankTask extends Node implements Task {
 	@Override
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null) {
-			if (!Inventory.contains(FreeAlchemist.idOfItemToAlch)) {
+			if (!Inventory.contains(AlchemistGlobal.idOfItemToAlch)) {
 				return true;
 			}
 		}
@@ -51,7 +52,7 @@ public class BankTask extends Node implements Task {
 	private void withdrawRunesIfNeeded(int idOfRunes) {
 		if (!Inventory.contains(idOfRunes)) {
 			if (Inventory.isFull()) {
-				Bank.deposit(FreeAlchemist.idOfItemToAlch, 1);
+				Bank.deposit(AlchemistGlobal.idOfItemToAlch, 1);
 			}
 			System.out.println("No Nature Runes in Inventory");
 			if (Bank.getItem(idOfRunes) != null) {
@@ -62,13 +63,13 @@ public class BankTask extends Node implements Task {
 	}
 
 	private void withdrawMoreOfItemToAlch() {
-		if (Bank.getItem(FreeAlchemist.idOfItemToAlch) != null) {
-			System.out.println("Number of items to alch: "+Bank.getItemCount(true, FreeAlchemist.idOfItemToAlch));
-			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 26) {
-				Bank.withdraw(FreeAlchemist.idOfItemToAlch, 27);
+		if (Bank.getItem(AlchemistGlobal.idOfItemToAlch) != null) {
+			System.out.println("Number of items to alch: "+Bank.getItemCount(true, AlchemistGlobal.idOfItemToAlch));
+			if (Bank.getItemCount(AlchemistGlobal.idOfItemToAlch) > 26) {
+				Bank.withdraw(AlchemistGlobal.idOfItemToAlch, 27);
 			}
 			else {
-				Bank.withdraw(FreeAlchemist.idOfItemToAlch, Bank.Amount.ALL);
+				Bank.withdraw(AlchemistGlobal.idOfItemToAlch, Bank.Amount.ALL);
 			}
 			Bank.close();
 		}
