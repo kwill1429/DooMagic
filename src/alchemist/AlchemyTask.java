@@ -7,9 +7,9 @@ import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.wrappers.node.Item;
+import com.epicbot.api.util.Time;
 
-
-public class CastAlchemyTask extends Node implements Task {
+public class AlchemyTask extends Node implements Task {
 
 	@Override
 	public void run() {
@@ -23,19 +23,13 @@ public class CastAlchemyTask extends Node implements Task {
 		}
 		else if (Magic.canCastSpell(Magic.Spell.LOW_LEVEL_ALCHEMY)) {
 			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
-				for (int i = 0; i < 28; i++) {
-					item = Inventory.getItemAt(i);
+				while (Inventory.contains(AlchemistGlobal.idOfItemToAlch)) {
+					item = Inventory.getItem(AlchemistGlobal.idOfItemToAlch);
 					if (item != null) {
 						if (item.getID() == AlchemistGlobal.idOfItemToAlch) {
 							Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
-							
-							try {
-								Thread.sleep(1000);
-								Mouse.click(item.getCentralPoint(), true);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							Time.sleep(500, 1000);
+							Mouse.click(item.getCentralPoint(), true);
 						}
 					}
 				}			

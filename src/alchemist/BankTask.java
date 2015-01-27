@@ -8,9 +8,6 @@ import com.epicbot.api.rs3.methods.widget.Bank;
 
 public class BankTask extends Node implements Task {
 	
-	public static int idNatureRune = 561;
-	public static int idFireRune = 554;
-	
 	@Override
 	public void run() {
 		System.out.println("It's time to bank!");
@@ -26,12 +23,12 @@ public class BankTask extends Node implements Task {
 				else {
 					if (AlchemistGlobal.isStaffEquipped()) {
 						System.out.println("Staff is equipped.");
-						withdrawRunesIfNeeded(idNatureRune);
+						withdrawRunesIfNeeded(AlchemistGlobal.idNatureRune);
 						withdrawMoreOfItemToAlch();
 					}
 					else {
-						withdrawRunesIfNeeded(idNatureRune);
-						withdrawRunesIfNeeded(idFireRune);
+						withdrawRunesIfNeeded(AlchemistGlobal.idNatureRune);
+						withdrawRunesIfNeeded(AlchemistGlobal.idFireRune);
 						withdrawMoreOfItemToAlch();
 					}
 				}

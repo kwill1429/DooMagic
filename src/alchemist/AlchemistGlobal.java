@@ -9,11 +9,13 @@ import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 public class AlchemistGlobal {
 	private static int startingXP, endingXP;
 	private static int startingLvl, endingLvl;
-	private static int xpGained, lvlsGained;
-	public static int idOfItemToAlch = 62;	
+	private static int xpGained, lvlsGained;	
 	private static int idLavaStaff = 3053;
 	private static int idSteamStaff = 11736;
 	private static int idFireStaff = 1387;
+	public static int idNatureRune = 561;
+	public static int idFireRune = 554;
+	public static int idOfItemToAlch = 62;
 	
 	public static void recordInitialStats() {
 		if (Players.getLocal() != null) {
@@ -46,7 +48,7 @@ public class AlchemistGlobal {
 	}
 	
 	public static boolean areNecessaryItemsInInventory() {
-		if (Inventory.contains(BankTask.idNatureRune) && Inventory.contains(idOfItemToAlch)) {
+		if (Inventory.contains(idNatureRune) && Inventory.contains(idOfItemToAlch)) {
 			return true;
 		}
 		return false;
