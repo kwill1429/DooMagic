@@ -31,6 +31,7 @@ public class BankTask extends Node implements Task {
 					else {
 						withdrawRunesIfNeeded(idNatureRune);
 						withdrawRunesIfNeeded(idFireRune);
+						withdrawMoreOfItemToAlch();
 					}
 				}
 			}
@@ -47,10 +48,11 @@ public class BankTask extends Node implements Task {
 		return false;
 	}
 	
-	
-	
 	private void withdrawRunesIfNeeded(int idOfRunes) {
 		if (!Inventory.contains(idOfRunes)) {
+			if (Inventory.isFull()) {
+				Bank.deposit(FreeAlchemist.idOfItemToAlch, 1);
+			}
 			System.out.println("No Nature Runes in Inventory");
 			if (Bank.getItem(idOfRunes) != null) {
 				System.out.println("Nature Runes in Bank");
@@ -62,12 +64,10 @@ public class BankTask extends Node implements Task {
 	private void withdrawMoreOfItemToAlch() {
 		if (Bank.getItem(FreeAlchemist.idOfItemToAlch) != null) {
 			System.out.println("Number of items to alch: "+Bank.getItemCount(true, FreeAlchemist.idOfItemToAlch));
-			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 26) 
-			{
+			if (Bank.getItemCount(FreeAlchemist.idOfItemToAlch) > 26) {
 				Bank.withdraw(FreeAlchemist.idOfItemToAlch, 27);
 			}
-			else
-			{
+			else {
 				Bank.withdraw(FreeAlchemist.idOfItemToAlch, Bank.Amount.ALL);
 			}
 			Bank.close();
