@@ -17,34 +17,31 @@ public class AlchemyTask extends Node implements Task {
 		Item item;
 		
 		if (Magic.canCastSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY)) {
-			while (AlchemistGlobal.areNecessaryItemsInInventory()) {
+			while (BankTaskAlchemy.haveItemsInInventoryForAlchemy()) {
 				System.out.println("Casting High Level Alchemy");
 				Magic.castSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY, false);
 			}
 		}
 		else if (Magic.canCastSpell(Magic.Spell.LOW_LEVEL_ALCHEMY)) {
-			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
-				while (Inventory.contains(AlchemistGlobal.idOfItemToAlch) && !shouldStop) {
-					item = Inventory.getItem(AlchemistGlobal.idOfItemToAlch);
-					if (item != null) {
-						Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
-						Mouse.click(item.getCentralPoint(), true);
-					}
-					Time.sleep(500, 1500);
-				}			
-			}
+			while (BankTaskAlchemy.haveItemsInInventoryForAlchemy() && !shouldStop) {
+				item = Inventory.getItem(AlchemistGlobal.itemToAlch);
+				if (item != null) {
+					Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
+					Mouse.click(item.getCentralPoint(), true);
+				}
+				Time.sleep(500, 1500);
+			}			
 		}
 	}
 	
 	@Override
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null && !shouldStop) {
-			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
+			if (BankTaskAlchemy.haveItemsInInventoryForAlchemy()) {
 				System.out.println("Have necessary items in inventory.");
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

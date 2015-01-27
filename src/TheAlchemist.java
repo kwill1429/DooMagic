@@ -2,7 +2,7 @@
 import java.awt.Graphics2D;
 
 import alchemist.AlchemistGlobal;
-import alchemist.BankTask;
+import alchemist.BankTaskAlchemy;
 import alchemist.AlchemyTask;
 
 import com.epicbot.api.ActiveScript;
@@ -13,14 +13,14 @@ import com.epicbot.event.listeners.PaintListener;
 
 public class TheAlchemist extends ActiveScript implements PaintListener 
 {
-	private BankTask bankTask;
+	private BankTaskAlchemy bankTask;
 	private AlchemyTask alchemyTask;
 		
 	@Override
 	public boolean onStart() {
-		AlchemistGlobal.startingTime = getStartTime();
-		System.out.println("Start Time: "+ AlchemistGlobal.startingTime);
-		bankTask = new BankTask();
+		AlchemistGlobal.timeStart = getStartTime();
+		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
+		bankTask = new BankTaskAlchemy();
 		alchemyTask = new AlchemyTask();
 		provide(bankTask);
 		provide(alchemyTask);
@@ -29,8 +29,6 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 	
 	@Override
 	public void onStop() {
-		//AlchemistGlobal.recordEndingStats();
-		//AlchemistGlobal.calculateFinalStats();
 		alchemyTask.shouldStop = true;
 		revoke(alchemyTask);
 		revoke(bankTask);
