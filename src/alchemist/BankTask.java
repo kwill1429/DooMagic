@@ -39,7 +39,7 @@ public class BankTask extends Node implements Task {
 	@Override
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null) {
-			if (!Inventory.contains(AlchemistGlobal.idOfItemToAlch)) {
+			if (!AlchemistGlobal.areNecessaryItemsInInventory()) {
 				return true;
 			}
 		}
@@ -71,4 +71,6 @@ public class BankTask extends Node implements Task {
 			Bank.close();
 		}
 	}
+	
+	
 }

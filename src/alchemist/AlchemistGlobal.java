@@ -5,6 +5,8 @@ import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
+import com.epicbot.api.util.SkillData;
+import com.epicbot.api.util.Time;
 
 public class AlchemistGlobal {
 	private static int startingXP, endingXP;
@@ -16,6 +18,8 @@ public class AlchemistGlobal {
 	public static int idNatureRune = 561;
 	public static int idFireRune = 554;
 	public static int idOfItemToAlch = 62;
+	public static long startingTime, endingTime, runtimeLong;
+	public static String runtimeString, xpPerHour;
 	
 	public static void recordInitialStats() {
 		if (Players.getLocal() != null) {
@@ -34,10 +38,21 @@ public class AlchemistGlobal {
 	}
 	
 	public static void calculateFinalStats() {
-		xpGained = startingXP - endingXP;
+		xpGained = endingXP - startingXP;
 		lvlsGained = startingLvl - endingLvl;
 		System.out.println("Xp Gained: "+xpGained);
 		System.out.println("Levels Gained: "+lvlsGained);
+	}
+	
+	public static void retrieveSessionStats() {
+		xpGained = SkillData.MAGIC.getXpGained();
+		lvlsGained = SkillData.MAGIC.getLevelsGained();
+		endingTime = System.currentTimeMillis();
+		runtimeLong = endingTime - startingTime;
+		runtimeString = Time.format(runtimeLong);
+		xpPerHour = Time.getPerHour(xpGained, startingTime);
+		System.out.println("Runtime: "+ runtimeString);
+		System.out.println("Xp/hr: "+ xpPerHour);
 	}
 	
 	public static boolean isStaffEquipped() {

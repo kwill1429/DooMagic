@@ -10,7 +10,8 @@ import com.epicbot.api.rs3.wrappers.node.Item;
 import com.epicbot.api.util.Time;
 
 public class AlchemyTask extends Node implements Task {
-
+	public boolean shouldStop = false;
+	
 	@Override
 	public void run() {
 		Item item;
@@ -23,15 +24,13 @@ public class AlchemyTask extends Node implements Task {
 		}
 		else if (Magic.canCastSpell(Magic.Spell.LOW_LEVEL_ALCHEMY)) {
 			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
-				while (Inventory.contains(AlchemistGlobal.idOfItemToAlch)) {
+				while (Inventory.contains(AlchemistGlobal.idOfItemToAlch) && !shouldStop) {
 					item = Inventory.getItem(AlchemistGlobal.idOfItemToAlch);
 					if (item != null) {
-						if (item.getID() == AlchemistGlobal.idOfItemToAlch) {
-							Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
-							Time.sleep(500, 1000);
-							Mouse.click(item.getCentralPoint(), true);
-						}
+						Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
+						Mouse.click(item.getCentralPoint(), true);
 					}
+					Time.sleep(500, 1500);
 				}			
 			}
 		}
@@ -39,7 +38,7 @@ public class AlchemyTask extends Node implements Task {
 	
 	@Override
 	public boolean shouldExecute() {
-		if (Players.getLocal() != null) {
+		if (Players.getLocal() != null && !shouldStop) {
 			if (AlchemistGlobal.areNecessaryItemsInInventory()) {
 				System.out.println("Have necessary items in inventory.");
 				return true;
