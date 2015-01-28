@@ -9,13 +9,13 @@ import com.epicbot.api.util.Time;
 
 public class AlchemistGlobal {
 	public static ActiveScript script;
-	public static int xpGained, lvlsGained;	
+	public static int xpGained, lvlsGained;
 	public static int staffLava = 3053;
 	public static int staffSteam = 11736;
 	public static int staffFire = 1387;
-	public static int runeNature = 561;
-	public static int runeFire = 554;
 	public static int itemToAlch = 62;
+	public static int runeFire = 554;
+	public static int runeNature = 62;
 	public static long timeStart, timeEnd, runtimeLong;
 	public static String runtimeString, xpPerHour;
 	public static int[] runesAlchemy = {
