@@ -7,7 +7,6 @@ import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.wrappers.node.Item;
-import com.epicbot.api.util.Time;
 
 public class AlchemyTask extends Node implements Task {
 	public boolean shouldStop = false;
@@ -16,21 +15,20 @@ public class AlchemyTask extends Node implements Task {
 	public void run() {
 		Item item;
 		
-		if (Magic.canCastSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY)) {
-			while (BankTaskAlchemy.haveItemsInInventoryForAlchemy()) {
-				System.out.println("Casting High Level Alchemy");
-				Magic.castSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY, false);
-			}
-		}
-		else if (Magic.canCastSpell(Magic.Spell.LOW_LEVEL_ALCHEMY)) {
+		if (Magic.canCastSpell(AlchemistGlobal.selectedSpell)) {
 			while (BankTaskAlchemy.haveItemsInInventoryForAlchemy() && !shouldStop) {
 				item = Inventory.getItem(AlchemistGlobal.itemToAlch);
 				if (item != null) {
-					Magic.castSpell(Magic.Spell.LOW_LEVEL_ALCHEMY, false);
+					Magic.castSpell(AlchemistGlobal.selectedSpell, false);
 					Mouse.click(item.getCentralPoint(), true);
 				}
-				Time.sleep(500, 1500);
-			}			
+//				Time.sleep(2500, 3000);
+			}
+		}
+		else {
+			System.out.println("Stopping script as you have a high enough Magic level to cast the selected spell");	
+			shouldStop = true;
+			AlchemistGlobal.script.stop();
 		}
 	}
 	
@@ -44,4 +42,5 @@ public class AlchemyTask extends Node implements Task {
 		}
 		return false;
 	}
+	
 }

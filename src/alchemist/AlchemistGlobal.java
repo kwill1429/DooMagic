@@ -1,11 +1,14 @@
 package alchemist;
 
+import com.epicbot.api.ActiveScript;
 import com.epicbot.api.rs3.methods.tab.Equipment;
+import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
 
 public class AlchemistGlobal {
+	public static ActiveScript script;
 	public static int xpGained, lvlsGained;	
 	public static int staffLava = 3053;
 	public static int staffSteam = 11736;
@@ -18,6 +21,14 @@ public class AlchemistGlobal {
 	public static int[] runesAlchemy = {
 		AlchemistGlobal.runeNature, AlchemistGlobal.runeFire
 	};
+	public static int[] stavesAlchemy = {
+		3053, 11736, 1387
+	};
+	public static Magic.Spell[] spells = {
+		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
+	};
+	public static Magic.Spell selectedSpell = spells[1];
+	
 	
 	public static void retrieveSessionStats() {
 		xpGained = SkillData.MAGIC.getXpGained();

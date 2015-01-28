@@ -15,9 +15,11 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 {
 	private BankTaskAlchemy bankTask;
 	private AlchemyTask alchemyTask;
+	
 		
 	@Override
 	public boolean onStart() {
+		AlchemistGlobal.script = this;
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
 		bankTask = new BankTaskAlchemy();
@@ -37,7 +39,6 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		AlchemistGlobal.retrieveSessionStats();
 	}
 	
-
 	@Override
 	public void onRepaint(Graphics2D arg0) {
 		// TODO Auto-generated method stub

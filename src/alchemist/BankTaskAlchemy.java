@@ -1,14 +1,16 @@
 package alchemist;
 
+import helpers.BankHelper;
+import helpers.InventoryHelper;
+
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
-import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.Bank;
 
 public class BankTaskAlchemy extends Node implements Task {
-	
+		
 	@Override
 	public void run() {
 		System.out.println("It's time to bank!");
@@ -24,7 +26,7 @@ public class BankTaskAlchemy extends Node implements Task {
 				else {
 					System.out.println("Banking with noted disabled");
 					withdrawRunesForAlchemy();
-					withdrawMoreOfItemToAlch();
+					BankHelper.fillInventoryWithItem(AlchemistGlobal.itemToAlch);
 				}
 			}
 		}
@@ -40,48 +42,16 @@ public class BankTaskAlchemy extends Node implements Task {
 		return false;
 	}
 	
-	private void withdrawRunes(int[] runesToKeep, int id) {
-		if (!Inventory.contains(id)) {
-			if (Inventory.isFull()) {
-				Bank.depositAllExcept(runesToKeep);
-				withdrawRunes(runesToKeep, id);
-			}
-			else {
-				if (Bank.getItem(id) != null) {
-					Bank.withdraw(id, Bank.Amount.ALL);
-				}
-			}
-		}
-	}
-	
 	private void withdrawRunesForAlchemy() {
-		withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeNature);
-		if (!staffEquippedForAlch()) {
-			withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeFire);
+		BankHelper.withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeNature);
+		if (!InventoryHelper.validStaffEquipped(AlchemistGlobal.stavesAlchemy)) {
+			BankHelper.withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeFire);
 		}
 	}
 	
-	private static boolean staffEquippedForAlch() {
-		if (Equipment.containsOneOf(AlchemistGlobal.staffFire) || 
-				Equipment.containsOneOf(AlchemistGlobal.staffLava) || 
-				Equipment.containsOneOf(AlchemistGlobal.staffSteam) ) {
-					return true;
-		}
-		return false;
-	}
-	
-	private void withdrawMoreOfItemToAlch() {
-		System.out.println("Entered withdrawMoreOfItemToAlch");
-		int numToWithdraw;
-		if (Bank.getItem(AlchemistGlobal.itemToAlch) != null) {
-			numToWithdraw = 28 - Inventory.getCount();
-			Bank.withdraw(AlchemistGlobal.itemToAlch, numToWithdraw);
-			Bank.close();
-		}
-	}
 	
 	public static boolean haveItemsInInventoryForAlchemy() {
-		if (staffEquippedForAlch()) {
+		if (InventoryHelper.validStaffEquipped(AlchemistGlobal.stavesAlchemy)) {
 			if (Inventory.contains(AlchemistGlobal.runeNature) && 
 					Inventory.contains(AlchemistGlobal.itemToAlch)) {
 						return true;
