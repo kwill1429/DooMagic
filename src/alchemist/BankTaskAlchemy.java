@@ -40,13 +40,11 @@ public class BankTaskAlchemy extends Node implements Task {
 		return false;
 	}
 	
-	private void withdrawRunes(int id) {
+	private void withdrawRunes(int[] runesToKeep, int id) {
 		if (!Inventory.contains(id)) {
 			if (Inventory.isFull()) {
-				if (Inventory.contains(AlchemistGlobal.itemToAlch)) {
-					Bank.deposit(AlchemistGlobal.itemToAlch, 1);
-					withdrawRunes(id);
-				}
+				Bank.depositAllExcept(runesToKeep);
+				withdrawRunes(runesToKeep, id);
 			}
 			else {
 				if (Bank.getItem(id) != null) {
@@ -57,9 +55,9 @@ public class BankTaskAlchemy extends Node implements Task {
 	}
 	
 	private void withdrawRunesForAlchemy() {
-		withdrawRunes(AlchemistGlobal.runeNature);
+		withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeNature);
 		if (!staffEquippedForAlch()) {
-			withdrawRunes(AlchemistGlobal.runeFire);
+			withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeFire);
 		}
 	}
 	

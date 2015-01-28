@@ -15,6 +15,9 @@ public class AlchemistGlobal {
 	public static int itemToAlch = 62;
 	public static long timeStart, timeEnd, runtimeLong;
 	public static String runtimeString, xpPerHour;
+	public static int[] runesAlchemy = {
+		AlchemistGlobal.runeNature, AlchemistGlobal.runeFire
+	};
 	
 	public static void retrieveSessionStats() {
 		xpGained = SkillData.MAGIC.getXpGained();
@@ -40,6 +43,4 @@ public class AlchemistGlobal {
 		}
 		return false;
 	}
-	
-	
 }
