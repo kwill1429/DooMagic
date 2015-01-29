@@ -25,11 +25,13 @@ public class AlchemistOptionPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public JComboBox<String> spellSelector;
 	public JFormattedTextField tbNumberOfCasts, tbItemToUse;
-	public JButton btnStart;
+	public JButton btnFindItem, btnStart;
+	private JLabel lblTitle, lblSpellSelection, lblNumberOfTimes, lblItemToUse, lblItemSelected;
 	/**
 	 * Create the panel.
 	 */
 	public AlchemistOptionPanel() {
+		setBackground(Color.GRAY);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{50, 144, 0, 71, 50, 0};
 		gridBagLayout.rowHeights = new int[]{27, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -37,17 +39,19 @@ public class AlchemistOptionPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblTitle = new JLabel("The Alchemist");
-		lblTitle.setForeground(Color.BLACK);
+		lblTitle = new JLabel("The Alchemist");
+		lblTitle.setForeground(Color.WHITE);
 		lblTitle.setFont(new Font("Helvetica Neue", Font.PLAIN, 20));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+		gbc_lblTitle.gridheight = 2;
 		gbc_lblTitle.gridwidth = 3;
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTitle.gridx = 1;
 		gbc_lblTitle.gridy = 0;
 		add(lblTitle, gbc_lblTitle);
 		
-		JLabel lblSpellSelection = new JLabel("Spell To Cast:");
+		lblSpellSelection = new JLabel("Spell To Cast:");
+		lblSpellSelection.setForeground(Color.WHITE);
 		lblSpellSelection.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblSpellSelection = new GridBagConstraints();
 		gbc_lblSpellSelection.anchor = GridBagConstraints.WEST;
@@ -56,7 +60,7 @@ public class AlchemistOptionPanel extends JPanel {
 		gbc_lblSpellSelection.gridy = 2;
 		add(lblSpellSelection, gbc_lblSpellSelection);
 		
-		JComboBox<String> spellSelector = new JComboBox<String>();
+		spellSelector = new JComboBox<String>();
 		spellSelector.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		spellSelector.setModel(new DefaultComboBoxModel<String>(new String[] {"Low Alchemy", "High Alchemy"}));
 		spellSelector.setSelectedIndex(0);
@@ -67,7 +71,9 @@ public class AlchemistOptionPanel extends JPanel {
 		gbc_spellSelector.gridy = 2;
 		add(spellSelector, gbc_spellSelector);
 		
-		JLabel lblNumberOfTimes = new JLabel("Number of Times To Cast:");
+		lblNumberOfTimes = new JLabel("Number of Times To Cast:");
+		lblNumberOfTimes.setForeground(Color.WHITE);
+		lblNumberOfTimes.setBackground(Color.WHITE);
 		lblNumberOfTimes.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblNumberOfTimes = new GridBagConstraints();
 		gbc_lblNumberOfTimes.insets = new Insets(0, 0, 5, 5);
@@ -75,7 +81,7 @@ public class AlchemistOptionPanel extends JPanel {
 		gbc_lblNumberOfTimes.gridy = 3;
 		add(lblNumberOfTimes, gbc_lblNumberOfTimes);
 		
-		JFormattedTextField tbNumberOfCasts = new JFormattedTextField();
+		tbNumberOfCasts = new JFormattedTextField();
 		tbNumberOfCasts.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		GridBagConstraints gbc_tbNumberOfCasts = new GridBagConstraints();
 		gbc_tbNumberOfCasts.insets = new Insets(0, 0, 5, 5);
@@ -84,7 +90,8 @@ public class AlchemistOptionPanel extends JPanel {
 		gbc_tbNumberOfCasts.gridy = 3;
 		add(tbNumberOfCasts, gbc_tbNumberOfCasts);
 		
-		JLabel lblItemToUse = new JLabel("Item To Use:");
+		lblItemToUse = new JLabel("Item To Use:");
+		lblItemToUse.setForeground(Color.WHITE);
 		lblItemToUse.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblItemToUse = new GridBagConstraints();
 		gbc_lblItemToUse.anchor = GridBagConstraints.WEST;
@@ -93,7 +100,7 @@ public class AlchemistOptionPanel extends JPanel {
 		gbc_lblItemToUse.gridy = 4;
 		add(lblItemToUse, gbc_lblItemToUse);
 		
-		JFormattedTextField tbItemToUse = new JFormattedTextField();
+		tbItemToUse = new JFormattedTextField();
 		tbItemToUse.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		GridBagConstraints gbc_tbItemToUse = new GridBagConstraints();
 		gbc_tbItemToUse.insets = new Insets(0, 0, 5, 5);
@@ -102,15 +109,23 @@ public class AlchemistOptionPanel extends JPanel {
 		gbc_tbItemToUse.gridy = 4;
 		add(tbItemToUse, gbc_tbItemToUse);
 		
-		Label lblItemSelected = new Label("");
+		lblItemSelected = new JLabel("");
+		lblItemSelected.setForeground(Color.WHITE);
 		lblItemSelected.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
-		lblItemSelected.setAlignment(Label.CENTER);
 		GridBagConstraints gbc_lblItemSelected = new GridBagConstraints();
 		gbc_lblItemSelected.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblItemSelected.insets = new Insets(0, 0, 5, 5);
 		gbc_lblItemSelected.gridx = 3;
 		gbc_lblItemSelected.gridy = 5;
 		add(lblItemSelected, gbc_lblItemSelected);
+		
+		btnFindItem = new JButton("Find Item");
+		btnFindItem.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
+		GridBagConstraints gbc_btnFindItem = new GridBagConstraints();
+		gbc_btnFindItem.insets = new Insets(0, 0, 5, 5);
+		gbc_btnFindItem.gridx = 3;
+		gbc_btnFindItem.gridy = 6;
+		add(btnFindItem, gbc_btnFindItem);
 		
 		JButton btnStart = new JButton("Start Script");
 		btnStart.setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
