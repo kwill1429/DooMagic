@@ -22,7 +22,12 @@ public class AlchemyTask extends Node implements Task {
 					Magic.castSpell(AlchemistGlobal.selectedSpell, false);
 					Mouse.click(item.getCentralPoint(), true);
 				}
-//				Time.sleep(2500, 3000);
+				try {
+					Thread.sleep(2500, 3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		else {

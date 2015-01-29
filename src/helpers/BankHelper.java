@@ -13,6 +13,7 @@ public class BankHelper {
 			}
 			else {
 				if (Bank.getItem(id) != null) {
+					System.out.println("Withdrawing nature rune");
 					Bank.withdraw(id, Bank.Amount.ALL);
 				}
 			}

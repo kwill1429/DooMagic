@@ -9,13 +9,14 @@ import com.epicbot.api.util.Time;
 
 public class AlchemistGlobal {
 	public static ActiveScript script;
+	public static int numOfCasts;
 	public static int xpGained, lvlsGained;
 	public static int staffLava = 3053;
 	public static int staffSteam = 11736;
 	public static int staffFire = 1387;
-	public static int itemToAlch = 62;
+	public static int itemToAlch = 63;
 	public static int runeFire = 554;
-	public static int runeNature = 62;
+	public static int runeNature = 561;
 	public static long timeStart, timeEnd, runtimeLong;
 	public static String runtimeString, xpPerHour;
 	public static int[] runesAlchemy = {
@@ -27,7 +28,7 @@ public class AlchemistGlobal {
 	public static Magic.Spell[] spells = {
 		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
 	};
-	public static Magic.Spell selectedSpell = spells[1];
+	public static Magic.Spell selectedSpell = spells[0];
 	
 	
 	public static void retrieveSessionStats() {

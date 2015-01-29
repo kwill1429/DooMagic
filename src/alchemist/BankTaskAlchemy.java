@@ -8,6 +8,7 @@ import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.Bank;
+import com.epicbot.api.rs3.methods.widget.Bank.Amount;
 
 public class BankTaskAlchemy extends Node implements Task {
 		
@@ -19,15 +20,13 @@ public class BankTaskAlchemy extends Node implements Task {
 			Bank.open();
 			if (Bank.isOpen()) {
 				System.out.println("Bank is open");
-				if (Bank.isWithdrawNotedEnabled()) {
-					System.out.println("WithdrawNote is enabled.");
-					Bank.setWithdrawNoted(false);
+				if (!Bank.isWithdrawNotedEnabled()) {
+					Bank.setWithdrawNoted(true);
 				}
-				else {
-					System.out.println("Banking with noted disabled");
-					withdrawRunesForAlchemy();
-					BankHelper.fillInventoryWithItem(AlchemistGlobal.itemToAlch);
-				}
+				withdrawRunesForAlchemy();
+				Bank.withdraw(AlchemistGlobal.itemToAlch - 1, Amount.ALL);
+				Bank.close();
+				//BankHelper.fillInventoryWithItem(AlchemistGlobal.itemToAlch);
 			}
 		}
 	}
@@ -43,6 +42,7 @@ public class BankTaskAlchemy extends Node implements Task {
 	}
 	
 	private void withdrawRunesForAlchemy() {
+		System.out.println("Entering withdrawRunes");
 		BankHelper.withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeNature);
 		if (!InventoryHelper.validStaffEquipped(AlchemistGlobal.stavesAlchemy)) {
 			BankHelper.withdrawRunes(AlchemistGlobal.runesAlchemy, AlchemistGlobal.runeFire);
