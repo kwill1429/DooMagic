@@ -17,7 +17,7 @@ public class AlchemyTask extends Node implements Task {
 		
 		if (Magic.canCastSpell(AlchemistGlobal.selectedSpell)) {
 			while (BankTaskAlchemy.haveItemsInInventoryForAlchemy() && !shouldStop) {
-				item = Inventory.getItem(AlchemistGlobal.itemToAlch);
+				item = Inventory.getItem(AlchemistGlobal.itemToAlchNoted);
 				if (item != null) {
 					Magic.castSpell(AlchemistGlobal.selectedSpell, false);
 					Mouse.click(item.getCentralPoint(), true);

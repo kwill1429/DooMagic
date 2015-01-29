@@ -24,7 +24,7 @@ public class BankTaskAlchemy extends Node implements Task {
 					Bank.setWithdrawNoted(true);
 				}
 				withdrawRunesForAlchemy();
-				Bank.withdraw(AlchemistGlobal.itemToAlch - 1, Amount.ALL);
+				Bank.withdraw(AlchemistGlobal.itemToAlch, Amount.ALL);
 				Bank.close();
 				//BankHelper.fillInventoryWithItem(AlchemistGlobal.itemToAlch);
 			}
@@ -53,7 +53,7 @@ public class BankTaskAlchemy extends Node implements Task {
 	public static boolean haveItemsInInventoryForAlchemy() {
 		if (InventoryHelper.validStaffEquipped(AlchemistGlobal.stavesAlchemy)) {
 			if (Inventory.contains(AlchemistGlobal.runeNature) && 
-					Inventory.contains(AlchemistGlobal.itemToAlch)) {
+					Inventory.contains(AlchemistGlobal.itemToAlchNoted)) {
 						return true;
 			}
 		}

@@ -2,6 +2,7 @@
 import java.awt.Graphics2D;
 
 import alchemist.AlchemistGlobal;
+import alchemist.AlchemistOptionPanel;
 import alchemist.BankTaskAlchemy;
 import alchemist.AlchemyTask;
 
@@ -15,11 +16,12 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 {
 	private BankTaskAlchemy bankTask;
 	private AlchemyTask alchemyTask;
-	
+	public AlchemistOptionPanel optionPanel;
 		
 	@Override
 	public boolean onStart() {
 		AlchemistGlobal.script = this;
+		this.setName("The Alchemist");
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
 		bankTask = new BankTaskAlchemy();

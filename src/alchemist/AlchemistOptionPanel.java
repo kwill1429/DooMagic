@@ -23,7 +23,9 @@ public class AlchemistOptionPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public JComboBox<String> spellSelector;
+	public JFormattedTextField tbNumberOfCasts, tbItemToUse;
+	public JButton btnStart;
 	/**
 	 * Create the panel.
 	 */

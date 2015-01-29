@@ -14,7 +14,8 @@ public class AlchemistGlobal {
 	public static int staffLava = 3053;
 	public static int staffSteam = 11736;
 	public static int staffFire = 1387;
-	public static int itemToAlch = 63;
+	public static int itemToAlch = 62;
+	public static int itemToAlchNoted = itemToAlch + 1;
 	public static int runeFire = 554;
 	public static int runeNature = 561;
 	public static long timeStart, timeEnd, runtimeLong;
@@ -50,7 +51,7 @@ public class AlchemistGlobal {
 	}
 	
 	public static boolean areNecessaryItemsInInventory() {
-		if (Inventory.contains(runeNature) && Inventory.contains(itemToAlch)) {
+		if (Inventory.contains(runeNature) && Inventory.contains(itemToAlchNoted)) {
 			return true;
 		}
 		return false;
