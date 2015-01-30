@@ -1,5 +1,7 @@
 package alchemist;
 
+import javax.swing.JFrame;
+
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.Magic;
@@ -8,6 +10,7 @@ import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
 
 public class AlchemistGlobal {
+	public static JFrame frame;
 	public static ActiveScript script;
 	public static int numOfCasts;
 	public static int xpGained, lvlsGained;
