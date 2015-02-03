@@ -1,4 +1,4 @@
-package helpers.objects;
+package utilities.objects;
 
 import com.epicbot.api.rs3.methods.tab.Magic;
 

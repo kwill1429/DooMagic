@@ -1,7 +1,7 @@
-package helpers;
+package utilities;
 
-import helpers.objects.MagicSpell;
-import helpers.objects.RuneForSpell;
+import utilities.objects.MagicSpell;
+import utilities.objects.RuneForSpell;
 import alchemist.AlchemistGlobal;
 
 import com.epicbot.api.rs3.methods.tab.Equipment;

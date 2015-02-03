@@ -1,9 +1,8 @@
 package alchemist;
 
-import helpers.objects.MagicSpell;
-
 import javax.swing.JFrame;
 
+import utilities.objects.MagicSpell;
 import alchemist.spells.alchemy.HighAlchemySpell;
 import alchemist.spells.alchemy.LowAlchemySpell;
 

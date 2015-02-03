@@ -1,4 +1,4 @@
-package helpers.objects;
+package utilities.objects;
 
 public class RuneForSpell {
 	private int numOfRunes;

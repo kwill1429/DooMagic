@@ -1,11 +1,10 @@
 package alchemist.spells.alchemy;
 
+import utilities.objects.MagicSpell;
+import utilities.objects.RuneForSpell;
 import alchemist.AlchemistGlobal;
 
 import com.epicbot.api.rs3.methods.tab.Magic;
-
-import helpers.objects.MagicSpell;
-import helpers.objects.RuneForSpell;
 
 public class LowAlchemySpell extends MagicSpell {
 	

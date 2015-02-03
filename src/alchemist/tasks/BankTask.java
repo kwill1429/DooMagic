@@ -1,6 +1,6 @@
 package alchemist.tasks;
 
-import helpers.InventoryHelper;
+import utilities.InventoryHelper;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
