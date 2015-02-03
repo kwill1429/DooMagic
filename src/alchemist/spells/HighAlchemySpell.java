@@ -4,8 +4,8 @@ import alchemist.AlchemistGlobal;
 
 import com.epicbot.api.rs3.methods.tab.Magic;
 
-import helpers.MagicSpell;
-import helpers.RuneForSpell;
+import helpers.objects.MagicSpell;
+import helpers.objects.RuneForSpell;
 
 public class HighAlchemySpell extends MagicSpell {
 

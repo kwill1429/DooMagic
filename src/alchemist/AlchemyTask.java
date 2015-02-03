@@ -2,7 +2,6 @@ package alchemist;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
-import com.epicbot.api.rs3.methods.interactive.Players;
 
 public class AlchemyTask extends Node implements Task {
 	public boolean shouldStop = false;
@@ -35,12 +34,12 @@ public class AlchemyTask extends Node implements Task {
 	
 	@Override
 	public boolean shouldExecute() {
-		if (Players.getLocal() != null && !shouldStop) {
-			if (BankTaskAlchemy.haveItemsInInventoryForAlchemy()) {
-				System.out.println("Have necessary items in inventory.");
-				return true;
-			}
-		}
+//		if (Players.getLocal() != null && !shouldStop) {
+//			if (BankTaskAlchemy.haveItemsInInventoryForAlchemy()) {
+//				System.out.println("Have necessary items in inventory.");
+//				return true;
+//			}
+//		}
 		return false;
 	}
 	

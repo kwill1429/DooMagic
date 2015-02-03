@@ -1,4 +1,4 @@
-package helpers;
+package helpers.objects;
 
 public class RuneForSpell {
 	private int numOfRunes;
@@ -47,7 +47,7 @@ public class RuneForSpell {
 		this.hasSubstitute = hasSubstitute;
 	}
 
-	public boolean isCanUseStaff() {
+	public boolean canUseStaff() {
 		return canUseStaff;
 	}
 

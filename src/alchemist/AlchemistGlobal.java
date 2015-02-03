@@ -1,6 +1,6 @@
 package alchemist;
 
-import helpers.MagicSpell;
+import helpers.objects.MagicSpell;
 
 import javax.swing.JFrame;
 
