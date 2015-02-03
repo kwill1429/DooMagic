@@ -1,11 +1,13 @@
 package alchemist;
 
+import helpers.MagicSpell;
+
 import javax.swing.JFrame;
 
+import alchemist.spells.HighAlchemySpell;
+import alchemist.spells.LowAlchemySpell;
+
 import com.epicbot.api.ActiveScript;
-import com.epicbot.api.rs3.methods.tab.Equipment;
-import com.epicbot.api.rs3.methods.tab.Magic;
-import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
 
@@ -31,11 +33,34 @@ public class AlchemistGlobal {
 	public static int[] stavesAlchemy = {
 		3053, 11736, 1387
 	};
-	public static Magic.Spell[] spells = {
-		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
-	};
-	public static Magic.Spell selectedSpell = spells[0];
 	
+	private MagicSpell[] spells;
+//	public static Magic.Spell[] spells = {
+//		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
+//	};
+//	public static Magic.Spell selectedSpell = spells[0];
+	public AlchemistGlobal() {
+		this.setupAvailableSpells();
+	}
+	
+	
+	public MagicSpell[] getSpells() {
+		return spells;
+	}
+
+
+	public void setSpells(MagicSpell[] spells) {
+		this.spells = spells;
+	}
+
+
+	public void setupAvailableSpells() {
+		spells = new MagicSpell[2];
+		MagicSpell lowAlchemy = new LowAlchemySpell();
+		MagicSpell highAlchemy = new HighAlchemySpell();
+		spells[0] = lowAlchemy;
+		spells[1] = highAlchemy;
+	}
 	
 	public static void retrieveSessionStats() {
 		xpGained = SkillData.MAGIC.getXpGained();
@@ -48,17 +73,17 @@ public class AlchemistGlobal {
 		System.out.println("Xp/hr: "+ xpPerHour);
 	}
 	
-	public static boolean isStaffEquipped() {
-		if (Equipment.containsOneOf(staffFire) || Equipment.containsOneOf(staffLava) || Equipment.containsOneOf(staffSteam) ) {
-			return true;
-		}
-		return false;
-	}
-	
-	public static boolean areNecessaryItemsInInventory() {
-		if (Inventory.contains(runeNature) && Inventory.contains(itemToAlchNoted)) {
-			return true;
-		}
-		return false;
-	}
+//	public static boolean isStaffEquipped() {
+//		if (Equipment.containsOneOf(staffFire) || Equipment.containsOneOf(staffLava) || Equipment.containsOneOf(staffSteam) ) {
+//			return true;
+//		}
+//		return false;
+//	}
+//	
+//	public static boolean areNecessaryItemsInInventory() {
+//		if (Inventory.contains(runeNature) && Inventory.contains(itemToAlchNoted)) {
+//			return true;
+//		}
+//		return false;
+//	}
 }
