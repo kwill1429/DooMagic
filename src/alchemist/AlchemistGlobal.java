@@ -21,6 +21,8 @@ public class AlchemistGlobal {
 	public static int itemToAlchNoted = itemToAlch + 1;
 	public static int runeFire = 554;
 	public static int runeNature = 561;
+	public static int runeSteam = 4694;
+	public static int runeLava = 4699;
 	public static long timeStart, timeEnd, runtimeLong;
 	public static String runtimeString, xpPerHour;
 	public static int[] runesAlchemy = {
