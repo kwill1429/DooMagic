@@ -2,7 +2,7 @@
 import java.awt.Graphics2D;
 
 import alchemist.AlchemistGlobal;
-import alchemist.BankTask;
+import alchemist.tasks.BankTask;
 
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.GameType;

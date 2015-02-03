@@ -1,4 +1,4 @@
-package alchemist.spells;
+package alchemist.spells.alchemy;
 
 import alchemist.AlchemistGlobal;
 

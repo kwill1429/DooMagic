@@ -1,4 +1,4 @@
-package alchemist;
+package alchemist.tasks;
 
 import helpers.InventoryHelper;
 

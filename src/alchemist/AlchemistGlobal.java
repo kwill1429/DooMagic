@@ -4,8 +4,8 @@ import helpers.objects.MagicSpell;
 
 import javax.swing.JFrame;
 
-import alchemist.spells.HighAlchemySpell;
-import alchemist.spells.LowAlchemySpell;
+import alchemist.spells.alchemy.HighAlchemySpell;
+import alchemist.spells.alchemy.LowAlchemySpell;
 
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.util.SkillData;

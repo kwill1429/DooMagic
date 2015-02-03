@@ -1,4 +1,4 @@
-package alchemist;
+package alchemist.tasks;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
