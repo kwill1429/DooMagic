@@ -34,32 +34,21 @@ public class AlchemistGlobal {
 		3053, 11736, 1387
 	};
 	
-	private MagicSpell[] spells;
+	public static MagicSpell[] spells;
+	public static MagicSpell selectedSpell;
 //	public static Magic.Spell[] spells = {
 //		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
 //	};
 //	public static Magic.Spell selectedSpell = spells[0];
-	public AlchemistGlobal() {
-		this.setupAvailableSpells();
-	}
-	
-	
-	public MagicSpell[] getSpells() {
-		return spells;
-	}
 
 
-	public void setSpells(MagicSpell[] spells) {
-		this.spells = spells;
-	}
-
-
-	public void setupAvailableSpells() {
+	public static void setupAvailableSpells() {
 		spells = new MagicSpell[2];
 		MagicSpell lowAlchemy = new LowAlchemySpell();
 		MagicSpell highAlchemy = new HighAlchemySpell();
 		spells[0] = lowAlchemy;
 		spells[1] = highAlchemy;
+		selectedSpell = spells[0];
 	}
 	
 	public static void retrieveSessionStats() {
