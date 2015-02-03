@@ -10,8 +10,8 @@ import helpers.RuneForSpell;
 public class HighAlchemySpell extends MagicSpell {
 
 	public HighAlchemySpell() {
-		this.setSpell(Magic.Spell.LOW_LEVEL_ALCHEMY);
-		this.setSpellName("Low Alchemy");
+		this.setSpell(Magic.Spell.HIGH_LEVEL_ALCHEMY);
+		this.setSpellName("High Alchemy");
 		this.setTimeToCast(3000);
 		
 		int[] staves = { AlchemistGlobal.staffFire,
@@ -21,12 +21,12 @@ public class HighAlchemySpell extends MagicSpell {
 		this.setStaves(staves);
 		
 		RuneForSpell natureRune = new RuneForSpell("Nature Rune", AlchemistGlobal.runeNature, 1, false, false);
-		RuneForSpell fireRune = new RuneForSpell("Fire Rune", AlchemistGlobal.runeFire, 3, true, true);
+		RuneForSpell fireRune = new RuneForSpell("Fire Rune", AlchemistGlobal.runeFire, 5, true, true);
 		RuneForSpell[] requiredRunes = { natureRune, fireRune };
 		this.setRequiredRunes(requiredRunes);
 		
-		RuneForSpell steamRune = new RuneForSpell("Steam Rune", AlchemistGlobal.runeSteam, 3, false, true);
-		RuneForSpell lavaRune = new RuneForSpell("Lava Rune", AlchemistGlobal.runeLava, 3, false, true);
+		RuneForSpell steamRune = new RuneForSpell("Steam Rune", AlchemistGlobal.runeSteam, 5, false, true);
+		RuneForSpell lavaRune = new RuneForSpell("Lava Rune", AlchemistGlobal.runeLava, 5, false, true);
 		RuneForSpell[] substituteRunes = { steamRune, lavaRune };
 		this.setSubstituteRunes(substituteRunes);
 	}
