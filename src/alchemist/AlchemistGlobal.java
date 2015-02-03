@@ -48,7 +48,7 @@ public class AlchemistGlobal {
 		MagicSpell highAlchemy = new HighAlchemySpell();
 		spells[0] = lowAlchemy;
 		spells[1] = highAlchemy;
-		selectedSpell = spells[0];
+		selectedSpell = spells[1];
 	}
 	
 	public static void retrieveSessionStats() {

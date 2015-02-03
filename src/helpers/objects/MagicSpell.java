@@ -7,6 +7,8 @@ public class MagicSpell {
 	private RuneForSpell[] requiredRunes;
 	private String spellName;
 	private int timeToCast;
+	private int levelToCast;
+	private boolean requiresAnItem;
 	
 		
 	public Magic.Spell getSpell() {
@@ -39,6 +41,22 @@ public class MagicSpell {
 	
 	public void setTimeToCast(int timeToCast) {
 		this.timeToCast = timeToCast;
+	}
+	
+	public int getLevelToCast() {
+		return levelToCast;
+	}
+
+	public void setLevelToCast(int levelToCast) {
+		this.levelToCast = levelToCast;
+	}
+
+	public boolean requiresAnItem() {
+		return requiresAnItem;
+	}
+
+	public void setRequiresAnItem(boolean requiresAnItem) {
+		this.requiresAnItem = requiresAnItem;
 	}
 
 	@Override

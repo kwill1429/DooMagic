@@ -20,7 +20,7 @@ public class BankTask extends Node implements Task {
 		//System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null && count < 1) {
 			System.out.println("Count less than 1");
-			if (InventoryHelper.areItemsInInventory()) {
+			if (InventoryHelper.areRunesInInventory()) {
 				System.out.println("NecessaryItems are in Inventory.");
 				return false;
 			}

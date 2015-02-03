@@ -18,7 +18,7 @@ public class InventoryHelper {
 		return false;
 	}
 	
-	public static boolean areItemsInInventory() {
+	public static boolean areRunesInInventory() {
 		MagicSpell spell = AlchemistGlobal.selectedSpell;
 		RuneForSpell rune;
 		RuneForSpell[] requiredRunes = spell.getRequiredRunes(); 
@@ -28,11 +28,12 @@ public class InventoryHelper {
 			
 			if (!meetsRuneRequirement(rune)) {
 				System.out.println("do not have enough of: " + rune.getRuneName());
-				break;
+				return false;
+				//break;
 			}
 		}	
 		
-		return false;
+		return true;
 	}
 	
 	private static boolean meetsRuneRequirement(RuneForSpell rune) {

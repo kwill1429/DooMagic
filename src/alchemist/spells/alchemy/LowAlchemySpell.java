@@ -17,6 +17,8 @@ public class LowAlchemySpell extends MagicSpell {
 		this.setSpell(Magic.Spell.LOW_LEVEL_ALCHEMY);
 		this.setSpellName("Low Alchemy");
 		this.setTimeToCast(3000);
+		this.setLevelToCast(21);
 		this.setRequiredRunes(requiredRunes);
+		this.setRequiresAnItem(true);
 	}
 }
