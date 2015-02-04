@@ -21,4 +21,5 @@ public class Runes {
 	public final static int Smoke = 4697;
 	public final static int Soul = 566;
 	public final static int Steam = 4694;
+	public final static int Water = 555;
 }
