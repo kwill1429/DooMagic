@@ -2,7 +2,7 @@ package alchemist;
 
 import javax.swing.JFrame;
 
-import utilities.objects.MagicSpell;
+import utilities.objects.PSSpell;
 import alchemist.spells.alchemy.HighAlchemySpell;
 import alchemist.spells.alchemy.LowAlchemySpell;
 
@@ -33,8 +33,8 @@ public class AlchemistGlobal {
 		3053, 11736, 1387
 	};
 	
-	public static MagicSpell[] spells;
-	public static MagicSpell selectedSpell;
+	public static PSSpell[] spells;
+	public static PSSpell selectedSpell;
 //	public static Magic.Spell[] spells = {
 //		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
 //	};
@@ -42,9 +42,9 @@ public class AlchemistGlobal {
 
 
 	public static void setupAvailableSpells() {
-		spells = new MagicSpell[2];
-		MagicSpell lowAlchemy = new LowAlchemySpell();
-		MagicSpell highAlchemy = new HighAlchemySpell();
+		spells = new PSSpell[2];
+		PSSpell lowAlchemy = new LowAlchemySpell();
+		PSSpell highAlchemy = new HighAlchemySpell();
 		spells[0] = lowAlchemy;
 		spells[1] = highAlchemy;
 		selectedSpell = spells[1];

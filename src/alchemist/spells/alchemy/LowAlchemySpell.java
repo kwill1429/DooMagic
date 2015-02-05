@@ -1,14 +1,15 @@
 package alchemist.spells.alchemy;
 
-import utilities.objects.MagicSpell;
+import utilities.objects.PSSpell;
 import alchemist.AlchemistGlobal;
 import alchemist.AlchemistRune;
 
 import com.epicbot.api.rs3.methods.tab.Magic;
 
-public class LowAlchemySpell extends MagicSpell {
+public class LowAlchemySpell extends PSSpell {
 	
 	public LowAlchemySpell() {
+		super("Low Level Alchemy", Magic.Spell.LOW_LEVEL_ALCHEMY);
 		AlchemistRune natureRune = new AlchemistRune("Nature Rune", AlchemistGlobal.runeNature, 1, false, false);
 		AlchemistRune fireRune = new AlchemistRune("Fire Rune", AlchemistGlobal.runeFire, 3, true, true);
 		AlchemistRune[] requiredRunes = { natureRune, fireRune };

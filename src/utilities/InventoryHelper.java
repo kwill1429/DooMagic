@@ -1,6 +1,6 @@
 package utilities;
 
-import utilities.objects.MagicSpell;
+import utilities.objects.PSSpell;
 import alchemist.AlchemistGlobal;
 import alchemist.AlchemistRune;
 
@@ -19,7 +19,7 @@ public class InventoryHelper {
 	}
 	
 	public static boolean areRunesInInventory() {
-		MagicSpell spell = AlchemistGlobal.selectedSpell;
+		PSSpell spell = AlchemistGlobal.selectedSpell;
 		AlchemistRune rune;
 		AlchemistRune[] requiredRunes = spell.getRequiredRunes(); 
 		
