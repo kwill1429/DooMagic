@@ -1,10 +1,12 @@
 package utilities.objects;
 
+import alchemist.AlchemistRune;
+
 import com.epicbot.api.rs3.methods.tab.Magic;
 
 public class MagicSpell {
 	private Magic.Spell spell;
-	private RuneForSpell[] requiredRunes;
+	private AlchemistRune[] requiredRunes;
 	private String spellName;
 	private int timeToCast;
 	private int levelToCast;
@@ -19,11 +21,11 @@ public class MagicSpell {
 		this.spell = spell;
 	}
 
-	public RuneForSpell[] getRequiredRunes() {
+	public AlchemistRune[] getRequiredRunes() {
 		return requiredRunes;
 	}
 
-	public void setRequiredRunes(RuneForSpell[] requiredRunes) {
+	public void setRequiredRunes(AlchemistRune[] requiredRunes) {
 		this.requiredRunes = requiredRunes;
 	}
 

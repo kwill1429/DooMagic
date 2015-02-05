@@ -1,13 +1,13 @@
-package utilities.objects;
+package alchemist;
 
-public class RuneForSpell {
+public class AlchemistRune {
 	private int numOfRunes;
 	private int runeID;
 	private boolean hasSubstitute;
 	private boolean canUseStaff;
 	private String runeName;
 	
-	public RuneForSpell(String runeName, int runeID, int numOfRunes, boolean hasSubstitute, boolean canUseStaff) {
+	public AlchemistRune(String runeName, int runeID, int numOfRunes, boolean hasSubstitute, boolean canUseStaff) {
 		this.runeName = runeName;
 		this.setRuneID(runeID);
 		this.setNumOfRunes(numOfRunes);

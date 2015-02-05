@@ -1,8 +1,8 @@
 package utilities;
 
 import utilities.objects.MagicSpell;
-import utilities.objects.RuneForSpell;
 import alchemist.AlchemistGlobal;
+import alchemist.AlchemistRune;
 
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
@@ -20,8 +20,8 @@ public class InventoryHelper {
 	
 	public static boolean areRunesInInventory() {
 		MagicSpell spell = AlchemistGlobal.selectedSpell;
-		RuneForSpell rune;
-		RuneForSpell[] requiredRunes = spell.getRequiredRunes(); 
+		AlchemistRune rune;
+		AlchemistRune[] requiredRunes = spell.getRequiredRunes(); 
 		
 		for (int i = 0; i < requiredRunes.length; i++) {
 			rune = requiredRunes[i];
@@ -36,7 +36,7 @@ public class InventoryHelper {
 		return true;
 	}
 	
-	private static boolean meetsRuneRequirement(RuneForSpell rune) {
+	private static boolean meetsRuneRequirement(AlchemistRune rune) {
 		int runeID, numOfRunes;
 		int[] relatedRunes;
 		int[] staves;
