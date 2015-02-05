@@ -1,11 +1,10 @@
 package alchemist;
 
+import java.util.HashMap;
+
 import javax.swing.JFrame;
 
 import utilities.objects.PSSpell;
-import alchemist.spells.alchemy.HighAlchemySpell;
-import alchemist.spells.alchemy.LowAlchemySpell;
-
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
@@ -33,22 +32,9 @@ public class AlchemistGlobal {
 		3053, 11736, 1387
 	};
 	
-	public static PSSpell[] spells;
+	public static HashMap<String, PSSpell> availableSpells;
 	public static PSSpell selectedSpell;
-//	public static Magic.Spell[] spells = {
-//		 Magic.Spell.LOW_LEVEL_ALCHEMY, Magic.Spell.HIGH_LEVEL_ALCHEMY 
-//	};
-//	public static Magic.Spell selectedSpell = spells[0];
 
-
-	public static void setupAvailableSpells() {
-		spells = new PSSpell[2];
-		PSSpell lowAlchemy = new LowAlchemySpell();
-		PSSpell highAlchemy = new HighAlchemySpell();
-		spells[0] = lowAlchemy;
-		spells[1] = highAlchemy;
-		selectedSpell = spells[1];
-	}
 	
 	public static void retrieveSessionStats() {
 		xpGained = SkillData.MAGIC.getXpGained();
@@ -60,18 +46,4 @@ public class AlchemistGlobal {
 		System.out.println("Runtime: "+ runtimeString);
 		System.out.println("Xp/hr: "+ xpPerHour);
 	}
-	
-//	public static boolean isStaffEquipped() {
-//		if (Equipment.containsOneOf(staffFire) || Equipment.containsOneOf(staffLava) || Equipment.containsOneOf(staffSteam) ) {
-//			return true;
-//		}
-//		return false;
-//	}
-//	
-//	public static boolean areNecessaryItemsInInventory() {
-//		if (Inventory.contains(runeNature) && Inventory.contains(itemToAlchNoted)) {
-//			return true;
-//		}
-//		return false;
-//	}
 }

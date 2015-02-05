@@ -1,7 +1,7 @@
 package alchemist.tasks;
 
-import utilities.InventoryHelper;
 import alchemist.AlchemistGlobal;
+import alchemist.Spells;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
@@ -21,7 +21,7 @@ public class CastSpellTask extends Node implements Task {
 		System.out.println("Ready to start alching!");
 		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 			Item item = Inventory.getItem(AlchemistGlobal.itemToAlchNoted);
-			while (InventoryHelper.areRunesInInventory() && item != null && !shouldStop) {
+			while (Spells.areRunesForSpellInInventory() && item != null && !shouldStop) {
 				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
 				timeStart = System.currentTimeMillis();
 				Mouse.click(item.getCentralPoint(), true);
@@ -41,9 +41,9 @@ public class CastSpellTask extends Node implements Task {
 
 	@Override
 	public boolean shouldExecute() {
-		if (Players.getLocal() != null && !shouldStop) {	
+		if (Players.getLocal() != null && !shouldStop) {
 			System.out.println("First if statement in shouldExecute");
-			if (InventoryHelper.areRunesInInventory()) {
+			if (Spells.areRunesForSpellInInventory()) {
 				System.out.println("Required items are in inventory");
 				if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 					System.out.println("Spell requires an item");

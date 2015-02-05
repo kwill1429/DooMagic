@@ -2,11 +2,14 @@ package alchemist;
 
 import java.util.HashMap;
 
+import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.Magic;
+import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 
 import utilities.items.Runes;
 import utilities.objects.PSRune;
 import utilities.objects.PSSpell;
+import utilities.objects.PSStaff;
 
 public class Spells {
 	private PSSpell lowAlch;
@@ -57,5 +60,77 @@ public class Spells {
 		spells.put("High Alchemy", highAlch);
 		
 		this.spells = spells;
+	}
+	
+	public static boolean areRunesForSpellInInventory() {
+		PSSpell spell = AlchemistGlobal.selectedSpell;
+		PSRune rune;
+		PSRune[] requiredRunes = spell.getRunes(); 
+		
+		for (int i = 0; i < requiredRunes.length; i++) {
+			rune = requiredRunes[i];
+			
+			if (!meetsRuneRequirement(rune)) {
+				System.out.println("do not have enough of: " + rune.getItemName());
+				return false;
+				//break;
+			}
+		}	
+		
+		return true;
+	}
+	
+	public static boolean isValidStaffEquipped(PSStaff[] staves) {
+		for (int i = 0; i < staves.length; i++) {
+			if (Equipment.containsOneOf(staves[i].getItemID())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	private static boolean meetsRuneRequirement(PSRune rune) {
+		int runeID, numOfRunes;
+		PSRune[] relatedRunes;
+		PSStaff[] staves;
+		
+		runeID = rune.getItemID();
+		numOfRunes = rune.getNumOfRunes();
+		relatedRunes = rune.getAssociatedRunes();
+		staves = rune.getAssociatedStaves();
+		
+		if (relatedRunes != null) {
+			if (isValidStaffEquipped(staves)) {
+				return true;
+			}
+		}
+		
+		if (hasEnoughOfRune(runeID, numOfRunes)) {
+			return true;
+		}
+		else {
+			if (relatedRunes != null) {
+				for (int i = 0; i < relatedRunes.length; i++) {
+					runeID = relatedRunes[i].getItemID();
+						
+					if (hasEnoughOfRune(runeID, numOfRunes)) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private static boolean hasEnoughOfRune(int runeID, int numOfRunes) {
+		if (Inventory.contains(runeID)) {
+			if (Inventory.getCount(true, runeID) >= numOfRunes) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

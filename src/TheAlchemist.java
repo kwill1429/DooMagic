@@ -2,6 +2,7 @@
 import java.awt.Graphics2D;
 
 import alchemist.AlchemistGlobal;
+import alchemist.Spells;
 import alchemist.tasks.BankTask;
 import alchemist.tasks.CastSpellTask;
 
@@ -24,8 +25,8 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		this.setName("The Alchemist");
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
-		AlchemistGlobal.setupAvailableSpells();
-		AlchemistGlobal.selectedSpell = AlchemistGlobal.spells[0];
+		AlchemistGlobal.availableSpells = new Spells().getSpells();
+		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Low Alchemy");
 		
 		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");

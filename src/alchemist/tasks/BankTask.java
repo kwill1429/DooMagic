@@ -1,6 +1,6 @@
 package alchemist.tasks;
 
-import utilities.InventoryHelper;
+import alchemist.Spells;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
@@ -20,7 +20,7 @@ public class BankTask extends Node implements Task {
 		//System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null && count < 1) {
 			System.out.println("Count less than 1");
-			if (InventoryHelper.areRunesInInventory()) {
+			if (Spells.areRunesForSpellInInventory()) {
 				System.out.println("NecessaryItems are in Inventory.");
 				return false;
 			}
