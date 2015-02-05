@@ -6,7 +6,7 @@ import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 
-import utilities.items.Runes;
+import utilities.items.RuneList;
 import utilities.objects.PSRune;
 import utilities.objects.PSSpell;
 import utilities.objects.PSStaff;
@@ -17,7 +17,7 @@ public class Spells {
 	private HashMap<String, PSSpell> spells;
 	
 	public Spells() {
-		HashMap<String, PSRune> runes = new Runes().getRunes();
+		HashMap<String, PSRune> runes = new RuneList().getRunes();
 		PSRune runeOne, runeTwo;
 		
 		runeOne = runes.get("NatureRune");

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import utilities.objects.PSStaff;
 
-public class Staves {
+public class StaffList {
 	private PSStaff airStaff;
 	private PSStaff airBattle;
 	private PSStaff airMystic;
@@ -26,7 +26,7 @@ public class Staves {
 	private PSStaff waterMystic;
 	private HashMap<String, PSStaff> staves;
 	
-	public Staves() {
+	public StaffList() {
 		airStaff = new PSStaff("Staff of air", 1381);
 		airBattle = new PSStaff("Air battlestaff", 1398);
 		airMystic = new PSStaff("Mystic air staff", 1405);

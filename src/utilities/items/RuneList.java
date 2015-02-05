@@ -5,7 +5,7 @@ import java.util.HashMap;
 import utilities.objects.PSRune;
 import utilities.objects.PSStaff;
 
-public class Runes {
+public class RuneList {
 	private PSRune airRune;
 	private PSRune armadylRune;
 	private PSRune astralRune;
@@ -30,8 +30,8 @@ public class Runes {
 	private HashMap<String, PSRune> runes;
 	
 	
-	public Runes() {
-		Staves allStaves = new Staves();
+	public RuneList() {
+		StaffList allStaves = new StaffList();
 		HashMap<String, PSStaff> staves = allStaves.getStaves();
 		
 		airRune = new PSRune("Air rune", 556);
