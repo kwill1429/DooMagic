@@ -62,7 +62,7 @@ public class RuneList {
 		
 		dustRune = new PSRune("Dust rune", 4696);
 		
-		earthRune = new PSRune("Earth rune", 556);
+		earthRune = new PSRune("Earth rune", 557);
 		PSStaff[] earthStaves = {
 			staves.get("MudBattle"),
 			staves.get("MudMystic"),
@@ -86,14 +86,14 @@ public class RuneList {
 		};
 		fireRune.setAssociatedStaves(fireStaves);
 		
-		lavaRune = new PSRune("Lava rune", 557);
+		lavaRune = new PSRune("Lava rune", 4699);
 		PSStaff[] lavaStaves = {
 			staves.get("LavaBattle"),
 			staves.get("LavaMystic")
 		};
 		lavaRune.setAssociatedStaves(lavaStaves);
 		
-		lawRune = new PSRune("Law rune", 4699);
+		lawRune = new PSRune("Law rune", 563);
 		
 		mindRune = new PSRune("Mind rune", 558);
 		

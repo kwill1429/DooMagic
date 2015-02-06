@@ -1,21 +1,22 @@
 package utilities.objects;
 
-import alchemist.AlchemistRune;
-
 import com.epicbot.api.rs3.methods.tab.Magic;
 
 public class PSSpell {
 	private int timeToCast;
-	private int levelToCast;
 	private boolean requiresAnItem;
 	private String spellName;
 	private Magic.Spell spell;
-	private AlchemistRune[] requiredRunes;
+	private Magic.InnerAbilityTab abilityTab;
+	
+
 	private PSRune[] runes;
 	
 	public PSSpell(String spellName, Magic.Spell spell) {
 		this.spellName = spellName;
-		this.spell = spell;		
+		this.spell = spell;	
+		this.abilityTab = spell.getInnerTabSetting();
+		this.requiresAnItem = false;
 	}
 	
 	public int getTimeToCast() {
@@ -24,14 +25,6 @@ public class PSSpell {
 
 	public void setTimeToCast(int timeToCast) {
 		this.timeToCast = timeToCast;
-	}
-
-	public int getLevelToCast() {
-		return levelToCast;
-	}
-
-	public void setLevelToCast(int levelToCast) {
-		this.levelToCast = levelToCast;
 	}
 
 	public boolean requiresAnItem() {
@@ -53,17 +46,13 @@ public class PSSpell {
 	public Magic.Spell getSpell() {
 		return spell;
 	}
-
-	public void setSpell(Magic.Spell spell) {
-		this.spell = spell;
+	
+	public Magic.InnerAbilityTab getAbilityTab() {
+		return abilityTab;
 	}
-
-	public AlchemistRune[] getRequiredRunes() {
-		return requiredRunes;
-	}
-
-	public void setRequiredRunes(AlchemistRune[] requiredRunes) {
-		this.requiredRunes = requiredRunes;
+	
+	public void setAbilityTab(Magic.InnerAbilityTab abilityTab) {
+		this.abilityTab = abilityTab;
 	}
 
 	public PSRune[] getRunes() {

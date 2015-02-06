@@ -17,8 +17,8 @@ public class CastSpellTask extends Node implements Task {
 	@Override
 	public void run() {
 		long timeStart, timeEnd, timeToSleep;
-		// TODO Auto-generated method stub
-		System.out.println("Ready to start alching!");
+		System.out.println("Selected spell: "+ AlchemistGlobal.selectedSpell.getSpell());
+		openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
 		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 			Item item = Inventory.getItem(AlchemistGlobal.itemToAlchNoted);
 			while (Spells.areRunesForSpellInInventory() && item != null && !shouldStop) {
@@ -32,7 +32,21 @@ public class CastSpellTask extends Node implements Task {
 					System.out.println("Time to sleep: "+ timeToSleep);
 					Thread.sleep(timeToSleep);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else {
+			while (Spells.areRunesForSpellInInventory() && !shouldStop) {
+				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
+				timeStart = System.currentTimeMillis();
+				timeEnd = System.currentTimeMillis();
+				timeToSleep = (AlchemistGlobal.selectedSpell.getTimeToCast() - (timeEnd - timeStart));
+				
+				try {
+					System.out.println("Time to sleep: "+ timeToSleep);
+					Thread.sleep(timeToSleep);
+				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
@@ -51,11 +65,21 @@ public class CastSpellTask extends Node implements Task {
 						return true;
 					}
 				}
+				else {
+					return true;
+				}
 			}
 		}
 		AlchemistGlobal.script.revoke(this);
 		AlchemistGlobal.script.stop();
 		AlchemistGlobal.script.kill();
 		return false;
+	}
+	
+	private void openTab(Magic.InnerAbilityTab tab) {
+		System.out.println("Tab passed in: "+tab);
+		if (!tab.isOpen()) {
+			tab.open();
+		}
 	}
 }

@@ -26,7 +26,7 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
 		AlchemistGlobal.availableSpells = new Spells().getSpells();
-		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Low Alchemy");
+		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Varrock Teleport");
 		
 		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
