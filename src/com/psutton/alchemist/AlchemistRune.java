@@ -1,4 +1,4 @@
-package alchemist;
+package com.psutton.alchemist;
 
 public class AlchemistRune {
 	private int numOfRunes;

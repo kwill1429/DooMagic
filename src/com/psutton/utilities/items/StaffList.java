@@ -1,8 +1,8 @@
-package utilities.items;
+package com.psutton.utilities.items;
 
 import java.util.HashMap;
 
-import utilities.objects.PSStaff;
+import com.psutton.utilities.objects.PSStaff;
 
 public class StaffList {
 	private PSStaff airStaff;

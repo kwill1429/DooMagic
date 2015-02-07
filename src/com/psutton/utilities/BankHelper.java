@@ -1,4 +1,4 @@
-package utilities;
+package com.psutton.utilities;
 
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.Bank;

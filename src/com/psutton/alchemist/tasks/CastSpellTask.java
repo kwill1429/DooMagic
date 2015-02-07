@@ -1,7 +1,4 @@
-package alchemist.tasks;
-
-import alchemist.AlchemistGlobal;
-import alchemist.Spells;
+package com.psutton.alchemist.tasks;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
@@ -10,6 +7,8 @@ import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.wrappers.node.Item; 
+import com.psutton.alchemist.AlchemistGlobal;
+import com.psutton.alchemist.Spells;
 
 public class CastSpellTask extends Node implements Task {
 	public static boolean shouldStop = false;

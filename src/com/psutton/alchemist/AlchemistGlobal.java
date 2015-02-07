@@ -1,13 +1,13 @@
-package alchemist;
+package com.psutton.alchemist;
 
 import java.util.HashMap;
 
 import javax.swing.JFrame;
 
-import utilities.objects.PSSpell;
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
+import com.psutton.utilities.objects.PSSpell;
 
 public class AlchemistGlobal {
 	public static JFrame frame;

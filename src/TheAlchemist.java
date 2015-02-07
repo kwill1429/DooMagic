@@ -1,16 +1,15 @@
 
 import java.awt.Graphics2D;
 
-import alchemist.AlchemistGlobal;
-import alchemist.Spells;
-import alchemist.tasks.BankTask;
-import alchemist.tasks.CastSpellTask;
-
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.event.listeners.PaintListener;
+import com.psutton.alchemist.AlchemistGlobal;
+import com.psutton.alchemist.Spells;
+import com.psutton.alchemist.tasks.BankTask;
+import com.psutton.alchemist.tasks.CastSpellTask;
 //import alchemist.AlchemyTask;
 	@Manifest(game=GameType.RS3, name="TheAlchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=0.5)
 

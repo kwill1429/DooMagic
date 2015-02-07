@@ -1,10 +1,9 @@
-package alchemist.tasks;
-
-import alchemist.Spells;
+package com.psutton.alchemist.tasks;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
+import com.psutton.alchemist.Spells;
 
 public class BankTask extends Node implements Task {
 	public int count = 0;

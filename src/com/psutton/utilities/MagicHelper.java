@@ -1,6 +1,6 @@
-package utilities;
+package com.psutton.utilities;
 
-import alchemist.AlchemistGlobal;
+import com.psutton.alchemist.AlchemistGlobal;
 
 public class MagicHelper {
 	

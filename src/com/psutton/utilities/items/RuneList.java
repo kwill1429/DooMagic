@@ -1,9 +1,9 @@
-package utilities.items;
+package com.psutton.utilities.items;
 
 import java.util.HashMap;
 
-import utilities.objects.PSRune;
-import utilities.objects.PSStaff;
+import com.psutton.utilities.objects.PSRune;
+import com.psutton.utilities.objects.PSStaff;
 
 public class RuneList {
 	private PSRune airRune;

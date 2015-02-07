@@ -1,4 +1,4 @@
-package utilities.objects;
+package com.psutton.utilities.objects;
 
 public class PSStaff extends PSItem {
 	

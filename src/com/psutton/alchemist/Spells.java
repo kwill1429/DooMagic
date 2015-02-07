@@ -1,15 +1,14 @@
-package alchemist;
+package com.psutton.alchemist;
 
 import java.util.HashMap;
 
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
-
-import utilities.items.RuneList;
-import utilities.objects.PSRune;
-import utilities.objects.PSSpell;
-import utilities.objects.PSStaff;
+import com.psutton.utilities.items.RuneList;
+import com.psutton.utilities.objects.PSRune;
+import com.psutton.utilities.objects.PSSpell;
+import com.psutton.utilities.objects.PSStaff;
 
 public class Spells {
 	private PSSpell lowAlch, highAlch, superheatItem;
