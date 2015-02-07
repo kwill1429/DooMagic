@@ -9,6 +9,17 @@ public class PSRune extends PSItem {
 		super(runeName, runeID);
 	}
 	
+	public PSRune(PSRune rune, int numOfRunes) {
+		super(rune.getItemName(), rune.getItemID());
+		this.setItemName(rune.getItemName());
+		this.setItemID(rune.getItemID());
+		this.numOfRunes = numOfRunes;
+		this.setAssociatedRunes(rune.getAssociatedRunes());
+		this.setAssociatedStaves(rune.getAssociatedStaves());
+	}
+	
+	
+	
 	public int getNumOfRunes() {
 		return numOfRunes;
 	}

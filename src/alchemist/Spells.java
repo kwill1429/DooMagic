@@ -21,7 +21,7 @@ public class Spells {
 	public Spells() {
 		HashMap<String, PSRune> runes = new RuneList().getRunes();
 		PSRune natureRune, fireRune, lawRune, waterRune, earthRune, airRune;
-		
+			
 		natureRune = runes.get("NatureRune");
 		fireRune = runes.get("FireRune");
 		lawRune = runes.get("LawRune");
@@ -29,89 +29,90 @@ public class Spells {
 		earthRune = runes.get("EarthRune");
 		airRune = runes.get("AirRune");
 			
-		natureRune.setNumOfRunes(1);
-		fireRune.setNumOfRunes(3);
-		PSRune[] lowAlchRunes = { natureRune, fireRune };
+		PSRune lowAlchOne = new PSRune(natureRune, 1);
+		PSRune lowAlchTwo = new PSRune(fireRune, 3);
+		PSRune[] lowAlchRunes = { lowAlchOne, lowAlchTwo };
 		lowAlch = new PSSpell("Low Level Alchemy", Magic.Spell.LOW_LEVEL_ALCHEMY);
 		lowAlch.setTimeToCast(3000);
 		lowAlch.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 		lowAlch.setRequiresAnItem(true);
 		lowAlch.setRunes(lowAlchRunes);
 		
-		
-		natureRune.setNumOfRunes(1);
-		fireRune.setNumOfRunes(5);
-		PSRune[] highAlchRunes = { natureRune, fireRune };
+		PSRune highAlchOne = new PSRune(natureRune, 1);
+		PSRune highAlchTwo = new PSRune(fireRune, 1);
+		PSRune[] highAlchRunes = { highAlchOne, highAlchTwo };
 		highAlch = new PSSpell("High Level Alchemy", Magic.Spell.HIGH_LEVEL_ALCHEMY);
 		highAlch.setTimeToCast(3000);
 		highAlch.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
 		
-		natureRune.setNumOfRunes(1);
-		fireRune.setNumOfRunes(4);
-		PSRune[] superheatItemRunes = { natureRune, fireRune };
+		PSRune superheatOne = new PSRune(natureRune, 1);
+		PSRune superheatTwo = new PSRune(fireRune, 4);
+		PSRune[] superheatItemRunes = { superheatOne, superheatTwo };
 		superheatItem = new PSSpell("Superheat Item", Magic.Spell.SUPERHEAT_ITEM);
 		superheatItem.setTimeToCast(3000);
 		superheatItem.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 		superheatItem.setRequiresAnItem(true);
 		superheatItem.setRunes(superheatItemRunes);
 		
-		lawRune.setNumOfRunes(1);
-		airRune.setNumOfRunes(1);
-		waterRune.setNumOfRunes(1);
-		PSRune[] mobilisingArmiesRunes = { lawRune, airRune, waterRune };
+		
+		PSRune mobilisingOne = new PSRune(lawRune, 1);
+		PSRune mobilisingTwo = new PSRune(airRune, 3);
+		PSRune mobilisingThree = new PSRune(waterRune, 1);
+		PSRune[] mobilisingArmiesRunes = { mobilisingOne, mobilisingTwo, mobilisingThree };
 		mobilisingArmiesTeleport = new PSSpell("Mobilising Armies Teleport", Magic.Spell.MOBILISING_ARMIES_TELEPORT);
 		mobilisingArmiesTeleport.setTimeToCast(3000);
 		mobilisingArmiesTeleport.setRunes(mobilisingArmiesRunes);
 		
-		lawRune.setNumOfRunes(1);
-		airRune.setNumOfRunes(3);
-		fireRune.setNumOfRunes(1);
-		PSRune[] varrockTeleRunes = { lawRune, airRune, fireRune };
+		
+		PSRune varrockOne = new PSRune(lawRune, 1);
+		PSRune varrockTwo = new PSRune(airRune, 3);
+		PSRune varrockThree = new PSRune(fireRune, 1);
+		PSRune[] varrockTeleRunes = { varrockOne, varrockTwo, varrockThree };
 		varrockTeleport = new PSSpell("Varrock Teleport", Magic.Spell.VARROCK_TELEPORT);
 		varrockTeleport.setTimeToCast(3000);
 		varrockTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		varrockTeleport.setRunes(varrockTeleRunes);
 		
-		lawRune.setNumOfRunes(1);
-		airRune.setNumOfRunes(3);
-		earthRune.setNumOfRunes(1);
-		PSRune[] lumbridgeTeleRunes = { lawRune, airRune, earthRune };
+		PSRune lumbridgeOne = new PSRune(lawRune, 1);
+		PSRune lumbridgeTwo = new PSRune(airRune, 3);
+		PSRune lumbridgeThree = new PSRune(earthRune, 1);
+		PSRune[] lumbridgeTeleRunes = { lumbridgeOne, lumbridgeTwo, lumbridgeThree };
 		lumbridgeTeleport = new PSSpell("Lumbridge Teleport", Magic.Spell.LUMBRIDGE_TELEPORT);
 		lumbridgeTeleport.setTimeToCast(3000);
 		lumbridgeTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		lumbridgeTeleport.setRunes(lumbridgeTeleRunes);
 		
-		lawRune.setNumOfRunes(1);
-		airRune.setNumOfRunes(1);
-		waterRune.setNumOfRunes(1);
-		PSRune[] faladorTeleRunes = { lawRune, airRune, waterRune };
+		PSRune faladorOne = new PSRune(lawRune, 1);
+		PSRune faladorTwo = new PSRune(airRune, 3);
+		PSRune faladorThree = new PSRune(waterRune, 1);
+		PSRune[] faladorTeleRunes = { faladorOne, faladorTwo, faladorThree };
 		faladorTeleport = new PSSpell("Falador Teleport", Magic.Spell.FALADOR_TELEPORT);
 		faladorTeleport.setTimeToCast(3000);
 		faladorTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		faladorTeleport.setRunes(faladorTeleRunes);
 		
-		lawRune.setNumOfRunes(1);
-		airRune.setNumOfRunes(1);
-		earthRune.setNumOfRunes(1);
-		PSRune[] houseTeleRunes = { lawRune, airRune, earthRune };
+		PSRune houseOne = new PSRune(lawRune, 1);
+		PSRune houseTwo = new PSRune(airRune, 1);
+		PSRune houseThree = new PSRune(earthRune, 1);
+		PSRune[] houseTeleRunes = { houseOne, houseTwo, houseThree };
 		houseTeleport = new PSSpell("House Teleport", Magic.Spell.HOME_TELEPORT);
 		houseTeleport.setTimeToCast(3000);
 		houseTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		houseTeleport.setRunes(houseTeleRunes);
 		
-		lawRune.setNumOfRunes(1);
-		airRune.setNumOfRunes(5);
-		PSRune[] camelotTeleRunes = { lawRune, airRune };
+		PSRune camelotOne = new PSRune(lawRune, 1);
+		PSRune camelotTwo = new PSRune(airRune, 5);
+		PSRune[] camelotTeleRunes = { camelotOne, camelotTwo };
 		camelotTeleport = new PSSpell("Camelot Teleport", Magic.Spell.CAMELOT_TELEPORT);
 		camelotTeleport.setTimeToCast(3000);
 		camelotTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		camelotTeleport.setRunes(camelotTeleRunes);
 		
-		lawRune.setNumOfRunes(2);
-		waterRune.setNumOfRunes(2);
-		PSRune[] ardougneTeleRunes = { lawRune, waterRune };
+		PSRune ardougneOne = new PSRune(lawRune, 2);
+		PSRune ardougneTwo = new PSRune(waterRune, 2);
+		PSRune[] ardougneTeleRunes = { ardougneOne, ardougneTwo };
 		ardougneTeleport = new PSSpell("Ardougne Teleport", Magic.Spell.ARDOUGNE_TELEPORT);
 		ardougneTeleport.setTimeToCast(3000);
 		ardougneTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
@@ -152,7 +153,7 @@ public class Spells {
 		
 		for (int i = 0; i < requiredRunes.length; i++) {
 			rune = requiredRunes[i];
-			
+			System.out.println("Required rune: "+ rune);
 			if (!meetsRuneRequirement(rune)) {
 				System.out.println("do not have enough of: " + rune.getItemName());
 				return false;
@@ -171,8 +172,6 @@ public class Spells {
 		return false;
 	}
 	
-	
-	
 	private static boolean meetsRuneRequirement(PSRune rune) {
 		int runeID, numOfRunes;
 		PSRune[] relatedRunes;
@@ -180,7 +179,6 @@ public class Spells {
 		
 		runeID = rune.getItemID();
 		numOfRunes = rune.getNumOfRunes();
-		System.out.println("Num of"+ rune+ " : "+numOfRunes);
 		relatedRunes = rune.getAssociatedRunes();
 		staves = rune.getAssociatedStaves();
 		
@@ -210,8 +208,7 @@ public class Spells {
 	
 	private static boolean hasEnoughOfRune(int runeID, int numOfRunes) {
 		if (Inventory.contains(runeID)) {
-			System.out.println("Rune count: " + Inventory.getCount(false, runeID)+ "Num of Runes: "+numOfRunes );
-			if (Inventory.getCount(false, runeID) >= numOfRunes) {
+			if (Inventory.getCount(true, runeID) >= numOfRunes) {
 				return true;
 			}
 		}
