@@ -57,11 +57,12 @@ public class Spells {
 		
 		
 		PSRune mobilisingOne = new PSRune(lawRune, 1);
-		PSRune mobilisingTwo = new PSRune(airRune, 3);
+		PSRune mobilisingTwo = new PSRune(airRune, 1);
 		PSRune mobilisingThree = new PSRune(waterRune, 1);
 		PSRune[] mobilisingArmiesRunes = { mobilisingOne, mobilisingTwo, mobilisingThree };
 		mobilisingArmiesTeleport = new PSSpell("Mobilising Armies Teleport", Magic.Spell.MOBILISING_ARMIES_TELEPORT);
 		mobilisingArmiesTeleport.setTimeToCast(3000);
+		mobilisingArmiesTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		mobilisingArmiesTeleport.setRunes(mobilisingArmiesRunes);
 		
 		
@@ -140,7 +141,7 @@ public class Spells {
 		spells.put("Falador Teleport", faladorTeleport);
 		spells.put("House Teleport", houseTeleport);
 		spells.put("Camelot Teleport", camelotTeleport);
-		spells.put("ArdougneTeleport", ardougneTeleport);
+		spells.put("Ardougne Teleport", ardougneTeleport);
 		
 		this.spells = spells;
 	}
