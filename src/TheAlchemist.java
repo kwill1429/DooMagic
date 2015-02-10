@@ -25,15 +25,16 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
 		AlchemistGlobal.availableSpells = new Spells().getSpells();
-		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Varrock Teleport");
+		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Low Alchemy");
 		
 		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
 			return false;
 		}
-		
-		castSpellTask = new CastSpellTask();
-		provide(castSpellTask);
+		bankTask = new BankTask();
+		provide(bankTask);
+		//castSpellTask = new CastSpellTask();
+		//provide(castSpellTask);
 		
 		//bankTask = new BankTask();
 		//provide(bankTask);
@@ -44,8 +45,8 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 	@SuppressWarnings("static-access")
 	@Override
 	public void onStop() {
-		castSpellTask.shouldStop = true;
-		revoke(castSpellTask);
+	//	castSpellTask.shouldStop = true;
+	//	revoke(castSpellTask);
 	//	revoke(bankTask);
 	//	terminated(alchemyTask);
 		terminated(bankTask);
