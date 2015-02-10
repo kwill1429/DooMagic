@@ -5,9 +5,9 @@ import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.widget.Bank;
 import com.psutton.alchemist.AlchemistGlobal;
+import com.psutton.alchemist.Helpers;
 import com.psutton.alchemist.Spells;
-import com.psutton.utilities.BankHelper;
-import com.psutton.utilities.ItemHelper;
+import com.psutton.utilities.objects.PSRune;
 
 public class BankTask extends Node implements Task {
 	public int count = 0;
@@ -32,7 +32,18 @@ public class BankTask extends Node implements Task {
 				
 				if (needRunes) {
 					System.out.println("Need runes!");
+					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(AlchemistGlobal.selectedSpell.getRunes());
+					
+					if (runesToWithdraw == null) {
+						System.out.println("Necessary Runes are NOT in bank!");
+					}
+					else {
+						for (int i = 0; i < runesToWithdraw.length; i++) {
+							System.out.println("Necessary Rune #"+i+" :"+runesToWithdraw[i]);
+						}
+					}
 				}
+				
 			}
 		}
 		else {
@@ -46,9 +57,9 @@ public class BankTask extends Node implements Task {
 	public boolean shouldExecute() {
 		System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null) {
-			if (!ItemHelper.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted) ||
+			if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted) ||
 					!Spells.areRunesForSpellInInventory()) {
-				if (!ItemHelper.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
 					needItem = true;
 				}
 				if (!Spells.areRunesForSpellInInventory()) {
@@ -56,9 +67,6 @@ public class BankTask extends Node implements Task {
 				}
 				return true;
 			}
-			//if (!haveItemsInInventoryForAlchemy()) {
-			//	return true;
-			//}
 		}
 		System.out.println("Don't need to bank!");
 		AlchemistGlobal.script.stop();

@@ -9,14 +9,12 @@ import com.epicbot.event.listeners.PaintListener;
 import com.psutton.alchemist.AlchemistGlobal;
 import com.psutton.alchemist.Spells;
 import com.psutton.alchemist.tasks.BankTask;
-import com.psutton.alchemist.tasks.CastSpellTask;
-//import alchemist.AlchemyTask;
 	@Manifest(game=GameType.RS3, name="TheAlchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=0.5)
 
 public class TheAlchemist extends ActiveScript implements PaintListener
 {
 	private BankTask bankTask;
-	private CastSpellTask castSpellTask;
+	// private CastSpellTask castSpellTask;
 		
 	@Override
 	public boolean onStart() {
@@ -42,7 +40,6 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		return true;
 	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void onStop() {
 	//	castSpellTask.shouldStop = true;
