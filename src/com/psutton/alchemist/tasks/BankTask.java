@@ -1,5 +1,7 @@
 package com.psutton.alchemist.tasks;
 
+import java.util.ArrayList;
+
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
@@ -13,6 +15,7 @@ public class BankTask extends Node implements Task {
 	public int count = 0;
 	private boolean needRunes = false;
 	private boolean needItem = false;
+	private PSRune[] runesNeeded;
 	
 	@Override
 	public void run() {
@@ -32,7 +35,7 @@ public class BankTask extends Node implements Task {
 				
 				if (needRunes) {
 					System.out.println("Need runes!");
-					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(AlchemistGlobal.selectedSpell.getRunes());
+					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
 					
 					if (runesToWithdraw == null) {
 						System.out.println("Necessary Runes are NOT in bank!");
@@ -64,6 +67,7 @@ public class BankTask extends Node implements Task {
 				}
 				if (!Spells.areRunesForSpellInInventory()) {
 					needRunes = true;
+					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
 				}
 				return true;
 			}

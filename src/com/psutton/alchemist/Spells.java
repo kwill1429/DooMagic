@@ -172,7 +172,7 @@ public class Spells {
 		return false;
 	}
 	
-	private static boolean meetsRuneRequirement(PSRune rune) {
+	public static boolean meetsRuneRequirement(PSRune rune) {
 		int runeID, numOfRunes;
 		PSRune[] relatedRunes;
 		PSStaff[] staves;

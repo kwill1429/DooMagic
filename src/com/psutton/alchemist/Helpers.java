@@ -84,5 +84,31 @@ public class Helpers {
 		}
 		return true;
 	}
+	
+	public static PSRune[] getRunesToWithdraw(PSRune[] runes) {
+		ArrayList<PSRune> runesToWithdrawList = new ArrayList<PSRune>();
+		PSRune rune;
+		PSRune[] runesToWithdraw = null;
+		int index = 0;
+		
+		for (int i = 0; i < runes.length; i++) {
+			rune = runes[i];
+			if (!Spells.meetsRuneRequirement(rune)) {
+				runesToWithdrawList.add(rune);
+			}
+		}
+		
+		runesToWithdrawList.trimToSize();
+		
+		if (!runesToWithdrawList.isEmpty()) {
+			runesToWithdraw = new PSRune[runesToWithdrawList.size()];
+			for (PSRune runeToWithdraw : runesToWithdrawList) {
+				runesToWithdraw[index] = runeToWithdraw;
+				index ++;
+			}
+		}
+		
+		return runesToWithdraw;
+	}
 
 }
