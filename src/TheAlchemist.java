@@ -9,12 +9,13 @@ import com.epicbot.event.listeners.PaintListener;
 import com.psutton.alchemist.AlchemistGlobal;
 import com.psutton.alchemist.Spells;
 import com.psutton.alchemist.tasks.BankTask;
+import com.psutton.alchemist.tasks.CastSpellTask;
 	@Manifest(game=GameType.RS3, name="TheAlchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=0.5)
 
 public class TheAlchemist extends ActiveScript implements PaintListener
 {
 	private BankTask bankTask;
-	// private CastSpellTask castSpellTask;
+	private CastSpellTask castSpellTask;
 		
 	@Override
 	public boolean onStart() {
@@ -29,23 +30,21 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
 			return false;
 		}
+		
 		bankTask = new BankTask();
 		provide(bankTask);
-		//castSpellTask = new CastSpellTask();
-		//provide(castSpellTask);
+		castSpellTask = new CastSpellTask();
+		provide(castSpellTask);
 		
-		//bankTask = new BankTask();
-		//provide(bankTask);
-		//return true;
 		return true;
 	}
 	
 	@Override
 	public void onStop() {
-	//	castSpellTask.shouldStop = true;
-	//	revoke(castSpellTask);
-	//	revoke(bankTask);
-	//	terminated(alchemyTask);
+		castSpellTask.shouldStop = true;
+		revoke(castSpellTask);
+		revoke(bankTask);
+		terminated(castSpellTask);
 		terminated(bankTask);
 		AlchemistGlobal.retrieveSessionStats();
 		this.stop();

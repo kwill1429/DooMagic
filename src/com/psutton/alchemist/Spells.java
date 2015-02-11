@@ -2,13 +2,10 @@ package com.psutton.alchemist;
 
 import java.util.HashMap;
 
-import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.Magic;
-import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.psutton.utilities.items.RuneList;
 import com.psutton.utilities.objects.PSRune;
 import com.psutton.utilities.objects.PSSpell;
-import com.psutton.utilities.objects.PSStaff;
 
 public class Spells {
 	private PSSpell lowAlch, highAlch, superheatItem;
@@ -144,74 +141,5 @@ public class Spells {
 		spells.put("Ardougne Teleport", ardougneTeleport);
 		
 		this.spells = spells;
-	}
-	
-	public static boolean areRunesForSpellInInventory() {
-		PSSpell spell = AlchemistGlobal.selectedSpell;
-		PSRune rune;
-		PSRune[] requiredRunes = spell.getRunes(); 
-		
-		for (int i = 0; i < requiredRunes.length; i++) {
-			rune = requiredRunes[i];
-			System.out.println("Required rune: "+ rune);
-			if (!meetsRuneRequirement(rune)) {
-				System.out.println("do not have enough of: " + rune.getItemName());
-				return false;
-			}
-		}	
-		
-		return true;
-	}
-	
-	public static boolean isValidStaffEquipped(PSStaff[] staves) {
-		for (int i = 0; i < staves.length; i++) {
-			if (Equipment.containsOneOf(staves[i].getItemID())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public static boolean meetsRuneRequirement(PSRune rune) {
-		int runeID, numOfRunes;
-		PSRune[] relatedRunes;
-		PSStaff[] staves;
-		
-		runeID = rune.getItemID();
-		numOfRunes = rune.getNumOfRunes();
-		relatedRunes = rune.getAssociatedRunes();
-		staves = rune.getAssociatedStaves();
-		
-		if (staves != null) {
-			if (isValidStaffEquipped(staves)) {
-				return true;
-			}
-		}
-		
-		
-		if (hasEnoughOfRune(runeID, numOfRunes)) {
-			return true;
-		}
-		else {
-			if (relatedRunes != null) {
-				for (int i = 0; i < relatedRunes.length; i++) {
-					runeID = relatedRunes[i].getItemID();
-					if (hasEnoughOfRune(runeID, numOfRunes)) {
-						return true;
-					}
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	private static boolean hasEnoughOfRune(int runeID, int numOfRunes) {
-		if (Inventory.contains(runeID)) {
-			if (Inventory.getCount(true, runeID) >= numOfRunes) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

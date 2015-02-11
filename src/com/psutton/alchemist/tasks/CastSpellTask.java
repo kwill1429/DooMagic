@@ -8,10 +8,10 @@ import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.wrappers.node.Item; 
 import com.psutton.alchemist.AlchemistGlobal;
-import com.psutton.alchemist.Spells;
+import com.psutton.alchemist.Helpers;
 
 public class CastSpellTask extends Node implements Task {
-	public static boolean shouldStop = false;
+	public boolean shouldStop = false;
 
 	@Override
 	public void run() {
@@ -19,7 +19,8 @@ public class CastSpellTask extends Node implements Task {
 		
 		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 			Item item = Inventory.getItem(AlchemistGlobal.itemToAlchNoted);
-			while (Spells.areRunesForSpellInInventory() && item != null && !shouldStop) {
+			while (Helpers.areRunesForSpellInInventory() && item != null && !shouldStop) {
+				System.out.println("Ability Tab: "+ AlchemistGlobal.selectedSpell.getAbilityTab());
 				openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
 				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
 				timeStart = System.currentTimeMillis();
@@ -36,7 +37,7 @@ public class CastSpellTask extends Node implements Task {
 			}
 		}
 		else {
-			while (Spells.areRunesForSpellInInventory() && !shouldStop) {
+			while (Helpers.areRunesForSpellInInventory() && !shouldStop) {
 				openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
 				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
 				timeStart = System.currentTimeMillis();
@@ -55,7 +56,7 @@ public class CastSpellTask extends Node implements Task {
 	@Override
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null && !shouldStop) {
-			if (Spells.areRunesForSpellInInventory()) {
+			if (Helpers.areRunesForSpellInInventory()) {
 				if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 					if (Inventory.contains(AlchemistGlobal.itemToAlchNoted)) {
 						return true;
@@ -74,6 +75,7 @@ public class CastSpellTask extends Node implements Task {
 	
 	private void openTab(Magic.InnerAbilityTab tab) {
 		if (!tab.isOpen()) {
+			System.out.println("Tab is closed, opening now");
 			tab.open();
 		}
 	}

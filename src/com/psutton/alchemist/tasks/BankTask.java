@@ -1,14 +1,11 @@
 package com.psutton.alchemist.tasks;
 
-import java.util.ArrayList;
-
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.widget.Bank;
 import com.psutton.alchemist.AlchemistGlobal;
 import com.psutton.alchemist.Helpers;
-import com.psutton.alchemist.Spells;
 import com.psutton.utilities.objects.PSRune;
 
 public class BankTask extends Node implements Task {
@@ -16,23 +13,15 @@ public class BankTask extends Node implements Task {
 	private boolean needRunes = false;
 	private boolean needItem = false;
 	private PSRune[] runesNeeded;
+	private PSRune rune;
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		if (Bank.BankLocations.atBank()) {
 			System.out.println("At a bank already!");
 			Bank.open();
 			if (Bank.isOpen()) {
 				Bank.setWithdrawNoted(true);
-				if (needItem) {
-					System.out.println("Need item");
-					if (Bank.getItem(AlchemistGlobal.itemToAlch) != null) {
-						System.out.println("Withdrawing item");
-						Bank.withdraw(AlchemistGlobal.itemToAlch, Bank.Amount.ALL);
-					}
-				}
-				
 				if (needRunes) {
 					System.out.println("Need runes!");
 					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
@@ -42,30 +31,36 @@ public class BankTask extends Node implements Task {
 					}
 					else {
 						for (int i = 0; i < runesToWithdraw.length; i++) {
-							System.out.println("Necessary Rune #"+i+" :"+runesToWithdraw[i]);
+							rune = runesToWithdraw[i];
+							Bank.withdraw(rune.getItemID(), Bank.Amount.ALL);
 						}
 					}
 				}
-				
+				if (needItem) {
+					System.out.println("Need item");
+					if (Bank.getItem(AlchemistGlobal.itemToAlch) != null) {
+						System.out.println("Withdrawing item");
+						Bank.withdraw(AlchemistGlobal.itemToAlch, Bank.Amount.ALL);
+					}
+				}
 			}
+			Bank.close();
 		}
 		else {
 			System.out.println("Not in a bank!");
+			AlchemistGlobal.script.revoke(this);
 		}
-		
-		AlchemistGlobal.script.stop();
-		AlchemistGlobal.script.kill();
 	}
 	
 	public boolean shouldExecute() {
 		System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null) {
 			if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted) ||
-					!Spells.areRunesForSpellInInventory()) {
+					!Helpers.areRunesForSpellInInventory()) {
 				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
 					needItem = true;
 				}
-				if (!Spells.areRunesForSpellInInventory()) {
+				if (!Helpers.areRunesForSpellInInventory()) {
 					needRunes = true;
 					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
 				}
@@ -73,8 +68,6 @@ public class BankTask extends Node implements Task {
 			}
 		}
 		System.out.println("Don't need to bank!");
-		AlchemistGlobal.script.stop();
-		AlchemistGlobal.script.kill();
 		return false;
 	}
 
