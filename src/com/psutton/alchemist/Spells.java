@@ -1,6 +1,8 @@
 package com.psutton.alchemist;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.psutton.utilities.items.RuneList;
@@ -8,10 +10,11 @@ import com.psutton.utilities.objects.PSRune;
 import com.psutton.utilities.objects.PSSpell;
 
 public class Spells {
-	private PSSpell lowAlch, highAlch, superheatItem;
+	private PSSpell lowAlch, highAlch;
+//	private PSSpell superheatItem;
 	private PSSpell mobilisingArmiesTeleport, varrockTeleport, lumbridgeTeleport, faladorTeleport;
 	private PSSpell houseTeleport, camelotTeleport, ardougneTeleport;
-	
+	private String[] spellList;
 	private HashMap<String, PSSpell> spells;
 	
 	public Spells() {
@@ -43,14 +46,14 @@ public class Spells {
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
 		
-		PSRune superheatOne = new PSRune(natureRune, 1);
-		PSRune superheatTwo = new PSRune(fireRune, 4);
-		PSRune[] superheatItemRunes = { superheatOne, superheatTwo };
-		superheatItem = new PSSpell("Superheat Item", Magic.Spell.SUPERHEAT_ITEM);
-		superheatItem.setTimeToCast(3000);
-		superheatItem.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
-		superheatItem.setRequiresAnItem(true);
-		superheatItem.setRunes(superheatItemRunes);
+//		PSRune superheatOne = new PSRune(natureRune, 1);
+//		PSRune superheatTwo = new PSRune(fireRune, 4);
+//		PSRune[] superheatItemRunes = { superheatOne, superheatTwo };
+//		superheatItem = new PSSpell("Superheat Item", Magic.Spell.SUPERHEAT_ITEM);
+//		superheatItem.setTimeToCast(3000);
+//		superheatItem.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
+//		superheatItem.setRequiresAnItem(true);
+//		superheatItem.setRunes(superheatItemRunes);
 		
 		
 		PSRune mobilisingOne = new PSRune(lawRune, 1);
@@ -118,20 +121,21 @@ public class Spells {
 		generateSpells();
 	}
 
+	public String[] getSpellList() {
+		return spellList;
+	}
+
 	public HashMap<String, PSSpell> getSpells() {
 		return spells;
 	}
-
-	public void setSpells(HashMap<String, PSSpell> spells) {
-		this.spells = spells;
-	}
 	
 	private void generateSpells() {
-		HashMap<String, PSSpell> spells = new HashMap<String, PSSpell> (10);
+		HashMap<String, PSSpell> spells = new HashMap<String, PSSpell> (9);
+		String[] spellList = new String[9];
 		
 		spells.put("Low Alchemy", lowAlch);
 		spells.put("High Alchemy", highAlch);
-		spells.put("Superheat Item", superheatItem);
+//		spells.put("Superheat Item", superheatItem);
 		spells.put("Mobilising Armies Teleport", mobilisingArmiesTeleport);
 		spells.put("Varrock Teleport", varrockTeleport);
 		spells.put("Lumbridge Teleport", lumbridgeTeleport);
@@ -141,5 +145,16 @@ public class Spells {
 		spells.put("Ardougne Teleport", ardougneTeleport);
 		
 		this.spells = spells;
+		
+		Set<String> keys = spells.keySet();
+		
+		int index = 0;
+		for (String key: keys) {
+			spellList[index] = (key);
+		}
+		
+		
+		this.spellList = spellList;
 	}
+	
 }

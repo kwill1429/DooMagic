@@ -1,6 +1,8 @@
 package com.psutton.alchemist;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -21,7 +23,7 @@ public class AlchemistGlobal {
 	public static int[] stavesAlchemy = {
 		3053, 11736, 1387
 	};
-	
+	public static String[] spellList;
 	public static HashMap<String, PSSpell> availableSpells;
 	public static PSSpell selectedSpell;
 

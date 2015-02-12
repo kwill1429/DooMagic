@@ -1,4 +1,5 @@
 
+import java.awt.EventQueue;
 import java.awt.Graphics2D;
 
 import com.epicbot.api.ActiveScript;
@@ -6,6 +7,7 @@ import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.event.listeners.PaintListener;
+import com.psutton.alchemist.AlchemistFrame;
 import com.psutton.alchemist.AlchemistGlobal;
 import com.psutton.alchemist.Spells;
 import com.psutton.alchemist.tasks.BankTask;
@@ -23,7 +25,9 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		this.setName("The Alchemist");
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
-		AlchemistGlobal.availableSpells = new Spells().getSpells();
+		Spells spells = new Spells();
+	
+		AlchemistGlobal.availableSpells = spells.getSpells();
 		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Low Alchemy");
 		
 		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
@@ -31,12 +35,23 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 			return false;
 		}
 		
-		bankTask = new BankTask();
-		provide(bankTask);
-		castSpellTask = new CastSpellTask();
-		provide(castSpellTask);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AlchemistFrame frame = new AlchemistFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+//		bankTask = new BankTask();
+//		provide(bankTask);
+//		castSpellTask = new CastSpellTask();
+//		provide(castSpellTask);
 		
-		return true;
+		//return true;
+		return false;
 	}
 	
 	@Override
