@@ -1,6 +1,6 @@
 package com.psutton.alchemist;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -151,9 +151,10 @@ public class Spells {
 		int index = 0;
 		for (String key: keys) {
 			spellList[index] = (key);
+			index ++;
 		}
 		
-		
+		Arrays.sort(spellList);
 		this.spellList = spellList;
 	}
 	

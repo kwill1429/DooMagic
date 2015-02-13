@@ -1,9 +1,6 @@
 package com.psutton.alchemist;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import javax.swing.JFrame;
 
 import com.epicbot.api.ActiveScript;

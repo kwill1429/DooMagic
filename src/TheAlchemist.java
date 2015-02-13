@@ -26,15 +26,15 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		AlchemistGlobal.timeStart = getStartTime();
 		System.out.println("Start Time: "+ AlchemistGlobal.timeStart);
 		Spells spells = new Spells();
-	
+		
 		AlchemistGlobal.availableSpells = spells.getSpells();
+		AlchemistGlobal.spellList = spells.getSpellList();
 		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Low Alchemy");
 		
 		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
 			return false;
 		}
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
