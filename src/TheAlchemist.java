@@ -5,9 +5,12 @@ import java.awt.Graphics2D;
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
+import com.epicbot.api.input.Mouse;
+import com.epicbot.api.rs3.methods.Game;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.SkillData;
+import com.epicbot.api.util.Time;
 import com.epicbot.api.util.paint.Paint;
 import com.epicbot.event.listeners.PaintListener;
 import com.psutton.alchemist.AlchemistFrame;
@@ -34,29 +37,32 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		
 		AlchemistGlobal.availableSpells = spells.getSpells();
 		AlchemistGlobal.spellList = spells.getSpellList();
-		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Low Alchemy");
+		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Varrock Teleport");
 		
 		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
 			return false;
 		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AlchemistFrame frame = new AlchemistFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-//		bankTask = new BankTask();
-//		provide(bankTask);
-//		castSpellTask = new CastSpellTask();
-//		provide(castSpellTask);
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AlchemistFrame frame = new AlchemistFrame();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+
 		
-//		return true;
-		return false;
+		System.out.println("Game Width: "+Game.getWidth()+" Height: "+Game.getHeight());
+		bankTask = new BankTask();
+		provide(bankTask);
+		castSpellTask = new CastSpellTask();
+		provide(castSpellTask);
+		
+		return true;
+//		return false;
 	}
 	
 	@Override
@@ -74,10 +80,16 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 	@Override
 	public void onRepaint(Graphics2D g) {
 		int lvlsGained = Skills.Skill.MAGIC.getCurrentLevel() - this.startingLvl;
+		long runtime = System.currentTimeMillis() - getStartTime();
+		
+		String runtimeString = "Runtime: "+Time.format(runtime);
 		String lvlString = "Magic Level: "+Skills.Skill.MAGIC.getCurrentLevel()+"("+lvlsGained+")";
 		String xpString = "XP Gained: "+SkillData.MAGIC.getXpGained();
-		Paint.drawLine(g, 0, lvlString);
-		Paint.drawLine(g, 1, xpString);
+		String xpPerHrString = "XP/Hr: "+SkillData.MAGIC.getXpPerHour(runtime);
+		Paint.drawLine(g, 0, runtimeString);
+		Paint.drawLine(g, 1, lvlString);
+		Paint.drawLine(g, 2, xpString);
+		Paint.drawLine(g, 3, xpPerHrString);
 		// TODO Auto-generated method stub
 	}
 }

@@ -10,7 +10,7 @@ import com.psutton.utilities.objects.PSSpell;
 import com.psutton.utilities.objects.PSStaff;
 
 public class Helpers {
-
+	
 	public static PSRune[] areNecessaryRunesInBank(PSRune[] runes) {
 		int numOfDifferentRunesNeeded = runes.length;
 		PSRune[] associatedRunes;
@@ -121,7 +121,7 @@ public class Helpers {
 		
 		for (int i = 0; i < requiredRunes.length; i++) {
 			rune = requiredRunes[i];
-			System.out.println("Required rune: "+ rune);
+			
 			if (!meetsRuneRequirement(rune)) {
 				System.out.println("do not have enough of: " + rune.getItemName());
 				return false;
@@ -182,5 +182,4 @@ public class Helpers {
 		}
 		return false;
 	}
-
 }

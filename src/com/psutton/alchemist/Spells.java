@@ -1,5 +1,6 @@
 package com.psutton.alchemist;
 
+import java.awt.Point;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class Spells {
 		lowAlch.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 		lowAlch.setRequiresAnItem(true);
 		lowAlch.setRunes(lowAlchRunes);
+		lowAlch.setCentralCoordinate(new Point(715, 323));
 		
 		PSRune highAlchOne = new PSRune(natureRune, 1);
 		PSRune highAlchTwo = new PSRune(fireRune, 1);
@@ -45,6 +47,7 @@ public class Spells {
 		highAlch.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
+		highAlch.setCentralCoordinate(new Point(715, 357));
 		
 //		PSRune superheatOne = new PSRune(natureRune, 1);
 //		PSRune superheatTwo = new PSRune(fireRune, 4);
@@ -54,7 +57,7 @@ public class Spells {
 //		superheatItem.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 //		superheatItem.setRequiresAnItem(true);
 //		superheatItem.setRunes(superheatItemRunes);
-		
+//		superheatItem.setCentralCoordinate(new Point(635, 357));
 		
 		PSRune mobilisingOne = new PSRune(lawRune, 1);
 		PSRune mobilisingTwo = new PSRune(airRune, 1);
@@ -64,7 +67,7 @@ public class Spells {
 		mobilisingArmiesTeleport.setTimeToCast(3000);
 		mobilisingArmiesTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		mobilisingArmiesTeleport.setRunes(mobilisingArmiesRunes);
-		
+		mobilisingArmiesTeleport.setCentralCoordinate(new Point(635, 323));
 		
 		PSRune varrockOne = new PSRune(lawRune, 1);
 		PSRune varrockTwo = new PSRune(airRune, 3);
@@ -74,6 +77,7 @@ public class Spells {
 		varrockTeleport.setTimeToCast(3000);
 		varrockTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		varrockTeleport.setRunes(varrockTeleRunes);
+		varrockTeleport.setCentralCoordinate(new Point(675, 323));
 		
 		PSRune lumbridgeOne = new PSRune(lawRune, 1);
 		PSRune lumbridgeTwo = new PSRune(airRune, 3);
@@ -83,6 +87,7 @@ public class Spells {
 		lumbridgeTeleport.setTimeToCast(3000);
 		lumbridgeTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		lumbridgeTeleport.setRunes(lumbridgeTeleRunes);
+		lumbridgeTeleport.setCentralCoordinate(new Point(715, 323));
 		
 		PSRune faladorOne = new PSRune(lawRune, 1);
 		PSRune faladorTwo = new PSRune(airRune, 3);
@@ -92,6 +97,7 @@ public class Spells {
 		faladorTeleport.setTimeToCast(3000);
 		faladorTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		faladorTeleport.setRunes(faladorTeleRunes);
+		faladorTeleport.setCentralCoordinate(new Point(755, 323));
 		
 		PSRune houseOne = new PSRune(lawRune, 1);
 		PSRune houseTwo = new PSRune(airRune, 1);
@@ -101,6 +107,7 @@ public class Spells {
 		houseTeleport.setTimeToCast(3000);
 		houseTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		houseTeleport.setRunes(houseTeleRunes);
+		houseTeleport.setCentralCoordinate(new Point(595, 357));
 		
 		PSRune camelotOne = new PSRune(lawRune, 1);
 		PSRune camelotTwo = new PSRune(airRune, 5);
@@ -109,6 +116,7 @@ public class Spells {
 		camelotTeleport.setTimeToCast(3000);
 		camelotTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		camelotTeleport.setRunes(camelotTeleRunes);
+		camelotTeleport.setCentralCoordinate(new Point(635, 357));
 		
 		PSRune ardougneOne = new PSRune(lawRune, 2);
 		PSRune ardougneTwo = new PSRune(waterRune, 2);
@@ -117,6 +125,7 @@ public class Spells {
 		ardougneTeleport.setTimeToCast(3000);
 		ardougneTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		ardougneTeleport.setRunes(ardougneTeleRunes);
+		ardougneTeleport.setCentralCoordinate(new Point(675, 357));
 		
 		generateSpells();
 	}

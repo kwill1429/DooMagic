@@ -1,5 +1,6 @@
 package com.psutton.utilities.objects;
 
+import java.awt.Point;
 import com.epicbot.api.rs3.methods.tab.Magic;
 
 public class PSSpell {
@@ -8,6 +9,7 @@ public class PSSpell {
 	private String spellName;
 	private Magic.Spell spell;
 	private Magic.InnerAbilityTab abilityTab;
+	private Point centralPoint;
 	
 
 	private PSRune[] runes;
@@ -63,8 +65,18 @@ public class PSSpell {
 		this.runes = runes;
 	}
 
+	public Point getCentralPoint() {
+		return centralPoint;
+	}
+
+	public void setCentralCoordinate(Point centralCoordinate) {
+		this.centralPoint = centralCoordinate;
+	}
+
 	@Override
 	public String toString() {
 		return this.spellName;
 	}
+
+	
 }

@@ -1,11 +1,14 @@
 package com.psutton.alchemist.tasks;
 
+import java.awt.Point;
+
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.input.Mouse;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
+import com.epicbot.api.rs3.methods.widget.actionbar.abilities.inner.InnerTab;
 import com.epicbot.api.rs3.wrappers.node.Item; 
 import com.psutton.alchemist.AlchemistGlobal;
 import com.psutton.alchemist.Helpers;
@@ -16,6 +19,9 @@ public class CastSpellTask extends Node implements Task {
 	@Override
 	public void run() {
 		long timeStart, timeEnd, timeToSleep;
+		Point centralPoint = AlchemistGlobal.selectedSpell.getCentralPoint();
+		
+		InnerTab.MAGIC_SKILLING_SPELLS.open();
 		
 		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 			Item item = Inventory.getItem(AlchemistGlobal.itemToAlchNoted);
@@ -23,6 +29,8 @@ public class CastSpellTask extends Node implements Task {
 				System.out.println("Ability Tab: "+ AlchemistGlobal.selectedSpell.getAbilityTab());
 				openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
 				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
+				System.out.println("Click at x: "+centralPoint.x+" y: "+centralPoint.y);
+				//Mouse.click(centralPoint, true);
 				timeStart = System.currentTimeMillis();
 				Mouse.click(item.getCentralPoint(), true);
 				timeEnd = System.currentTimeMillis();
