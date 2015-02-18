@@ -1,7 +1,5 @@
 package com.psutton.alchemist.tasks;
 
-import java.awt.Point;
-
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.input.Mouse;
@@ -10,6 +8,7 @@ import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.actionbar.abilities.inner.InnerTab;
 import com.epicbot.api.rs3.wrappers.node.Item; 
+import com.epicbot.api.util.Time;
 import com.psutton.alchemist.AlchemistGlobal;
 import com.psutton.alchemist.Helpers;
 
@@ -19,7 +18,7 @@ public class CastSpellTask extends Node implements Task {
 	@Override
 	public void run() {
 		long timeStart, timeEnd, timeToSleep;
-		Point centralPoint = AlchemistGlobal.selectedSpell.getCentralPoint();
+		Long timeToSleepActual;
 		
 		InnerTab.MAGIC_SKILLING_SPELLS.open();
 		
@@ -29,19 +28,13 @@ public class CastSpellTask extends Node implements Task {
 				System.out.println("Ability Tab: "+ AlchemistGlobal.selectedSpell.getAbilityTab());
 				openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
 				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
-				System.out.println("Click at x: "+centralPoint.x+" y: "+centralPoint.y);
-				//Mouse.click(centralPoint, true);
-				timeStart = System.currentTimeMillis();
 				Mouse.click(item.getCentralPoint(), true);
+				timeStart = System.currentTimeMillis();
 				timeEnd = System.currentTimeMillis();
 				timeToSleep = (AlchemistGlobal.selectedSpell.getTimeToCast() - (timeEnd - timeStart));
+				timeToSleepActual = new Long(timeToSleep);
 				
-				try {
-					System.out.println("Time to sleep: "+ timeToSleep);
-					Thread.sleep(timeToSleep);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				Time.sleep(timeToSleepActual.intValue());
 			}
 		}
 		else {
@@ -51,12 +44,9 @@ public class CastSpellTask extends Node implements Task {
 				timeStart = System.currentTimeMillis();
 				timeEnd = System.currentTimeMillis();
 				timeToSleep = (AlchemistGlobal.selectedSpell.getTimeToCast() - (timeEnd - timeStart));
-				
-				try {
-					Thread.sleep(timeToSleep);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				timeToSleepActual = new Long(timeToSleep);
+
+				Time.sleep(timeToSleepActual.intValue());
 			}
 		}
 	}

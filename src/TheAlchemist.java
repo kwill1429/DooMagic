@@ -1,12 +1,12 @@
 
 import java.awt.EventQueue;
 import java.awt.Graphics2D;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
-import com.epicbot.api.input.Mouse;
-import com.epicbot.api.rs3.methods.Game;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.SkillData;
@@ -37,29 +37,28 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		
 		AlchemistGlobal.availableSpells = spells.getSpells();
 		AlchemistGlobal.spellList = spells.getSpellList();
-		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get("Varrock Teleport");
 		
-		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
-			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
-			return false;
-		}
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					AlchemistFrame frame = new AlchemistFrame();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AlchemistFrame frame = new AlchemistFrame();
+					frame.setVisible(true);
+					
+					frame.addWindowListener(new WindowAdapter() {
 
-		
-		System.out.println("Game Width: "+Game.getWidth()+" Height: "+Game.getHeight());
-		bankTask = new BankTask();
-		provide(bankTask);
-		castSpellTask = new CastSpellTask();
-		provide(castSpellTask);
+			            @Override
+			            public void windowClosed(WindowEvent e) {
+			                System.out.println("User has closed window");
+			                startScript();
+			            }
+			        });
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		System.out.println("Script resumed");
 		
 		return true;
 //		return false;
@@ -91,5 +90,19 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		Paint.drawLine(g, 2, xpString);
 		Paint.drawLine(g, 3, xpPerHrString);
 		// TODO Auto-generated method stub
+	}
+	
+	private void startScript() {
+		System.out.println("Selected Spell: "+AlchemistGlobal.selectedSpell+" Num of casts: "+AlchemistGlobal.numOfCasts);
+		
+		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
+			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
+			this.stop();
+		} else {
+			bankTask = new BankTask();
+			provide(bankTask);
+			castSpellTask = new CastSpellTask();
+			provide(castSpellTask);
+		}
 	}
 }
