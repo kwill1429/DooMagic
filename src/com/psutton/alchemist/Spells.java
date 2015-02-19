@@ -74,7 +74,7 @@ public class Spells {
 		PSRune varrockThree = new PSRune(fireRune, 1);
 		PSRune[] varrockTeleRunes = { varrockOne, varrockTwo, varrockThree };
 		varrockTeleport = new PSSpell("Varrock Teleport", Magic.Spell.VARROCK_TELEPORT);
-		varrockTeleport.setTimeToCast(3000);
+		varrockTeleport.setTimeToCast(3500);
 		varrockTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		varrockTeleport.setRunes(varrockTeleRunes);
 		varrockTeleport.setCentralCoordinate(new Point(675, 323));
@@ -84,7 +84,7 @@ public class Spells {
 		PSRune lumbridgeThree = new PSRune(earthRune, 1);
 		PSRune[] lumbridgeTeleRunes = { lumbridgeOne, lumbridgeTwo, lumbridgeThree };
 		lumbridgeTeleport = new PSSpell("Lumbridge Teleport", Magic.Spell.LUMBRIDGE_TELEPORT);
-		lumbridgeTeleport.setTimeToCast(3000);
+		lumbridgeTeleport.setTimeToCast(3500);
 		lumbridgeTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		lumbridgeTeleport.setRunes(lumbridgeTeleRunes);
 		lumbridgeTeleport.setCentralCoordinate(new Point(715, 323));
@@ -94,7 +94,7 @@ public class Spells {
 		PSRune faladorThree = new PSRune(waterRune, 1);
 		PSRune[] faladorTeleRunes = { faladorOne, faladorTwo, faladorThree };
 		faladorTeleport = new PSSpell("Falador Teleport", Magic.Spell.FALADOR_TELEPORT);
-		faladorTeleport.setTimeToCast(4000);
+		faladorTeleport.setTimeToCast(3500);
 		faladorTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		faladorTeleport.setRunes(faladorTeleRunes);
 		faladorTeleport.setCentralCoordinate(new Point(755, 323));
@@ -104,7 +104,7 @@ public class Spells {
 		PSRune houseThree = new PSRune(earthRune, 1);
 		PSRune[] houseTeleRunes = { houseOne, houseTwo, houseThree };
 		houseTeleport = new PSSpell("House Teleport", Magic.Spell.HOME_TELEPORT);
-		houseTeleport.setTimeToCast(3000);
+		houseTeleport.setTimeToCast(3500);
 		houseTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		houseTeleport.setRunes(houseTeleRunes);
 		houseTeleport.setCentralCoordinate(new Point(595, 357));
@@ -113,7 +113,7 @@ public class Spells {
 		PSRune camelotTwo = new PSRune(airRune, 5);
 		PSRune[] camelotTeleRunes = { camelotOne, camelotTwo };
 		camelotTeleport = new PSSpell("Camelot Teleport", Magic.Spell.CAMELOT_TELEPORT);
-		camelotTeleport.setTimeToCast(3000);
+		camelotTeleport.setTimeToCast(3500);
 		camelotTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		camelotTeleport.setRunes(camelotTeleRunes);
 		camelotTeleport.setCentralCoordinate(new Point(635, 357));
@@ -122,7 +122,7 @@ public class Spells {
 		PSRune ardougneTwo = new PSRune(waterRune, 2);
 		PSRune[] ardougneTeleRunes = { ardougneOne, ardougneTwo };
 		ardougneTeleport = new PSSpell("Ardougne Teleport", Magic.Spell.ARDOUGNE_TELEPORT);
-		ardougneTeleport.setTimeToCast(3000);
+		ardougneTeleport.setTimeToCast(3500);
 		ardougneTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		ardougneTeleport.setRunes(ardougneTeleRunes);
 		ardougneTeleport.setCentralCoordinate(new Point(675, 357));

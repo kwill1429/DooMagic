@@ -13,7 +13,8 @@ import com.psutton.alchemist.Helpers;
 
 public class CastSpellTask extends Node implements Task {
 	public boolean shouldStop = false;
-
+	private int timeToSleep;
+	
 	@Override
 	public void run() {
 		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
@@ -59,8 +60,9 @@ public class CastSpellTask extends Node implements Task {
 					}
 				}
 
+				timeToSleep = AlchemistGlobal.selectedSpell.getTimeToCast();
 				AlchemistGlobal.scriptStatus = "Sleeping";
-				Time.sleep(100, 1500);
+				Time.sleep(timeToSleep,timeToSleep + 1500);
 			}
 		}
 	}
