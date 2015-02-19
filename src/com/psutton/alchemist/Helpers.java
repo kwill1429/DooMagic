@@ -5,23 +5,23 @@ import java.util.ArrayList;
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.Bank;
+import com.epicbot.api.rs3.wrappers.node.Item;
 import com.psutton.utilities.objects.PSRune;
 import com.psutton.utilities.objects.PSSpell;
 import com.psutton.utilities.objects.PSStaff;
 
 public class Helpers {
-	
+
 	public static PSRune[] areNecessaryRunesInBank(PSRune[] runes) {
 		int numOfDifferentRunesNeeded = runes.length;
 		PSRune[] associatedRunes;
 		PSRune rune, associatedRune;
 		PSRune[] runesToWithdraw = null;
 		ArrayList<PSRune> runesToWithdrawList = new ArrayList<PSRune>(numOfDifferentRunesNeeded);
-		
+
 		for (int i = 0; i < runes.length; i++) {
 			rune = runes[i];
-			
-			System.out.println("Checking for: " +rune+" in bank with ID of: "+rune.getItemID());
+
 			if (isRuneInBank(rune)) {
 				runesToWithdrawList.add(rune);
 				System.out.println(rune+" is in bank!");
@@ -39,37 +39,37 @@ public class Helpers {
 				}
 			}
 		}
-		
+
 		runesToWithdrawList.trimToSize();
-		
+
 		if (runesToWithdrawList.size() == numOfDifferentRunesNeeded) {
 			int index = 0;
 			runesToWithdraw = new PSRune[numOfDifferentRunesNeeded];
-			
+
 			for (PSRune runeToWithdraw : runesToWithdrawList) {
 				runesToWithdraw[index] = runeToWithdraw;
 				index ++;
 			}
 		}
-		
+
 		return runesToWithdraw;
 	}
-	
-	
+
+
 	public static boolean isRuneInBank(PSRune rune) {
 		if (Bank.getItemCount(true, rune.getItemID()) >= rune.getNumOfRunes()) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static boolean isNotedItemInInventory(int itemID) {
 		if (Inventory.contains(itemID)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static boolean areItemsInInventory(int[] items, int[] quantities) {
 		if (items != null) {
 			for (int i = 0; i < items.length; i++) {
@@ -87,22 +87,22 @@ public class Helpers {
 		}
 		return true;
 	}
-	
+
 	public static PSRune[] getRunesToWithdraw(PSRune[] runes) {
 		ArrayList<PSRune> runesToWithdrawList = new ArrayList<PSRune>();
 		PSRune rune;
 		PSRune[] runesToWithdraw = null;
 		int index = 0;
-		
+
 		for (int i = 0; i < runes.length; i++) {
 			rune = runes[i];
 			if (!meetsRuneRequirement(rune)) {
 				runesToWithdrawList.add(rune);
 			}
 		}
-		
+
 		runesToWithdrawList.trimToSize();
-		
+
 		if (!runesToWithdrawList.isEmpty()) {
 			runesToWithdraw = new PSRune[runesToWithdrawList.size()];
 			for (PSRune runeToWithdraw : runesToWithdrawList) {
@@ -110,27 +110,27 @@ public class Helpers {
 				index ++;
 			}
 		}
-		
+
 		return runesToWithdraw;
 	}
-	
+
 	public static boolean areRunesForSpellInInventory() {
 		PSSpell spell = AlchemistGlobal.selectedSpell;
 		PSRune rune;
 		PSRune[] requiredRunes = spell.getRunes(); 
-		
+
 		for (int i = 0; i < requiredRunes.length; i++) {
 			rune = requiredRunes[i];
-			
+
 			if (!meetsRuneRequirement(rune)) {
 				System.out.println("do not have enough of: " + rune.getItemName());
 				return false;
 			}
 		}	
-		
+
 		return true;
 	}
-	
+
 	public static boolean isValidStaffEquipped(PSStaff[] staves) {
 		for (int i = 0; i < staves.length; i++) {
 			if (Equipment.containsOneOf(staves[i].getItemID())) {
@@ -139,24 +139,40 @@ public class Helpers {
 		}
 		return false;
 	}
-	
+
+	public static void loadItemToUse() {
+		Item itemToAlch;
+
+		if (Inventory.getCount() == 1) {
+			itemToAlch = Inventory.getItemAt(0);
+			if (itemToAlch != null) {
+				AlchemistGlobal.itemToAlch = itemToAlch.getID();
+				AlchemistGlobal.itemToAlchNoted = AlchemistGlobal.itemToAlch + 1;
+			}
+		}
+		else {
+			System.out.println("Inventory is setup incorrectly to detect item to use.");
+			AlchemistGlobal.script.stop();
+		}
+	}
+
 	private static boolean meetsRuneRequirement(PSRune rune) {
 		int runeID, numOfRunes;
 		PSRune[] relatedRunes;
 		PSStaff[] staves;
-		
+
 		runeID = rune.getItemID();
 		numOfRunes = rune.getNumOfRunes();
 		relatedRunes = rune.getAssociatedRunes();
 		staves = rune.getAssociatedStaves();
-		
+
 		if (staves != null) {
 			if (isValidStaffEquipped(staves)) {
 				return true;
 			}
 		}
-		
-		
+
+
 		if (hasEnoughOfRune(runeID, numOfRunes)) {
 			return true;
 		}
@@ -170,10 +186,10 @@ public class Helpers {
 				}
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	private static boolean hasEnoughOfRune(int runeID, int numOfRunes) {
 		if (Inventory.contains(runeID)) {
 			if (Inventory.getCount(true, runeID) >= numOfRunes) {

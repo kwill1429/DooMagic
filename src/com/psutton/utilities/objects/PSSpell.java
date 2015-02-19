@@ -1,6 +1,7 @@
 package com.psutton.utilities.objects;
 
 import java.awt.Point;
+
 import com.epicbot.api.rs3.methods.tab.Magic;
 
 public class PSSpell {

@@ -25,7 +25,7 @@ public class StaffList {
 	private PSStaff waterBattle;
 	private PSStaff waterMystic;
 	private HashMap<String, PSStaff> staves;
-	
+
 	public StaffList() {
 		airStaff = new PSStaff("Staff of air", 1381);
 		airBattle = new PSStaff("Air battlestaff", 1398);
@@ -46,10 +46,10 @@ public class StaffList {
 		waterStaff = new PSStaff("Staff of water", 1383);
 		waterBattle = new PSStaff("Water battlestaff", 1395);
 		waterMystic = new PSStaff("Mystic water staff", 1403);
-	
+
 		generateStaves();
 	}
-	
+
 	public HashMap<String, PSStaff> getStaves() {
 		return staves;
 	}
@@ -57,37 +57,37 @@ public class StaffList {
 	public void setStaves(HashMap<String, PSStaff> staves) {
 		this.staves = staves;
 	}
-	
+
 	private void generateStaves() {
 		HashMap<String, PSStaff> staves = new HashMap<String, PSStaff>(19);
-		
+
 		staves.put("AirStaff", airStaff);
 		staves.put("AirBattle", airBattle);
 		staves.put("AirMystic", airMystic);
-		
+
 		staves.put ("ArmadylBattle", armadylBattle);
-		
+
 		staves.put("EarthStaff", earthStaff);
 		staves.put("EarthBattle", earthBattle);
 		staves.put("EarthMystic", earthMystic);
-		
+
 		staves.put("FireStaff", fireStaff);
 		staves.put("FireBattle", fireBattle);
 		staves.put("FireMystic", fireMystic);
-		
+
 		staves.put("LavaBattle", lavaBattle);
 		staves.put("LavaMystic", lavaMystic);
-		
+
 		staves.put("MudBattle", mudBattle);
 		staves.put("MudMystic", mudMystic);
-		
+
 		staves.put("SteamBattle", steamBattle);
 		staves.put("SteamMystic", steamMystic);
-		
+
 		staves.put("WaterStaff", waterStaff);
 		staves.put("WaterBattle", waterBattle);
 		staves.put("WaterMystic", waterMystic);
-		
+
 		this.setStaves(staves);
 	}
 }

@@ -6,7 +6,7 @@ public class AlchemistRune {
 	private boolean hasSubstitute;
 	private boolean canUseStaff;
 	private String runeName;
-	
+
 	public AlchemistRune(String runeName, int runeID, int numOfRunes, boolean hasSubstitute, boolean canUseStaff) {
 		this.runeName = runeName;
 		this.setRuneID(runeID);
@@ -14,19 +14,19 @@ public class AlchemistRune {
 		this.setHasSubstitute(hasSubstitute);
 		this.setCanUseStaff(canUseStaff);
 	}
-	
+
 	public int getNumOfRunes() {
 		return numOfRunes;
 	}
-	
+
 	public void setNumOfRunes(int numOfRunes) {
 		this.numOfRunes = numOfRunes;
 	}
-	
+
 	public int getRuneID() {
 		return runeID;
 	}
-	
+
 	public void setRuneID(int runeID) {
 		this.runeID = runeID;
 	}
@@ -38,7 +38,7 @@ public class AlchemistRune {
 	public void setRuneName(String runeName) {
 		this.runeName = runeName;
 	}
-	
+
 	public boolean hasSubstitute() {
 		return hasSubstitute;
 	}
@@ -59,6 +59,6 @@ public class AlchemistRune {
 	public String toString() {
 		return this.runeName;
 	}
-	
-	
+
+
 }

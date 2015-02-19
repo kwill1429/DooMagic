@@ -5,12 +5,12 @@ public class PSItem {
 	private int notedID;
 	private boolean isAlchable;
 	private String itemName;
-	
+
 	public PSItem(String itemName, int itemID) {
 		this.setItemName(itemName);
 		this.setItemID(itemID);
 	}
-	
+
 	public int getItemID() {
 		return itemID;
 	}

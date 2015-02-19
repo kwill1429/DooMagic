@@ -10,36 +10,35 @@ import com.psutton.utilities.objects.PSRune;
 
 public class BankTask extends Node implements Task {
 	public int count = 0;
-	private boolean needRunes = false;
-	private boolean needItem = false;
 	private PSRune[] runesNeeded;
 	private PSRune rune;
-	
+
 	@Override
 	public void run() {
 		if (Bank.BankLocations.atBank()) {
-			System.out.println("At a bank already!");
 			Bank.open();
 			if (Bank.isOpen()) {
+				Bank.depositInventory();
 				Bank.setWithdrawNoted(true);
-				if (needRunes) {
-					System.out.println("Need runes!");
+				if (!Helpers.areRunesForSpellInInventory()) {
+					AlchemistGlobal.scriptStatus = "Withdrawing Runes";
+					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
 					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
-					
+
 					if (runesToWithdraw == null) {
 						System.out.println("Necessary Runes are NOT in bank!");
 					}
 					else {
 						for (int i = 0; i < runesToWithdraw.length; i++) {
 							rune = runesToWithdraw[i];
+							Bank.waitForInputWidget(true);
 							Bank.withdraw(rune.getItemID(), Bank.Amount.ALL);
 						}
 					}
 				}
-				if (needItem) {
-					System.out.println("Need item");
+				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+					AlchemistGlobal.scriptStatus = "Withdrawing Items";
 					if (Bank.getItem(AlchemistGlobal.itemToAlch) != null) {
-						System.out.println("Withdrawing item");
 						Bank.withdraw(AlchemistGlobal.itemToAlch, Bank.Amount.ALL);
 					}
 				}
@@ -51,19 +50,20 @@ public class BankTask extends Node implements Task {
 			AlchemistGlobal.script.revoke(this);
 		}
 	}
-	
+
+	@Override
 	public boolean shouldExecute() {
 		System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null) {
 			if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted) ||
 					!Helpers.areRunesForSpellInInventory()) {
-				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
-					needItem = true;
-				}
-				if (!Helpers.areRunesForSpellInInventory()) {
-					needRunes = true;
-					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
-				}
+				//				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+				//					needItem = true;
+				//				}
+				//				if (!Helpers.areRunesForSpellInInventory()) {
+				//					needRunes = true;
+				//					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
+				//				}
 				return true;
 			}
 		}

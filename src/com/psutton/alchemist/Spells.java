@@ -12,23 +12,23 @@ import com.psutton.utilities.objects.PSSpell;
 
 public class Spells {
 	private PSSpell lowAlch, highAlch;
-//	private PSSpell superheatItem;
+	//	private PSSpell superheatItem;
 	private PSSpell mobilisingArmiesTeleport, varrockTeleport, lumbridgeTeleport, faladorTeleport;
 	private PSSpell houseTeleport, camelotTeleport, ardougneTeleport;
 	private String[] spellList;
 	private HashMap<String, PSSpell> spells;
-	
+
 	public Spells() {
 		HashMap<String, PSRune> runes = new RuneList().getRunes();
 		PSRune natureRune, fireRune, lawRune, waterRune, earthRune, airRune;
-			
+
 		natureRune = runes.get("NatureRune");
 		fireRune = runes.get("FireRune");
 		lawRune = runes.get("LawRune");
 		waterRune = runes.get("WaterRune");
 		earthRune = runes.get("EarthRune");
 		airRune = runes.get("AirRune");
-			
+
 		PSRune lowAlchOne = new PSRune(natureRune, 1);
 		PSRune lowAlchTwo = new PSRune(fireRune, 3);
 		PSRune[] lowAlchRunes = { lowAlchOne, lowAlchTwo };
@@ -38,7 +38,7 @@ public class Spells {
 		lowAlch.setRequiresAnItem(true);
 		lowAlch.setRunes(lowAlchRunes);
 		lowAlch.setCentralCoordinate(new Point(715, 323));
-		
+
 		PSRune highAlchOne = new PSRune(natureRune, 1);
 		PSRune highAlchTwo = new PSRune(fireRune, 1);
 		PSRune[] highAlchRunes = { highAlchOne, highAlchTwo };
@@ -48,17 +48,17 @@ public class Spells {
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
 		highAlch.setCentralCoordinate(new Point(715, 357));
-		
-//		PSRune superheatOne = new PSRune(natureRune, 1);
-//		PSRune superheatTwo = new PSRune(fireRune, 4);
-//		PSRune[] superheatItemRunes = { superheatOne, superheatTwo };
-//		superheatItem = new PSSpell("Superheat Item", Magic.Spell.SUPERHEAT_ITEM);
-//		superheatItem.setTimeToCast(3000);
-//		superheatItem.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
-//		superheatItem.setRequiresAnItem(true);
-//		superheatItem.setRunes(superheatItemRunes);
-//		superheatItem.setCentralCoordinate(new Point(635, 357));
-		
+
+		//		PSRune superheatOne = new PSRune(natureRune, 1);
+		//		PSRune superheatTwo = new PSRune(fireRune, 4);
+		//		PSRune[] superheatItemRunes = { superheatOne, superheatTwo };
+		//		superheatItem = new PSSpell("Superheat Item", Magic.Spell.SUPERHEAT_ITEM);
+		//		superheatItem.setTimeToCast(3000);
+		//		superheatItem.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
+		//		superheatItem.setRequiresAnItem(true);
+		//		superheatItem.setRunes(superheatItemRunes);
+		//		superheatItem.setCentralCoordinate(new Point(635, 357));
+
 		PSRune mobilisingOne = new PSRune(lawRune, 1);
 		PSRune mobilisingTwo = new PSRune(airRune, 1);
 		PSRune mobilisingThree = new PSRune(waterRune, 1);
@@ -68,7 +68,7 @@ public class Spells {
 		mobilisingArmiesTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		mobilisingArmiesTeleport.setRunes(mobilisingArmiesRunes);
 		mobilisingArmiesTeleport.setCentralCoordinate(new Point(635, 323));
-		
+
 		PSRune varrockOne = new PSRune(lawRune, 1);
 		PSRune varrockTwo = new PSRune(airRune, 3);
 		PSRune varrockThree = new PSRune(fireRune, 1);
@@ -78,7 +78,7 @@ public class Spells {
 		varrockTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		varrockTeleport.setRunes(varrockTeleRunes);
 		varrockTeleport.setCentralCoordinate(new Point(675, 323));
-		
+
 		PSRune lumbridgeOne = new PSRune(lawRune, 1);
 		PSRune lumbridgeTwo = new PSRune(airRune, 3);
 		PSRune lumbridgeThree = new PSRune(earthRune, 1);
@@ -88,17 +88,17 @@ public class Spells {
 		lumbridgeTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		lumbridgeTeleport.setRunes(lumbridgeTeleRunes);
 		lumbridgeTeleport.setCentralCoordinate(new Point(715, 323));
-		
+
 		PSRune faladorOne = new PSRune(lawRune, 1);
 		PSRune faladorTwo = new PSRune(airRune, 3);
 		PSRune faladorThree = new PSRune(waterRune, 1);
 		PSRune[] faladorTeleRunes = { faladorOne, faladorTwo, faladorThree };
 		faladorTeleport = new PSSpell("Falador Teleport", Magic.Spell.FALADOR_TELEPORT);
-		faladorTeleport.setTimeToCast(3000);
+		faladorTeleport.setTimeToCast(4000);
 		faladorTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		faladorTeleport.setRunes(faladorTeleRunes);
 		faladorTeleport.setCentralCoordinate(new Point(755, 323));
-		
+
 		PSRune houseOne = new PSRune(lawRune, 1);
 		PSRune houseTwo = new PSRune(airRune, 1);
 		PSRune houseThree = new PSRune(earthRune, 1);
@@ -108,7 +108,7 @@ public class Spells {
 		houseTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		houseTeleport.setRunes(houseTeleRunes);
 		houseTeleport.setCentralCoordinate(new Point(595, 357));
-		
+
 		PSRune camelotOne = new PSRune(lawRune, 1);
 		PSRune camelotTwo = new PSRune(airRune, 5);
 		PSRune[] camelotTeleRunes = { camelotOne, camelotTwo };
@@ -117,7 +117,7 @@ public class Spells {
 		camelotTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		camelotTeleport.setRunes(camelotTeleRunes);
 		camelotTeleport.setCentralCoordinate(new Point(635, 357));
-		
+
 		PSRune ardougneOne = new PSRune(lawRune, 2);
 		PSRune ardougneTwo = new PSRune(waterRune, 2);
 		PSRune[] ardougneTeleRunes = { ardougneOne, ardougneTwo };
@@ -126,7 +126,7 @@ public class Spells {
 		ardougneTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
 		ardougneTeleport.setRunes(ardougneTeleRunes);
 		ardougneTeleport.setCentralCoordinate(new Point(675, 357));
-		
+
 		generateSpells();
 	}
 
@@ -137,14 +137,14 @@ public class Spells {
 	public HashMap<String, PSSpell> getSpells() {
 		return spells;
 	}
-	
+
 	private void generateSpells() {
 		HashMap<String, PSSpell> spells = new HashMap<String, PSSpell> (9);
 		String[] spellList = new String[9];
-		
+
 		spells.put("Low Alchemy", lowAlch);
 		spells.put("High Alchemy", highAlch);
-//		spells.put("Superheat Item", superheatItem);
+		//		spells.put("Superheat Item", superheatItem);
 		spells.put("Mobilising Armies Teleport", mobilisingArmiesTeleport);
 		spells.put("Varrock Teleport", varrockTeleport);
 		spells.put("Lumbridge Teleport", lumbridgeTeleport);
@@ -152,19 +152,19 @@ public class Spells {
 		spells.put("House Teleport", houseTeleport);
 		spells.put("Camelot Teleport", camelotTeleport);
 		spells.put("Ardougne Teleport", ardougneTeleport);
-		
+
 		this.spells = spells;
-		
+
 		Set<String> keys = spells.keySet();
-		
+
 		int index = 0;
 		for (String key: keys) {
 			spellList[index] = (key);
 			index ++;
 		}
-		
+
 		Arrays.sort(spellList);
 		this.spellList = spellList;
 	}
-	
+
 }
