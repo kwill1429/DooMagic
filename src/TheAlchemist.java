@@ -9,7 +9,6 @@ import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
-import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
 import com.epicbot.api.util.paint.Paint;
 import com.epicbot.event.listeners.PaintListener;
@@ -19,7 +18,7 @@ import com.psutton.alchemist.Helpers;
 import com.psutton.alchemist.Spells;
 import com.psutton.alchemist.tasks.BankTask;
 import com.psutton.alchemist.tasks.CastSpellTask;
-@Manifest(game=GameType.RS3, name="The Alchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.0)
+@Manifest(game=GameType.RS3, name="The Alchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.01)
 
 public class TheAlchemist extends ActiveScript implements PaintListener
 {
@@ -29,7 +28,7 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 	private long startTime = 0;
 	private long runtime;
 	private String scriptInfoString, runtimeString, statusString, lvlString, xpString, xpPerHrString, numOfTimesCast;
-	
+
 	@Override
 	public boolean onStart() {
 		AlchemistGlobal.script = this;
@@ -40,8 +39,8 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 
 		AlchemistGlobal.availableSpells = spells.getSpells();
 		AlchemistGlobal.spellList = spells.getSpellList();
-		
-		
+
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {

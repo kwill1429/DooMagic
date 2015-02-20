@@ -14,7 +14,7 @@ import com.psutton.alchemist.Helpers;
 public class CastSpellTask extends Node implements Task {
 	public boolean shouldStop = false;
 	private int timeToSleep;
-	
+
 	@Override
 	public void run() {
 		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
@@ -24,19 +24,19 @@ public class CastSpellTask extends Node implements Task {
 				AlchemistGlobal.scriptStatus = "Casting "+AlchemistGlobal.selectedSpell;
 				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
 				Mouse.click(item.getCentralPoint(), true);
-				
+
 				AlchemistGlobal.numOfTimesCast++;
-				
+
 				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
 					shouldStop = true;
 				}
-				
+
 				if (AlchemistGlobal.numOfCasts != -1) {
 					if (AlchemistGlobal.numOfTimesCast == AlchemistGlobal.numOfCasts || Inventory.getItem(AlchemistGlobal.itemToAlchNoted) == null) {
 						shouldStop = true;
 					}
 				}
-				
+
 				AlchemistGlobal.scriptStatus = "Sleeping";
 				Time.sleep(100, 1500);
 				//				Uncomment once spell tabs are fixed.
@@ -62,7 +62,7 @@ public class CastSpellTask extends Node implements Task {
 
 				timeToSleep = AlchemistGlobal.selectedSpell.getTimeToCast();
 				AlchemistGlobal.scriptStatus = "Sleeping";
-				Time.sleep(timeToSleep,timeToSleep + 1500);
+				Time.sleep(timeToSleep,timeToSleep + 500);
 			}
 		}
 	}

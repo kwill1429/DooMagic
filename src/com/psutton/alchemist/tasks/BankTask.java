@@ -12,15 +12,20 @@ public class BankTask extends Node implements Task {
 	public int count = 0;
 	private PSRune[] runesNeeded;
 	private PSRune rune;
+	private boolean needItems;
+	private boolean needRunes;
 
 	@Override
 	public void run() {
+		int numOfRune;
+		int numOfItem;
+
 		if (Bank.BankLocations.atBank()) {
 			Bank.open();
 			if (Bank.isOpen()) {
 				Bank.depositInventory();
 				Bank.setWithdrawNoted(true);
-				if (!Helpers.areRunesForSpellInInventory()) {
+				while (!Helpers.areRunesForSpellInInventory()) {
 					AlchemistGlobal.scriptStatus = "Withdrawing Runes";
 					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
 					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
@@ -31,15 +36,22 @@ public class BankTask extends Node implements Task {
 					else {
 						for (int i = 0; i < runesToWithdraw.length; i++) {
 							rune = runesToWithdraw[i];
+
+							numOfRune = Bank.getItemCount(true, rune.getItemID());
 							Bank.waitForInputWidget(true);
-							Bank.withdraw(rune.getItemID(), Bank.Amount.ALL);
+							Bank.withdraw(rune.getItemID(), numOfRune);
 						}
 					}
 				}
-				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+				while (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
 					AlchemistGlobal.scriptStatus = "Withdrawing Items";
 					if (Bank.getItem(AlchemistGlobal.itemToAlch) != null) {
-						Bank.withdraw(AlchemistGlobal.itemToAlch, Bank.Amount.ALL);
+						numOfItem = Bank.getItemCount(true, AlchemistGlobal.itemToAlch);
+						Bank.waitForInputWidget(true);
+						Bank.withdraw(AlchemistGlobal.itemToAlch, numOfItem);
+					}
+					else {
+						break;
 					}
 				}
 			}
@@ -55,20 +67,31 @@ public class BankTask extends Node implements Task {
 	public boolean shouldExecute() {
 		System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null) {
-			if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted) ||
-					!Helpers.areRunesForSpellInInventory()) {
-				//				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
-				//					needItem = true;
-				//				}
-				//				if (!Helpers.areRunesForSpellInInventory()) {
-				//					needRunes = true;
-				//					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
-				//				}
-				return true;
+			if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
+				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+					needItems = true;
+				}
+				else {
+					needItems = false;
+				}
 			}
+			else {
+				needItems = false;
+
+				if (!Helpers.areRunesForSpellInInventory()) {
+					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
+					needRunes = true;
+				}
+				else {
+					needRunes = false;
+				}
+			}
+
+			if (needItems || needRunes) {
+				return true;
+			}	
 		}
 		System.out.println("Don't need to bank!");
 		return false;
 	}
-
 }
