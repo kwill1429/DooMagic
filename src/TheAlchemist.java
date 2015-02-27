@@ -18,7 +18,7 @@ import com.psutton.alchemist.Helpers;
 import com.psutton.alchemist.Spells;
 import com.psutton.alchemist.tasks.BankTask;
 import com.psutton.alchemist.tasks.CastSpellTask;
-@Manifest(game=GameType.RS3, name="The Alchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.01)
+@Manifest(game=GameType.RS3, name="The Alchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.20)
 
 public class TheAlchemist extends ActiveScript implements PaintListener
 {

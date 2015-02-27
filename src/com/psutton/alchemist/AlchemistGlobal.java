@@ -10,7 +10,7 @@ public class AlchemistGlobal {
 	public static int numOfTimesCast = 0;
 	public static int xpGained, lvlsGained;
 	public static int itemToAlch, itemToAlchNoted;
-	public static String scriptVersion = "(v1.10)";
+	public static String scriptVersion = "(v1.20)";
 	public static String scriptStatus = "Starting Up";
 	public static AlchemistFrame frame;
 	public static ActiveScript script;

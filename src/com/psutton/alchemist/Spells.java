@@ -14,7 +14,7 @@ public class Spells {
 	private PSSpell lowAlch, highAlch;
 	//	private PSSpell superheatItem;
 	private PSSpell mobilisingArmiesTeleport, varrockTeleport, lumbridgeTeleport, faladorTeleport;
-	private PSSpell houseTeleport, camelotTeleport, ardougneTeleport;
+	private PSSpell houseTeleport, camelotTeleport, ardougneTeleport, trollheimTeleport;
 	private String[] spellList;
 	private HashMap<String, PSSpell> spells;
 
@@ -127,6 +127,15 @@ public class Spells {
 		ardougneTeleport.setRunes(ardougneTeleRunes);
 		ardougneTeleport.setCentralCoordinate(new Point(675, 357));
 
+		PSRune trollheimOne = new PSRune(lawRune, 2);
+		PSRune trollheimTwo = new PSRune(fireRune, 2);
+		PSRune[] trollheimTeleRunes = { trollheimOne, trollheimTwo };
+		trollheimTeleport = new PSSpell("Trollheim Teleport", Magic.Spell.TROLLHEIM_TELEPORT);
+		trollheimTeleport.setTimeToCast(3500);
+		trollheimTeleport.setAbilityTab(Magic.InnerAbilityTab.COMBAT_SPELL);
+		trollheimTeleport.setRunes(trollheimTeleRunes);
+		//		trollheimTeleport.setCentralCoordinate(new Point(675, 357));
+
 		generateSpells();
 	}
 
@@ -139,8 +148,9 @@ public class Spells {
 	}
 
 	private void generateSpells() {
-		HashMap<String, PSSpell> spells = new HashMap<String, PSSpell> (9);
-		String[] spellList = new String[9];
+		int index = 0;
+		HashMap<String, PSSpell> spells = new HashMap<String, PSSpell> (10);
+		String[] spellList;
 
 		spells.put("Low Alchemy", lowAlch);
 		spells.put("High Alchemy", highAlch);
@@ -152,12 +162,14 @@ public class Spells {
 		spells.put("House Teleport", houseTeleport);
 		spells.put("Camelot Teleport", camelotTeleport);
 		spells.put("Ardougne Teleport", ardougneTeleport);
+		spells.put("Trollheim Teleport", trollheimTeleport);
 
 		this.spells = spells;
 
 		Set<String> keys = spells.keySet();
 
-		int index = 0;
+		index = 0;
+		spellList = new String[spells.size()];
 		for (String key: keys) {
 			spellList[index] = (key);
 			index ++;

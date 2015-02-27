@@ -11,8 +11,6 @@ public class PSSpell {
 	private Magic.Spell spell;
 	private Magic.InnerAbilityTab abilityTab;
 	private Point centralPoint;
-	
-
 	private PSRune[] runes;
 	
 	public PSSpell(String spellName, Magic.Spell spell) {
