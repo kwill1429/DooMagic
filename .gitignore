@@ -1,1 +1,9 @@
 **/.DS_Store
+.classpath
+.idea
+.project
+.settings
+bin
+lib
+RS3_Alchemist.eml
+RS3_Alchemist.iml
