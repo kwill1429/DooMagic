@@ -1,4 +1,4 @@
-package com.psutton.alchemist;
+package com.psutton.doomagic;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-public class AlchemistFrame extends JFrame {
+public class DooMagicFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	//	private JTextField tfItemToUse;
 	private JLabel lblTitle, lblSpellToCast, lblNumOfCasts;
@@ -27,8 +27,8 @@ public class AlchemistFrame extends JFrame {
 	private JButton btnStart;
 	private JTextField tfNumOfCasts;
 
-	public AlchemistFrame() {
-		AlchemistGlobal.frame = this;
+	public DooMagicFrame() {
+		DooMagicGlobal.frame = this;
 		setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		setType(Type.UTILITY);
 		getContentPane().setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
@@ -41,7 +41,7 @@ public class AlchemistFrame extends JFrame {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 
-		lblTitle = new JLabel("The Alchemist");
+		lblTitle = new JLabel(DooMagicGlobal.scriptName);
 		lblTitle.setFont(new Font("Helvetica Neue", Font.PLAIN, 22));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
@@ -60,15 +60,15 @@ public class AlchemistFrame extends JFrame {
 		gbc_lblPlaceholder.gridy = 1;
 		getContentPane().add(lblPlaceholder, gbc_lblPlaceholder);
 
-		final JComboBox<?> cbSpellToCast = new JComboBox<Object>(AlchemistGlobal.spellList);
+		final JComboBox<?> cbSpellToCast = new JComboBox<Object>(DooMagicGlobal.spellList);
 		cbSpellToCast.setSelectedIndex(0);
-		AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get((cbSpellToCast.getSelectedItem().toString()));
+		DooMagicGlobal.selectedSpell = DooMagicGlobal.availableSpells.get((cbSpellToCast.getSelectedItem().toString()));
 		cbSpellToCast.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String selectedSpell = cbSpellToCast.getSelectedItem().toString();
 				System.out.println("selectedSpell: "+selectedSpell);
-				AlchemistGlobal.selectedSpell = AlchemistGlobal.availableSpells.get(selectedSpell);
+				DooMagicGlobal.selectedSpell = DooMagicGlobal.availableSpells.get(selectedSpell);
 				btnStart.setEnabled(true);
 				//				if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
 				//					toggleItemToUse(true);
@@ -117,10 +117,10 @@ public class AlchemistFrame extends JFrame {
 				System.out.println("Num of casts entered: " + input);
 				try {
 					numOfCasts = Integer.parseInt(input);
-					AlchemistGlobal.numOfCasts = numOfCasts;
+					DooMagicGlobal.numOfCasts = numOfCasts;
 				} catch (NumberFormatException numFormatException) {
 					System.out.println("Invalid entry for number of casts.");
-					AlchemistGlobal.numOfCasts = -1;
+					DooMagicGlobal.numOfCasts = -1;
 				}
 			}
 		});
@@ -214,7 +214,7 @@ public class AlchemistFrame extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AlchemistFrame frame = AlchemistGlobal.frame;
+				DooMagicFrame frame = DooMagicGlobal.frame;
 				frame.dispose();
 			}
 		});

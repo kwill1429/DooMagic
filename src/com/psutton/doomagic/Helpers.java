@@ -1,4 +1,4 @@
-package com.psutton.alchemist;
+package com.psutton.doomagic;
 
 import java.util.ArrayList;
 
@@ -115,7 +115,7 @@ public class Helpers {
 	}
 
 	public static boolean areRunesForSpellInInventory() {
-		PSSpell spell = AlchemistGlobal.selectedSpell;
+		PSSpell spell = DooMagicGlobal.selectedSpell;
 		PSRune rune;
 		PSRune[] requiredRunes = spell.getRunes(); 
 
@@ -146,13 +146,13 @@ public class Helpers {
 		if (Inventory.getCount() == 1) {
 			itemToAlch = Inventory.getItemAt(0);
 			if (itemToAlch != null) {
-				AlchemistGlobal.itemToAlch = itemToAlch.getID();
-				AlchemistGlobal.itemToAlchNoted = AlchemistGlobal.itemToAlch + 1;
+				DooMagicGlobal.itemToAlch = itemToAlch.getID();
+				DooMagicGlobal.itemToAlchNoted = DooMagicGlobal.itemToAlch + 1;
 			}
 		}
 		else {
 			System.out.println("Inventory is setup incorrectly to detect item to use.");
-			AlchemistGlobal.script.stop();
+			DooMagicGlobal.script.stop();
 		}
 	}
 

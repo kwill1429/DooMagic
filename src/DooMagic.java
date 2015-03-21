@@ -12,15 +12,15 @@ import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.Time;
 import com.epicbot.api.util.paint.Paint;
 import com.epicbot.event.listeners.PaintListener;
-import com.psutton.alchemist.AlchemistFrame;
-import com.psutton.alchemist.AlchemistGlobal;
-import com.psutton.alchemist.Helpers;
-import com.psutton.alchemist.Spells;
-import com.psutton.alchemist.tasks.BankTask;
-import com.psutton.alchemist.tasks.CastSpellTask;
-@Manifest(game=GameType.RS3, name="The Alchemist", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.20)
+import com.psutton.doomagic.DooMagicFrame;
+import com.psutton.doomagic.DooMagicGlobal;
+import com.psutton.doomagic.Helpers;
+import com.psutton.doomagic.Spells;
+import com.psutton.doomagic.tasks.BankTask;
+import com.psutton.doomagic.tasks.CastSpellTask;
+@Manifest(game=GameType.RS3, name="DooMagic", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.21)
 
-public class TheAlchemist extends ActiveScript implements PaintListener
+public class DooMagic extends ActiveScript implements PaintListener
 {
 	private BankTask bankTask;
 	private CastSpellTask castSpellTask;
@@ -31,21 +31,21 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 
 	@Override
 	public boolean onStart() {
-		AlchemistGlobal.script = this;
+		DooMagicGlobal.script = this;
 		this.setName("The Alchemist");
 		Spells spells = new Spells();
 		startingLvl = Skills.Skill.MAGIC.getCurrentLevel();
 		startingXp = Skills.Skill.MAGIC.getExperience();
 
-		AlchemistGlobal.availableSpells = spells.getSpells();
-		AlchemistGlobal.spellList = spells.getSpellList();
+		DooMagicGlobal.availableSpells = spells.getSpells();
+		DooMagicGlobal.spellList = spells.getSpellList();
 
 
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					AlchemistFrame frame = new AlchemistFrame();
+					DooMagicFrame frame = new DooMagicFrame();
 					frame.setVisible(true);
 
 					frame.addWindowListener(new WindowAdapter() {
@@ -83,13 +83,13 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 		xpGained = Skills.Skill.MAGIC.getExperience() - this.startingXp;
 		runtime = System.currentTimeMillis() - startTime;
 
-		scriptInfoString = "The Alchemist "+AlchemistGlobal.scriptVersion;
+		scriptInfoString = DooMagicGlobal.scriptName;
 		runtimeString = "Runtime: "+Time.format(runtime);
-		statusString = "Script status: "+AlchemistGlobal.scriptStatus;
+		statusString = "Script status: "+DooMagicGlobal.scriptStatus;
 		lvlString = "Magic Level: "+Skills.Skill.MAGIC.getCurrentLevel()+"("+lvlsGained+")";
 		xpString = "XP Gained: "+xpGained;
 		xpPerHrString = "XP/Hr: "+Time.getPerHour(xpGained, startTime);
-		numOfTimesCast = "Num of Casts: "+AlchemistGlobal.numOfTimesCast;
+		numOfTimesCast = "Num of Casts: "+DooMagicGlobal.numOfTimesCast;
 
 		Paint.drawLine(g, 0, scriptInfoString);
 		Paint.drawLine(g, 1, runtimeString);
@@ -102,14 +102,14 @@ public class TheAlchemist extends ActiveScript implements PaintListener
 	}
 
 	private void startScript() {
-		System.out.println("Selected Spell: "+AlchemistGlobal.selectedSpell+" Num of casts: "+AlchemistGlobal.numOfCasts);
+		System.out.println("Selected Spell: "+DooMagicGlobal.selectedSpell+" Num of casts: "+DooMagicGlobal.numOfCasts);
 
-		if (!Magic.canCastSpell(AlchemistGlobal.selectedSpell.getSpell())) {
+		if (!Magic.canCastSpell(DooMagicGlobal.selectedSpell.getSpell())) {
 			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
 			this.stop();
 		} else {
-			if (AlchemistGlobal.selectedSpell != null) {
-				if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
+			if (DooMagicGlobal.selectedSpell != null) {
+				if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 					Helpers.loadItemToUse();
 				}
 				startTime = getStartTime();

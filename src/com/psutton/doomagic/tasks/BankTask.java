@@ -1,11 +1,11 @@
-package com.psutton.alchemist.tasks;
+package com.psutton.doomagic.tasks;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.widget.Bank;
-import com.psutton.alchemist.AlchemistGlobal;
-import com.psutton.alchemist.Helpers;
+import com.psutton.doomagic.DooMagicGlobal;
+import com.psutton.doomagic.Helpers;
 import com.psutton.utilities.objects.PSRune;
 
 public class BankTask extends Node implements Task {
@@ -26,8 +26,8 @@ public class BankTask extends Node implements Task {
 				Bank.depositInventory();
 				Bank.setWithdrawNoted(true);
 				while (!Helpers.areRunesForSpellInInventory()) {
-					AlchemistGlobal.scriptStatus = "Withdrawing Runes";
-					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
+					DooMagicGlobal.scriptStatus = "Withdrawing Runes";
+					this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
 					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
 
 					if (runesToWithdraw == null) {
@@ -43,12 +43,12 @@ public class BankTask extends Node implements Task {
 						}
 					}
 				}
-				while (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
-					AlchemistGlobal.scriptStatus = "Withdrawing Items";
-					if (Bank.getItem(AlchemistGlobal.itemToAlch) != null) {
-						numOfItem = Bank.getItemCount(true, AlchemistGlobal.itemToAlch);
+				while (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
+					DooMagicGlobal.scriptStatus = "Withdrawing Items";
+					if (Bank.getItem(DooMagicGlobal.itemToAlch) != null) {
+						numOfItem = Bank.getItemCount(true, DooMagicGlobal.itemToAlch);
 						Bank.waitForInputWidget(true);
-						Bank.withdraw(AlchemistGlobal.itemToAlch, numOfItem);
+						Bank.withdraw(DooMagicGlobal.itemToAlch, numOfItem);
 					}
 					else {
 						break;
@@ -59,7 +59,7 @@ public class BankTask extends Node implements Task {
 		}
 		else {
 			System.out.println("Not in a bank!");
-			AlchemistGlobal.script.revoke(this);
+			DooMagicGlobal.script.revoke(this);
 		}
 	}
 
@@ -67,8 +67,8 @@ public class BankTask extends Node implements Task {
 	public boolean shouldExecute() {
 		System.out.println("BankTask shouldExecute");
 		if (Players.getLocal() != null) {
-			if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
-				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+			if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+				if (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
 					needItems = true;
 				}
 				else {
@@ -79,7 +79,7 @@ public class BankTask extends Node implements Task {
 				needItems = false;
 
 				if (!Helpers.areRunesForSpellInInventory()) {
-					this.runesNeeded = Helpers.getRunesToWithdraw(AlchemistGlobal.selectedSpell.getRunes());
+					this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
 					needRunes = true;
 				}
 				else {

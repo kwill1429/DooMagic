@@ -1,4 +1,4 @@
-package com.psutton.alchemist.tasks;
+package com.psutton.doomagic.tasks;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
@@ -8,8 +8,8 @@ import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.wrappers.node.Item;
 import com.epicbot.api.util.Time;
-import com.psutton.alchemist.AlchemistGlobal;
-import com.psutton.alchemist.Helpers;
+import com.psutton.doomagic.DooMagicGlobal;
+import com.psutton.doomagic.Helpers;
 
 public class CastSpellTask extends Node implements Task {
 	public boolean shouldStop = false;
@@ -17,27 +17,27 @@ public class CastSpellTask extends Node implements Task {
 
 	@Override
 	public void run() {
-		if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
-			Item item = Inventory.getItem(AlchemistGlobal.itemToAlchNoted);
+		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+			Item item = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
 			while (Helpers.areRunesForSpellInInventory() && item != null && !shouldStop) {
-				openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
-				AlchemistGlobal.scriptStatus = "Casting "+AlchemistGlobal.selectedSpell;
-				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
+				openTab(DooMagicGlobal.selectedSpell.getAbilityTab());
+				DooMagicGlobal.scriptStatus = "Casting "+DooMagicGlobal.selectedSpell;
+				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
 				Mouse.click(item.getCentralPoint(), true);
 
-				AlchemistGlobal.numOfTimesCast++;
+				DooMagicGlobal.numOfTimesCast++;
 
-				if (!Helpers.isNotedItemInInventory(AlchemistGlobal.itemToAlchNoted)) {
+				if (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
 					shouldStop = true;
 				}
 
-				if (AlchemistGlobal.numOfCasts != -1) {
-					if (AlchemistGlobal.numOfTimesCast == AlchemistGlobal.numOfCasts || Inventory.getItem(AlchemistGlobal.itemToAlchNoted) == null) {
+				if (DooMagicGlobal.numOfCasts != -1) {
+					if (DooMagicGlobal.numOfTimesCast == DooMagicGlobal.numOfCasts || Inventory.getItem(DooMagicGlobal.itemToAlchNoted) == null) {
 						shouldStop = true;
 					}
 				}
 
-				AlchemistGlobal.scriptStatus = "Sleeping";
+				DooMagicGlobal.scriptStatus = "Sleeping";
 				Time.sleep(100, 1500);
 				//				Uncomment once spell tabs are fixed.
 				//				timeStart = System.currentTimeMillis();
@@ -49,19 +49,19 @@ public class CastSpellTask extends Node implements Task {
 		}
 		else {
 			while (Helpers.areRunesForSpellInInventory() && !shouldStop) {
-				openTab(AlchemistGlobal.selectedSpell.getAbilityTab());
-				AlchemistGlobal.scriptStatus = "Casting "+AlchemistGlobal.selectedSpell;
-				Magic.castSpell(AlchemistGlobal.selectedSpell.getSpell(), false);
+				openTab(DooMagicGlobal.selectedSpell.getAbilityTab());
+				DooMagicGlobal.scriptStatus = "Casting "+DooMagicGlobal.selectedSpell;
+				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
 
-				AlchemistGlobal.numOfTimesCast++;
-				if (AlchemistGlobal.numOfCasts != -1) {
-					if (AlchemistGlobal.numOfTimesCast == AlchemistGlobal.numOfCasts) {
+				DooMagicGlobal.numOfTimesCast++;
+				if (DooMagicGlobal.numOfCasts != -1) {
+					if (DooMagicGlobal.numOfTimesCast == DooMagicGlobal.numOfCasts) {
 						shouldStop = true;
 					}
 				}
 
-				timeToSleep = AlchemistGlobal.selectedSpell.getTimeToCast();
-				AlchemistGlobal.scriptStatus = "Sleeping";
+				timeToSleep = DooMagicGlobal.selectedSpell.getTimeToCast();
+				DooMagicGlobal.scriptStatus = "Sleeping";
 				Time.sleep(timeToSleep,timeToSleep + 500);
 			}
 		}
@@ -71,8 +71,8 @@ public class CastSpellTask extends Node implements Task {
 	public boolean shouldExecute() {
 		if (Players.getLocal() != null && !shouldStop) {
 			if (Helpers.areRunesForSpellInInventory()) {
-				if (AlchemistGlobal.selectedSpell.requiresAnItem()) {
-					if (Inventory.contains(AlchemistGlobal.itemToAlchNoted)) {
+				if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+					if (Inventory.contains(DooMagicGlobal.itemToAlchNoted)) {
 						return true;
 					}
 				}
@@ -81,9 +81,9 @@ public class CastSpellTask extends Node implements Task {
 				}
 			}
 		}
-		AlchemistGlobal.script.revoke(this);
-		AlchemistGlobal.script.stop();
-		AlchemistGlobal.script.kill();
+		DooMagicGlobal.script.revoke(this);
+		DooMagicGlobal.script.stop();
+		DooMagicGlobal.script.kill();
 		return false;
 	}
 

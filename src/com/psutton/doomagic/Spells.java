@@ -1,4 +1,4 @@
-package com.psutton.alchemist;
+package com.psutton.doomagic;
 
 import java.awt.Point;
 import java.util.Arrays;

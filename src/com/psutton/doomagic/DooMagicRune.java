@@ -1,13 +1,13 @@
-package com.psutton.alchemist;
+package com.psutton.doomagic;
 
-public class AlchemistRune {
+public class DooMagicRune {
 	private int numOfRunes;
 	private int runeID;
 	private boolean hasSubstitute;
 	private boolean canUseStaff;
 	private String runeName;
 
-	public AlchemistRune(String runeName, int runeID, int numOfRunes, boolean hasSubstitute, boolean canUseStaff) {
+	public DooMagicRune(String runeName, int runeID, int numOfRunes, boolean hasSubstitute, boolean canUseStaff) {
 		this.runeName = runeName;
 		this.setRuneID(runeID);
 		this.setNumOfRunes(numOfRunes);
