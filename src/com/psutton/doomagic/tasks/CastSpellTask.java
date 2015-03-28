@@ -20,8 +20,7 @@ public class CastSpellTask extends Node implements Task {
 		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 			Item item = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
 			while (Helpers.areRunesForSpellInInventory() && item != null && !shouldStop) {
-				openTab(DooMagicGlobal.selectedSpell.getAbilityTab());
-				DooMagicGlobal.scriptStatus = "Casting "+DooMagicGlobal.selectedSpell;
+				DooMagicGlobal.scriptStatus = "Casting " + DooMagicGlobal.selectedSpell;
 				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
 				Mouse.click(item.getCentralPoint(), true);
 
@@ -39,12 +38,6 @@ public class CastSpellTask extends Node implements Task {
 
 				DooMagicGlobal.scriptStatus = "Sleeping";
 				Time.sleep(100, 1500);
-				//				Uncomment once spell tabs are fixed.
-				//				timeStart = System.currentTimeMillis();
-				//				timeEnd = System.currentTimeMillis();
-				//				timeToSleep = (AlchemistGlobal.selectedSpell.getTimeToCast() - (timeEnd - timeStart));
-				//				timeToSleepActual = new Long(timeToSleep);
-				//				Time.sleep(timeToSleepActual.intValue());
 			}
 		}
 		else {
@@ -89,6 +82,7 @@ public class CastSpellTask extends Node implements Task {
 
 	private void openTab(Magic.InnerAbilityTab tab) {
 		if (!tab.isOpen()) {
+			System.out.println("Opening tab: " + tab);
 			tab.open();
 		}
 	}

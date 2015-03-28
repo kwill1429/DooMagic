@@ -44,7 +44,7 @@ public class Spells {
 		PSRune[] highAlchRunes = { highAlchOne, highAlchTwo };
 		highAlch = new PSSpell("High Level Alchemy", Magic.Spell.HIGH_LEVEL_ALCHEMY);
 		highAlch.setTimeToCast(3000);
-		highAlch.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
+		highAlch.setAbilityTab(Magic.InnerAbilityTab.SKILLING_SPELL);
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
 		highAlch.setCentralCoordinate(new Point(715, 357));
