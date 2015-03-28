@@ -32,7 +32,7 @@ public class DooMagic extends ActiveScript implements PaintListener
 	@Override
 	public boolean onStart() {
 		DooMagicGlobal.script = this;
-		this.setName("The Alchemist");
+		this.setName("DooMagic");
 		Spells spells = new Spells();
 		startingLvl = Skills.Skill.MAGIC.getCurrentLevel();
 		startingXp = Skills.Skill.MAGIC.getExperience();
@@ -65,6 +65,17 @@ public class DooMagic extends ActiveScript implements PaintListener
 		System.out.println("Script resumed");
 
 		return true;
+	}
+	
+	public void onPause() {
+		System.out.println("Script paused");
+		castSpellTask.shouldStop = true;
+		this.revoke(castSpellTask);
+		this.revoke(bankTask);
+		this.terminated(castSpellTask);
+		this.terminated(bankTask);
+		this.pause();
+	
 	}
 
 	@Override
