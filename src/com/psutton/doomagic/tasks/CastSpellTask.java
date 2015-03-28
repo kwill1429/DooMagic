@@ -42,7 +42,6 @@ public class CastSpellTask extends Node implements Task {
 		}
 		else {
 			while (Helpers.areRunesForSpellInInventory() && !shouldStop) {
-				openTab(DooMagicGlobal.selectedSpell.getAbilityTab());
 				DooMagicGlobal.scriptStatus = "Casting "+DooMagicGlobal.selectedSpell;
 				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
 
@@ -78,12 +77,5 @@ public class CastSpellTask extends Node implements Task {
 		DooMagicGlobal.script.stop();
 		DooMagicGlobal.script.kill();
 		return false;
-	}
-
-	private void openTab(Magic.InnerAbilityTab tab) {
-		if (!tab.isOpen()) {
-			System.out.println("Opening tab: " + tab);
-			tab.open();
-		}
 	}
 }
