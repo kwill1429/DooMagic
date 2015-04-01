@@ -9,8 +9,6 @@ import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
-import com.epicbot.api.util.Time;
-import com.epicbot.api.util.paint.Paint;
 import com.epicbot.event.listeners.PaintListener;
 import com.psutton.doomagic.DooMagicFrame;
 import com.psutton.doomagic.DooMagicGlobal;
@@ -25,21 +23,18 @@ public class DooMagic extends ActiveScript implements PaintListener
 {
 	private BankTask bankTask;
 	private CastSpellTask castSpellTask;
-	private int startingLvl, startingXp, xpGained, lvlsGained;
-	private long startTime = 0;
-	private long runtime;
-	private String scriptInfoString, runtimeString, statusString, lvlString, xpString, xpPerHrString, numOfTimesCast;
+	private DooMagicPaintUtil paintUtil = new DooMagicPaintUtil();
 
 	@Override
 	public boolean onStart() {
-		DooMagicGlobal.script = this;
-		this.setName("DooMagic");
 		Spells spells = new Spells();
-		startingLvl = Skills.Skill.MAGIC.getCurrentLevel();
-		startingXp = Skills.Skill.MAGIC.getExperience();
 
+		DooMagicGlobal.script = this;
+		DooMagicGlobal.startingLvl = Skills.Skill.MAGIC.getCurrentLevel();
+		DooMagicGlobal.startingXP = Skills.Skill.MAGIC.getExperience();
 		DooMagicGlobal.availableSpells = spells.getSpells();
 		DooMagicGlobal.spellList = spells.getSpellList();
+		this.setName("DooMagic");
 
 
 		EventQueue.invokeLater(new Runnable() {
@@ -67,7 +62,7 @@ public class DooMagic extends ActiveScript implements PaintListener
 
 		return true;
 	}
-	
+
 	@Override
 	public void onStop() {
 		castSpellTask.shouldStop = true;
@@ -80,29 +75,7 @@ public class DooMagic extends ActiveScript implements PaintListener
 
 	@Override
 	public void onRepaint(Graphics2D g) {
-		lvlsGained = Skills.Skill.MAGIC.getCurrentLevel() - this.startingLvl;
-		xpGained = Skills.Skill.MAGIC.getExperience() - this.startingXp;
-		runtime = System.currentTimeMillis() - startTime;
-
-		scriptInfoString = DooMagicGlobal.scriptName;
-		runtimeString = "Runtime: "+Time.format(runtime);
-		statusString = "Script status: "+DooMagicGlobal.scriptStatus;
-		lvlString = "Magic Level: "+Skills.Skill.MAGIC.getCurrentLevel()+"("+lvlsGained+")";
-		xpString = "XP Gained: "+xpGained;
-		xpPerHrString = "XP/Hr: "+Time.getPerHour(xpGained, startTime);
-		numOfTimesCast = "Num of Casts: "+DooMagicGlobal.numOfTimesCast;
-
-		Paint.drawLine(g, 0, scriptInfoString);
-		Paint.drawLine(g, 1, runtimeString);
-		Paint.drawLine(g, 2, statusString);
-		Paint.drawLine(g, 3, lvlString);
-		Paint.drawLine(g, 4, xpString);
-		Paint.drawLine(g, 5, xpPerHrString);
-		Paint.drawLine(g, 6, numOfTimesCast);
-		
-		DooMagicPaintUtil paint = new DooMagicPaintUtil();
-		paint.createPaint(g);
-		// TODO Auto-generated method stub
+		paintUtil.createPaint(g);
 	}
 
 	private void startScript() {

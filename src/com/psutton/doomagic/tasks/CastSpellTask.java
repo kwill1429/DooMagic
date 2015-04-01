@@ -20,7 +20,7 @@ public class CastSpellTask extends Node implements Task {
 		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 			Item item = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
 			while (Helpers.areRunesForSpellInInventory() && item != null && !shouldStop) {
-				DooMagicGlobal.scriptStatus = "Casting " + DooMagicGlobal.selectedSpell;
+				DooMagicGlobal.scriptStatus = "Casting Spell";
 				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
 				Mouse.click(item.getCentralPoint(), true);
 
@@ -42,7 +42,7 @@ public class CastSpellTask extends Node implements Task {
 		}
 		else {
 			while (Helpers.areRunesForSpellInInventory() && !shouldStop) {
-				DooMagicGlobal.scriptStatus = "Casting "+DooMagicGlobal.selectedSpell;
+				DooMagicGlobal.scriptStatus = "Casting Spell";
 				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
 
 				DooMagicGlobal.numOfTimesCast++;

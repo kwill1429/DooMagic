@@ -10,6 +10,7 @@ public class DooMagicGlobal {
 	public static int numOfTimesCast = 0;
 	public static int xpGained, lvlsGained;
 	public static int itemToAlch, itemToAlchNoted;
+	public static int startingLvl, startingXP;
 	public static long startTime;
 	public static String scriptVersion = "v1.21";
 	public static String scriptName = "DooMagic";
