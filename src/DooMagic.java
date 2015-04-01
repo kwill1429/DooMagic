@@ -14,6 +14,7 @@ import com.epicbot.api.util.paint.Paint;
 import com.epicbot.event.listeners.PaintListener;
 import com.psutton.doomagic.DooMagicFrame;
 import com.psutton.doomagic.DooMagicGlobal;
+import com.psutton.doomagic.DooMagicPaintUtil;
 import com.psutton.doomagic.Helpers;
 import com.psutton.doomagic.Spells;
 import com.psutton.doomagic.tasks.BankTask;
@@ -67,17 +68,6 @@ public class DooMagic extends ActiveScript implements PaintListener
 		return true;
 	}
 	
-	public void onPause() {
-		System.out.println("Script paused");
-		castSpellTask.shouldStop = true;
-		this.revoke(castSpellTask);
-		this.revoke(bankTask);
-		this.terminated(castSpellTask);
-		this.terminated(bankTask);
-		this.pause();
-	
-	}
-
 	@Override
 	public void onStop() {
 		castSpellTask.shouldStop = true;
@@ -109,6 +99,9 @@ public class DooMagic extends ActiveScript implements PaintListener
 		Paint.drawLine(g, 4, xpString);
 		Paint.drawLine(g, 5, xpPerHrString);
 		Paint.drawLine(g, 6, numOfTimesCast);
+		
+		DooMagicPaintUtil paint = new DooMagicPaintUtil();
+		paint.createPaint(g);
 		// TODO Auto-generated method stub
 	}
 
@@ -123,7 +116,7 @@ public class DooMagic extends ActiveScript implements PaintListener
 				if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 					Helpers.loadItemToUse();
 				}
-				startTime = getStartTime();
+				DooMagicGlobal.startTime = getStartTime();
 				bankTask = new BankTask();
 				provide(bankTask);
 				castSpellTask = new CastSpellTask();
