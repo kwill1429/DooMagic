@@ -9,6 +9,7 @@ import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
+import com.epicbot.api.util.SkillData;
 import com.epicbot.event.listeners.PaintListener;
 import com.psutton.doomagic.DooMagicFrame;
 import com.psutton.doomagic.DooMagicGlobal;
@@ -48,7 +49,6 @@ public class DooMagic extends ActiveScript implements PaintListener
 
 						@Override
 						public void windowClosed(WindowEvent e) {
-							System.out.println("User has closed window");
 							startScript();
 						}
 					});
@@ -57,8 +57,6 @@ public class DooMagic extends ActiveScript implements PaintListener
 				}
 			}
 		});
-
-		System.out.println("Script resumed");
 
 		return true;
 	}
@@ -90,6 +88,7 @@ public class DooMagic extends ActiveScript implements PaintListener
 					Helpers.loadItemToUse();
 				}
 				DooMagicGlobal.startTime = getStartTime();
+				SkillData.MAGIC.resetStartData();
 				bankTask = new BankTask();
 				provide(bankTask);
 				castSpellTask = new CastSpellTask();
