@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
+import com.epicbot.api.rs3.methods.Game;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.SkillData;
@@ -37,7 +38,7 @@ public class DooMagic extends ActiveScript implements PaintListener
 		DooMagicGlobal.spellList = spells.getSpellList();
 		this.setName("DooMagic");
 
-
+		System.out.println("Width: " + Game.getWidth() + " Height: " + Game.getHeight());
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
