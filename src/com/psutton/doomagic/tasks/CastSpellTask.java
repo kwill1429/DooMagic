@@ -14,68 +14,59 @@ import com.psutton.doomagic.Helpers;
 public class CastSpellTask extends Node implements Task {
 	public boolean shouldStop = false;
 	private int timeToSleep;
+	private Item itemForSpell;
 
 	@Override
 	public void run() {
+		DooMagicGlobal.scriptStatus = "Casting Spell";
+
+		Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
+
 		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-			Item item = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
-			while (Helpers.areRunesForSpellInInventory() && item != null && !shouldStop) {
-				DooMagicGlobal.scriptStatus = "Casting Spell";
-				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
-				Mouse.click(item.getCentralPoint(), true);
-
-				DooMagicGlobal.numOfTimesCast++;
-
-				if (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
-					shouldStop = true;
-				}
-
-				if (DooMagicGlobal.numOfCasts != -1) {
-					if (DooMagicGlobal.numOfTimesCast == DooMagicGlobal.numOfCasts || Inventory.getItem(DooMagicGlobal.itemToAlchNoted) == null) {
-						shouldStop = true;
-					}
-				}
-
-				DooMagicGlobal.scriptStatus = "Sleeping";
-				Time.sleep(100, 1500);
-			}
+			Mouse.click(this.itemForSpell.getCentralPoint(), true);
+			DooMagicGlobal.scriptStatus = "Sleeping";
+			Time.sleep(100, 1500);
 		}
 		else {
-			while (Helpers.areRunesForSpellInInventory() && !shouldStop) {
-				DooMagicGlobal.scriptStatus = "Casting Spell";
-				Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
-
-				DooMagicGlobal.numOfTimesCast++;
-				if (DooMagicGlobal.numOfCasts != -1) {
-					if (DooMagicGlobal.numOfTimesCast == DooMagicGlobal.numOfCasts) {
-						shouldStop = true;
-					}
-				}
-
-				timeToSleep = DooMagicGlobal.selectedSpell.getTimeToCast();
-				DooMagicGlobal.scriptStatus = "Sleeping";
-				Time.sleep(timeToSleep,timeToSleep + 500);
-			}
+			timeToSleep = DooMagicGlobal.selectedSpell.getTimeToCast();
+			DooMagicGlobal.scriptStatus = "Sleeping";
+			Time.sleep(timeToSleep,timeToSleep + 500);
 		}
+
+		DooMagicGlobal.numOfTimesCast++;
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		if (Players.getLocal() != null && !shouldStop) {
-			if (Helpers.areRunesForSpellInInventory()) {
-				if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-					if (Inventory.contains(DooMagicGlobal.itemToAlchNoted)) {
-						return true;
-					}
-				}
-				else {
-					return true;
-				}
+		if (Players.getLocal() != null && (DooMagicGlobal.numOfCasts != DooMagicGlobal.numOfTimesCast)) {
+			if (this.canCastSpell()) {
+				return true;
 			}
+			else {
+				return false;
+			}	
 		}
 		DooMagicGlobal.script.revoke(this);
 		DooMagicGlobal.script.stop();
 		DooMagicGlobal.script.kill();
+		return false;
+	}
+
+	private boolean canCastSpell()
+	{
+		boolean hasRunes = Helpers.areRunesForSpellInInventory();
+		boolean hasItems = true;
+
+		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+			this.itemForSpell = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
+			if (this.itemForSpell == null) {
+				hasItems = false;
+			}
+		}
+
+		if (hasItems == true && hasRunes == true) {
+			return true;
+		}
 		return false;
 	}
 }
