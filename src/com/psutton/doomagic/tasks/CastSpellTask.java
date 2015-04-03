@@ -4,12 +4,13 @@ import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.input.Mouse;
 import com.epicbot.api.rs3.methods.interactive.Players;
-import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
+import com.epicbot.api.rs3.methods.widget.actionbar.abilities.inner.GeneralTab;
 import com.epicbot.api.rs3.wrappers.node.Item;
 import com.epicbot.api.util.Time;
 import com.psutton.doomagic.DooMagicGlobal;
 import com.psutton.doomagic.Helpers;
+import com.psutton.utilities.helpers.MagicHelper;
 
 public class CastSpellTask extends Node implements Task {
 	public boolean shouldStop = false;
@@ -20,7 +21,8 @@ public class CastSpellTask extends Node implements Task {
 	public void run() {
 		DooMagicGlobal.scriptStatus = "Casting Spell";
 
-		Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
+//		Magic.castSpell(DooMagicGlobal.selectedSpell.getSpell(), false);
+		castSpell();
 
 		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 			Mouse.click(this.itemForSpell.getCentralPoint(), true);
@@ -44,7 +46,7 @@ public class CastSpellTask extends Node implements Task {
 			}
 			else {
 				return false;
-			}	
+			}
 		}
 		DooMagicGlobal.script.revoke(this);
 		DooMagicGlobal.script.stop();
@@ -68,5 +70,20 @@ public class CastSpellTask extends Node implements Task {
 			return true;
 		}
 		return false;
+	}
+
+	private void castSpell() {
+		int x = MagicHelper.centerX(DooMagicGlobal.selectedSpell.getSpellPosition());
+		int y = MagicHelper.centerY(DooMagicGlobal.selectedSpell.getSpellPosition());
+
+		if (!GeneralTab.MAGIC.isOpen()) {
+			GeneralTab.MAGIC.open();
+		}
+
+		if (!DooMagicGlobal.selectedSpell.getAbilityTab().isOpen()) {
+			DooMagicGlobal.selectedSpell.getAbilityTab().open();
+		}
+
+		Mouse.click(x, y, true);
 	}
 }
