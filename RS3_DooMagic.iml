@@ -3,7 +3,7 @@
   <component name="EclipseModuleManager">
     <libelement value="file://$MODULE_DIR$/lib/API.jar" />
     <libelement value="file://$MODULE_DIR$/lib/epicbot.jar" />
-    <varelement var="file://$SCRIPT_OUTPUT$" kind="link:" value="Scripts" />
+    <varelement var="file://$SCRIPT_OUTPUT$" value="link:Scripts" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
