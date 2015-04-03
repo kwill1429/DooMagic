@@ -1,24 +1,17 @@
-
-import java.awt.EventQueue;
-import java.awt.Graphics2D;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import com.epicbot.api.ActiveScript;
 import com.epicbot.api.GameType;
 import com.epicbot.api.Manifest;
-import com.epicbot.api.rs3.methods.Game;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.SkillData;
 import com.epicbot.event.listeners.PaintListener;
-import com.psutton.doomagic.DooMagicFrame;
-import com.psutton.doomagic.DooMagicGlobal;
-import com.psutton.doomagic.DooMagicPaintUtil;
-import com.psutton.doomagic.Helpers;
-import com.psutton.doomagic.Spells;
+import com.psutton.doomagic.*;
 import com.psutton.doomagic.tasks.BankTask;
 import com.psutton.doomagic.tasks.CastSpellTask;
+
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 @Manifest(game=GameType.RS3, name="DooMagic", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.21)
 
 public class DooMagic extends ActiveScript implements PaintListener
@@ -38,7 +31,6 @@ public class DooMagic extends ActiveScript implements PaintListener
 		DooMagicGlobal.spellList = spells.getSpellList();
 		this.setName("DooMagic");
 
-		System.out.println("Width: " + Game.getWidth() + " Height: " + Game.getHeight());
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -64,7 +56,10 @@ public class DooMagic extends ActiveScript implements PaintListener
 
 	@Override
 	public void onStop() {
-		castSpellTask.shouldStop = true;
+		if (DooMagicGlobal.frame.isEnabled()) {
+			DooMagicGlobal.frame.dispose();
+		}
+
 		revoke(castSpellTask);
 		revoke(bankTask);
 		terminated(castSpellTask);
