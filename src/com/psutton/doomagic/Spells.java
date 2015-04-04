@@ -32,7 +32,7 @@ public class Spells {
 		PSRune lowAlchTwo = new PSRune(fireRune, 3);
 		PSRune[] lowAlchRunes = { lowAlchOne, lowAlchTwo };
 		lowAlch = new PSSpell("Low Level Alchemy", Magic.Spell.LOW_LEVEL_ALCHEMY);
-		lowAlch.setTimeToCast(3000);
+		lowAlch.setTimeToCast(1000);
 		lowAlch.setAbilityTab(Magic.InnerAbilityTab.SKILLING_SPELL);
 		lowAlch.setRequiresAnItem(true);
 		lowAlch.setRunes(lowAlchRunes);
@@ -42,7 +42,7 @@ public class Spells {
 		PSRune highAlchTwo = new PSRune(fireRune, 1);
 		PSRune[] highAlchRunes = { highAlchOne, highAlchTwo };
 		highAlch = new PSSpell("High Level Alchemy", Magic.Spell.HIGH_LEVEL_ALCHEMY);
-		highAlch.setTimeToCast(3000);
+		highAlch.setTimeToCast(1000);
 		highAlch.setAbilityTab(Magic.InnerAbilityTab.SKILLING_SPELL);
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
@@ -63,7 +63,7 @@ public class Spells {
 		PSRune mobilisingThree = new PSRune(waterRune, 1);
 		PSRune[] mobilisingArmiesRunes = { mobilisingOne, mobilisingTwo, mobilisingThree };
 		mobilisingArmiesTeleport = new PSSpell("Mobilising Armies Teleport", Magic.Spell.MOBILISING_ARMIES_TELEPORT);
-		mobilisingArmiesTeleport.setTimeToCast(3000);
+		mobilisingArmiesTeleport.setTimeToCast(3500);
 		mobilisingArmiesTeleport.setAbilityTab(Magic.InnerAbilityTab.TELEPORT_SPELL);
 		mobilisingArmiesTeleport.setRunes(mobilisingArmiesRunes);
 		mobilisingArmiesTeleport.setSpellPosition(2);
