@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-public class DooMagicFrame extends JFrame {
+public class DooMagicGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	//	private JTextField tfItemToUse;
 	private JLabel lblTitle, lblSpellToCast, lblNumOfCasts;
@@ -27,7 +27,7 @@ public class DooMagicFrame extends JFrame {
 	private JButton btnStart;
 	private JTextField tfNumOfCasts;
 
-	public DooMagicFrame() {
+	public DooMagicGUI() {
 		DooMagicGlobal.frame = this;
 		setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		setType(Type.UTILITY);
@@ -214,7 +214,7 @@ public class DooMagicFrame extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DooMagicFrame frame = DooMagicGlobal.frame;
+				DooMagicGUI frame = DooMagicGlobal.frame;
 				frame.dispose();
 			}
 		});

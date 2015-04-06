@@ -9,11 +9,8 @@ import com.psutton.doomagic.Helpers;
 import com.psutton.utilities.objects.PSRune;
 
 public class BankTask extends Node implements Task {
-	public int count = 0;
 	private PSRune[] runesNeeded;
 	private PSRune rune;
-	private boolean needItems;
-	private boolean needRunes;
 
 	@Override
 	public void run() {
@@ -58,40 +55,32 @@ public class BankTask extends Node implements Task {
 			Bank.close();
 		}
 		else {
-			System.out.println("Not in a bank!");
 			DooMagicGlobal.script.revoke(this);
 		}
 	}
 
 	@Override
 	public boolean shouldExecute() {
-		System.out.println("BankTask shouldExecute");
+		boolean needItems = false;
+		boolean needRunes = false;
+
 		if (Players.getLocal() != null) {
 			if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 				if (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
 					needItems = true;
 				}
-				else {
-					needItems = false;
-				}
 			}
-			else {
-				needItems = false;
 
-				if (!Helpers.areRunesForSpellInInventory()) {
-					this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
-					needRunes = true;
-				}
-				else {
-					needRunes = false;
-				}
+			if (!Helpers.areRunesForSpellInInventory()) {
+				this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
+				needRunes = true;
 			}
 
 			if (needItems || needRunes) {
 				return true;
-			}	
+			}
 		}
-		System.out.println("Don't need to bank!");
+
 		return false;
 	}
 }

@@ -27,17 +27,12 @@ public class CastSpellTask extends Node implements Task {
 
 		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
 			Mouse.click(this.itemForSpell.getCentralPoint(), true);
-			DooMagicGlobal.scriptStatus = "Sleeping";
-//			Time.sleep(100, 1500);
-			Time.sleep(timeToSleep,timeToSleep + 500);
-		}
-		else {
-			timeToSleep = DooMagicGlobal.selectedSpell.getTimeToCast();
-			DooMagicGlobal.scriptStatus = "Sleeping";
-			Time.sleep(timeToSleep,timeToSleep + 500);
 		}
 
+		DooMagicGlobal.scriptStatus = "Sleeping";
 		DooMagicGlobal.numOfTimesCast++;
+
+		Time.sleep(timeToSleep,timeToSleep + 500);
 	}
 
 	@Override

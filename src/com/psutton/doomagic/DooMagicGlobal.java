@@ -6,16 +6,15 @@ import com.epicbot.api.ActiveScript;
 import com.psutton.utilities.objects.PSSpell;
 
 public class DooMagicGlobal {
-	public static int numOfCasts;
+	public static int numOfCasts, antiBanCounter;
 	public static int numOfTimesCast = 0;
-	public static int xpGained, lvlsGained;
 	public static int itemToAlch, itemToAlchNoted;
 	public static int startingLvl, startingXP;
 	public static long startTime;
-	public static String scriptVersion = "v1.21";
-	public static String scriptName = "DooMagic";
+	public final static String scriptVersion = "v1.21";
+	public final static String scriptName = "DooMagic";
 	public static String scriptStatus = "Starting Up";
-	public static DooMagicFrame frame;
+	public static DooMagicGUI frame;
 	public static ActiveScript script;
 	public static String[] spellList;
 	public static HashMap<String, PSSpell> availableSpells;

@@ -10,11 +10,12 @@ import com.psutton.doomagic.DooMagicGlobal;
 
 public class AntiBanTask extends Node implements Task {
 	private int antiBanCounter;
-	
+
 	@Override
 	public void run() {
 		boolean didHitAntiBan = true;
-		// TODO Auto-generated method stub
+		this.antiBanCounter = DooMagicGlobal.antiBanCounter;
+
 		if (antiBanCounter % 9 == 0) {
 			System.out.println("Antiban % 9");
 		} else if (antiBanCounter % 8 == 0) {
@@ -30,29 +31,28 @@ public class AntiBanTask extends Node implements Task {
 		} else if (antiBanCounter % 3 == 0) {
 			System.out.println("Antiban % 3");
 		} else {
-			System.out.println("Antiban Else");
-			this.antiBanCounter++;
-			didHitAntiBan = false;
+			DooMagicGlobal.antiBanCounter ++;
 		}
-		
-		Time.sleep(2000);
+
+		DooMagicGlobal.scriptStatus = "Performing AntiBan";
+		Time.sleep(3000);
+
 		if (didHitAntiBan == true) {
-			this.generateAntiBanCounter();
+			AntiBanTask.generateAntiBanCounter();
 		}
 	}
-	
+
 	@Override
 	public boolean shouldExecute() {
-		if (Players.getLocal() != null && (DooMagicGlobal.numOfTimesCast == this.antiBanCounter)) {
+		if (Players.getLocal() != null && (DooMagicGlobal.numOfTimesCast == DooMagicGlobal.antiBanCounter)) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
-	private void generateAntiBanCounter()
-	{
+	public static void generateAntiBanCounter() {
 		Random random = new Random();
-		antiBanCounter += random.nextInt(20) + 1;
+		DooMagicGlobal.antiBanCounter += random.nextInt(10) + 3;
 	}
 }
