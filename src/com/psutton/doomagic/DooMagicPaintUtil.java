@@ -28,8 +28,8 @@ public class DooMagicPaintUtil
 	private String scriptInfoString, runtimeString, statusString, lvlString, xpString;
 	private String xpPerHrString, numOfTimesCast, timeToLevelString;
 
-	private final Color frameColor = new Color(0, 0, 0, 150);
-	private final Color textColor = new Color(26, 73, 153, 255);
+	private final Color frameColor = new Color(0, 0, 0, 175);
+	private final Color textColor = new Color(26, 73, 255, 255);
 	private final Color versionColor = new Color(255, 255, 255, 255);
 
 	private final Font versionFont = new Font("Helvetica Neue", Font.BOLD, 13);
