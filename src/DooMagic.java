@@ -1,6 +1,4 @@
 import com.epicbot.api.ActiveScript;
-import com.epicbot.api.GameType;
-import com.epicbot.api.Manifest;
 import com.epicbot.api.rs3.methods.tab.Magic;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.SkillData;
@@ -13,7 +11,6 @@ import com.psutton.doomagic.tasks.CastSpellTask;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-@Manifest(game=GameType.RS3, name="DooMagic", author="Doomboy5888", description="Handles all your alchemy, teleporting and superheating needs", version=1.21)
 
 public class DooMagic extends ActiveScript implements PaintListener
 {

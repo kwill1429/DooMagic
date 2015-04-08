@@ -1,18 +1,16 @@
 package com.psutton.doomagic.tasks;
 
-import java.util.Random;
-
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.input.Mouse;
-import com.epicbot.api.rs3.methods.Tabs;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.rs3.methods.widget.Camera;
 import com.epicbot.api.rs3.methods.widget.actionbar.abilities.inner.GeneralTab;
-import com.epicbot.api.rs3.wrappers.widget.WidgetChild;
 import com.epicbot.api.util.Time;
 import com.psutton.doomagic.DooMagicGlobal;
+
+import java.util.Random;
 
 public class AntiBanTask extends Node implements Task {
 	private int antiBanCounter;

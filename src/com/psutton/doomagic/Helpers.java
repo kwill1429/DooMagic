@@ -1,7 +1,5 @@
 package com.psutton.doomagic;
 
-import java.util.ArrayList;
-
 import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.Bank;
@@ -9,6 +7,8 @@ import com.epicbot.api.rs3.wrappers.node.Item;
 import com.psutton.utilities.objects.PSRune;
 import com.psutton.utilities.objects.PSSpell;
 import com.psutton.utilities.objects.PSStaff;
+
+import java.util.ArrayList;
 
 public class Helpers {
 

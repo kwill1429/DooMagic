@@ -1,9 +1,9 @@
 package com.psutton.doomagic;
 
-import java.util.HashMap;
-
 import com.epicbot.api.ActiveScript;
 import com.psutton.utilities.objects.PSSpell;
+
+import java.util.HashMap;
 
 public class DooMagicGlobal {
 	public static int numOfCasts, antiBanCounter;
