@@ -14,8 +14,7 @@ public class BankTask extends Node implements Task {
 
 	@Override
 	public void run() {
-		int numOfRune;
-		int numOfItem;
+		int numToWithdraw = 0;
 
 		if (Bank.BankLocations.atBank()) {
 			Bank.open();
@@ -29,23 +28,23 @@ public class BankTask extends Node implements Task {
 
 					if (runesToWithdraw == null) {
 						System.out.println("Necessary Runes are NOT in bank!");
-					}
-					else {
+					} else {
 						for (int i = 0; i < runesToWithdraw.length; i++) {
 							rune = runesToWithdraw[i];
+							numToWithdraw = numToWithdraw(rune.getItemID(), rune.getNumOfRunes());
 
-							numOfRune = Bank.getItemCount(true, rune.getItemID());
 							Bank.waitForInputWidget(true);
-							Bank.withdraw(rune.getItemID(), numOfRune);
+							Bank.withdraw(rune.getItemID(), numToWithdraw);
 						}
 					}
 				}
 				while (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
 					DooMagicGlobal.scriptStatus = "Withdrawing Items";
 					if (Bank.getItem(DooMagicGlobal.itemToAlch) != null) {
-						numOfItem = Bank.getItemCount(true, DooMagicGlobal.itemToAlch);
+						numToWithdraw = numToWithdraw(DooMagicGlobal.itemToAlch, 1);
+
 						Bank.waitForInputWidget(true);
-						Bank.withdraw(DooMagicGlobal.itemToAlch, numOfItem);
+						Bank.withdraw(DooMagicGlobal.itemToAlch, numToWithdraw);
 					}
 					else {
 						break;
@@ -82,5 +81,17 @@ public class BankTask extends Node implements Task {
 		}
 
 		return false;
+	}
+
+	private int numToWithdraw(int itemID, int numPerCast) {
+		int numOfItemInBank = Bank.getItemCount(true, itemID);
+
+		if (DooMagicGlobal.numOfCasts != 0) {
+			if (DooMagicGlobal.numOfCasts <= numOfItemInBank) {
+				return numPerCast * DooMagicGlobal.numOfCasts;
+			}
+		}
+
+		return numOfItemInBank;
 	}
 }
