@@ -4,7 +4,13 @@ import java.util.Random;
 
 import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
+import com.epicbot.api.input.Mouse;
+import com.epicbot.api.rs3.methods.Tabs;
 import com.epicbot.api.rs3.methods.interactive.Players;
+import com.epicbot.api.rs3.methods.tab.Skills;
+import com.epicbot.api.rs3.methods.widget.Camera;
+import com.epicbot.api.rs3.methods.widget.actionbar.abilities.inner.GeneralTab;
+import com.epicbot.api.rs3.wrappers.widget.WidgetChild;
 import com.epicbot.api.util.Time;
 import com.psutton.doomagic.DooMagicGlobal;
 
@@ -14,28 +20,40 @@ public class AntiBanTask extends Node implements Task {
 	@Override
 	public void run() {
 		boolean didHitAntiBan = true;
+		int angle, distance;
+		Random random;
+
 		this.antiBanCounter = DooMagicGlobal.antiBanCounter;
 
+		DooMagicGlobal.scriptStatus = "Performing AntiBan";
+
 		if (antiBanCounter % 9 == 0) {
-			System.out.println("Antiban % 9");
+			Skills.Skill.MAGIC.hover(5000);
 		} else if (antiBanCounter % 8 == 0) {
-			System.out.println("Antiban % 8");
+			random = new Random();
+			angle = random.nextInt(340) + 20;
+			Camera.setAngle(angle);
+			Time.sleep(750, 1250);
+			angle = random.nextInt(340) + 20;
+			Camera.setAngle(angle);
+			Time.sleep(2000, 7000);
 		} else if (antiBanCounter % 7 == 0) {
-			System.out.println("Antiban % 7");
+			random = new Random();
+			distance = random.nextInt(150) + 100;
+			Mouse.moveRandomly(distance, distance + 200);
+			Time.sleep(500, 1000);
+			Mouse.moveRandomly(distance, distance + 200);
+			Time.sleep(1500, 6500);
 		} else if (antiBanCounter % 6 == 0) {
-			System.out.println("Antiban % 6");
+			GeneralTab.MELEE.open();
+			Time.sleep(1000, 1500);
+			GeneralTab.OTHER.open();
+			Time.sleep(1250, 6250);
 		} else if (antiBanCounter % 5 == 0) {
-			System.out.println("Antiban % 5");
-		} else if (antiBanCounter % 4 == 0) {
-			System.out.println("Antiban % 4");
-		} else if (antiBanCounter % 3 == 0) {
-			System.out.println("Antiban % 3");
+			Time.sleep(2250, 7250);
 		} else {
 			DooMagicGlobal.antiBanCounter ++;
 		}
-
-		DooMagicGlobal.scriptStatus = "Performing AntiBan";
-		Time.sleep(3000);
 
 		if (didHitAntiBan == true) {
 			AntiBanTask.generateAntiBanCounter();
@@ -53,6 +71,6 @@ public class AntiBanTask extends Node implements Task {
 
 	public static void generateAntiBanCounter() {
 		Random random = new Random();
-		DooMagicGlobal.antiBanCounter += random.nextInt(10) + 3;
+		DooMagicGlobal.antiBanCounter += random.nextInt(100) + 50;
 	}
 }
