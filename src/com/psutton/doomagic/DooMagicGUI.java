@@ -1,21 +1,13 @@
 package com.psutton.doomagic;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import com.epicbot.api.rs3.methods.Game;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 public class DooMagicGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -28,12 +20,15 @@ public class DooMagicGUI extends JFrame {
 	private JTextField tfNumOfCasts;
 
 	public DooMagicGUI() {
+		int topLeftX = (Game.getWidth() - 400) / 2;
+		int topLeftY = (Game.getHeight() - 250) / 2;
+
 		DooMagicGlobal.frame = this;
 		setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		setType(Type.UTILITY);
 		getContentPane().setFont(new Font("Helvetica Neue", Font.PLAIN, 13));
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 250);
+		setBounds(topLeftX, topLeftY, 400, 250);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 30, 30, 0};
 		gridBagLayout.rowHeights = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 0};

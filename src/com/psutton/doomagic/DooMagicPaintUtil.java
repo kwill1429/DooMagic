@@ -9,6 +9,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import com.epicbot.api.rs3.methods.Game;
 import com.epicbot.api.rs3.methods.tab.Skills;
 import com.epicbot.api.util.SkillData;
 import com.epicbot.api.util.Time;
@@ -19,11 +20,9 @@ public class DooMagicPaintUtil
 	private long runtime;
 
 	private final int frameTopX = 0;
-	private final int frameTopY = 200;
+	private int frameTopY, textTopX, textTopY;
 	private final int frameWidth = 500;
 	private final int frameHeight = 150;
-	private final int textTopX = frameTopX + 150;
-	private final int textTopY = frameTopY + 25;
 
 	private String scriptInfoString, runtimeString, statusString, lvlString, xpString;
 	private String xpPerHrString, numOfTimesCast, timeToLevelString;
@@ -40,6 +39,10 @@ public class DooMagicPaintUtil
 
 	public void createPaint(Graphics g)
 	{
+		frameTopY = Game.getHeight() - 350;
+		textTopX = frameTopX + 150;
+		textTopY = frameTopY + 25;
+
 		// Draws the background
 		g.setColor(frameColor);
 		g.fillRoundRect(frameTopX, frameTopY, frameWidth, frameHeight, 10, 10);
