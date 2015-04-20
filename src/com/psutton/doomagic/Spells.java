@@ -39,7 +39,7 @@ public class Spells {
 		lowAlch.setSpellPosition(4);
 
 		PSRune highAlchOne = new PSRune(natureRune, 1);
-		PSRune highAlchTwo = new PSRune(fireRune, 1);
+		PSRune highAlchTwo = new PSRune(fireRune, 5);
 		PSRune[] highAlchRunes = { highAlchOne, highAlchTwo };
 		highAlch = new PSSpell("High Level Alchemy", Magic.Spell.HIGH_LEVEL_ALCHEMY);
 		highAlch.setTimeToCast(2000);
