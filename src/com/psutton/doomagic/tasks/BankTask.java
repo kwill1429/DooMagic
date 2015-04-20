@@ -33,7 +33,6 @@ public class BankTask extends Node implements Task {
 							rune = runesToWithdraw[i];
 							numToWithdraw = numToWithdraw(rune.getItemID(), rune.getNumOfRunes());
 
-							Bank.waitForInputWidget(true);
 							Bank.withdraw(rune.getItemID(), numToWithdraw);
 						}
 					}
@@ -43,7 +42,6 @@ public class BankTask extends Node implements Task {
 					if (Bank.getItem(DooMagicGlobal.itemToAlch) != null) {
 						numToWithdraw = numToWithdraw(DooMagicGlobal.itemToAlch, 1);
 
-						Bank.waitForInputWidget(true);
 						Bank.withdraw(DooMagicGlobal.itemToAlch, numToWithdraw);
 					}
 					else {
