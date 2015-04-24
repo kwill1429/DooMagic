@@ -21,7 +21,7 @@ public class DooMagicPaintUtil
 	private final int frameHeight = 150;
 
 	private String scriptInfoString, runtimeString, statusString, lvlString, xpString;
-	private String xpPerHrString, numOfTimesCast, timeToLevelString;
+	private String xpPerHrString, numOfTimesCast, timeToLevelString, castsPerHr;
 
 	private final Color frameColor = new Color(0, 0, 0, 175);
 	private final Color textColor = new Color(26, 73, 255, 255);
@@ -61,11 +61,11 @@ public class DooMagicPaintUtil
 		g.drawString(timeToLevelString, textTopX, textTopY + 75);
 		g.drawString(numOfTimesCast, textTopX, textTopY + 100);
 
-
 		// Draws the second column of stats
 		g.drawString(lvlString, textTopX + 215, textTopY + 25);
 		g.drawString(xpString, textTopX + 215, textTopY + 50);
 		g.drawString(xpPerHrString, textTopX + 215, textTopY + 75);
+        g.drawString(castsPerHr, textTopX + 215, textTopY + 100);
 
 		// Draws the version number
 		g.setColor(versionColor);
@@ -86,6 +86,7 @@ public class DooMagicPaintUtil
 		statusString = "Script status: " + DooMagicGlobal.scriptStatus;
 		timeToLevelString = "TTL: " + SkillData.MAGIC.getTTL(runtime);
 		numOfTimesCast = "Num of Casts: " + DooMagicGlobal.numOfTimesCast;
+		castsPerHr = "Casts/hr: " + Time.getPerHour(DooMagicGlobal.numOfTimesCast, DooMagicGlobal.startTime);
 
 		lvlString = "Magic Level: "+ Skills.Skill.MAGIC.getCurrentLevel() + "(" + lvlsGained + ")";
 		xpString = "XP Gained: " + xpGained;
