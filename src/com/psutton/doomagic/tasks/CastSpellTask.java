@@ -13,75 +13,78 @@ import com.psutton.doomagic.Helpers;
 import com.psutton.utilities.helpers.MagicHelper;
 
 public class CastSpellTask extends Node implements Task {
-	private boolean openedAbilityTab;
-	private int timeToSleep;
-	private Item itemForSpell;
+    private boolean openedAbilityTab;
+    private int timeToSleep;
+    private Item itemForSpell;
 
-	@Override
-	public void run() {
-		DooMagicGlobal.scriptStatus = "Casting Spell";
+    @Override
+    public void run() {
+        DooMagicGlobal.scriptStatus = "Casting Spell";
 
-		castSpell();
+        castSpell();
 
-		timeToSleep = DooMagicGlobal.selectedSpell.getTimeToCast();
+        timeToSleep = DooMagicGlobal.selectedSpell.getTimeToCast();
 
-		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-			Mouse.click(this.itemForSpell.getCentralPoint(), true);
-		}
+        if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+            Mouse.click(this.itemForSpell.getCentralPoint(), true);
+        }
 
-		DooMagicGlobal.scriptStatus = "Sleeping";
-		DooMagicGlobal.numOfTimesCast++;
+        DooMagicGlobal.scriptStatus = "Sleeping";
+        DooMagicGlobal.numOfTimesCast++;
 
-		Time.sleep(timeToSleep,timeToSleep + 500);
-	}
+        Time.sleep(timeToSleep,timeToSleep + 500);
+    }
 
-	@Override
-	public boolean shouldExecute() {
-		if (Players.getLocal() != null && (DooMagicGlobal.numOfCasts != DooMagicGlobal.numOfTimesCast)) {
-			if (this.canCastSpell()) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		DooMagicGlobal.script.revoke(this);
-		DooMagicGlobal.script.stop();
-		DooMagicGlobal.script.kill();
-		return false;
-	}
+    @Override
+    public boolean shouldExecute() {
+        if (Players.getLocal() != null && (DooMagicGlobal.numOfCasts != DooMagicGlobal.numOfTimesCast)) {
+            if (this.canCastSpell()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
-	private boolean canCastSpell()
-	{
-		boolean hasRunes = Helpers.areRunesForSpellInInventory();
-		boolean hasItems = true;
+        DooMagicGlobal.script.revoke(this);
+        DooMagicGlobal.script.stop();
+        DooMagicGlobal.script.kill();
 
-		if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-			this.itemForSpell = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
-			if (this.itemForSpell == null) {
-				hasItems = false;
-			}
-		}
+        return false;
+    }
 
-		if (hasItems == true && hasRunes == true) {
-			return true;
-		}
-		return false;
-	}
+    private boolean canCastSpell()
+    {
+        boolean hasRunes = Helpers.areRunesForSpellInInventory();
+        boolean hasItems = true;
 
-	private void castSpell() {
-		int x = MagicHelper.centerX(DooMagicGlobal.selectedSpell.getSpellPosition());
-		int y = MagicHelper.centerY(DooMagicGlobal.selectedSpell.getSpellPosition());
+        if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+            this.itemForSpell = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
 
-		if (!Tabs.MAGIC_ABILITIES.isOpen()) {
-			Tabs.MAGIC_ABILITIES.open();
-		}
+            if (this.itemForSpell == null) {
+                hasItems = false;
+            }
+        }
 
-		if (!openedAbilityTab) {
-			DooMagicGlobal.selectedSpell.getAbilityTab().open();
-			openedAbilityTab = true;
-		}
+        if (hasItems == true && hasRunes == true) {
+            return true;
+        }
 
-		Mouse.click(x, y, true);
-	}
+        return false;
+    }
+
+    private void castSpell() {
+        int x = MagicHelper.centerX(DooMagicGlobal.selectedSpell.getSpellPosition());
+        int y = MagicHelper.centerY(DooMagicGlobal.selectedSpell.getSpellPosition());
+
+        if (!Tabs.MAGIC_ABILITIES.isOpen()) {
+            Tabs.MAGIC_ABILITIES.open();
+        }
+
+        if (!openedAbilityTab) {
+            DooMagicGlobal.selectedSpell.getAbilityTab().open();
+            openedAbilityTab = true;
+        }
+
+        Mouse.click(x, y, true);
+    }
 }

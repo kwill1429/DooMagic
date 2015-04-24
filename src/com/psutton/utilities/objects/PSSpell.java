@@ -3,68 +3,68 @@ package com.psutton.utilities.objects;
 import com.epicbot.api.rs3.methods.tab.Magic;
 
 public class PSSpell {
-	private int timeToCast, spellPosition;
-	private boolean requiresAnItem;
-	private String spellName;
-	private Magic.Spell spell;
-	private Magic.InnerAbilityTab abilityTab;
-	private PSRune[] runes;
+    private int timeToCast, spellPosition;
+    private boolean requiresAnItem;
+    private String spellName;
+    private Magic.Spell spell;
+    private Magic.InnerAbilityTab abilityTab;
+    private PSRune[] runes;
 
-	public PSSpell(String spellName, Magic.Spell spell) {
-		this.spellName = spellName;
-		this.spell = spell;
-		this.abilityTab = spell.getInnerTabSetting();
-		this.requiresAnItem = false;
-	}
+    public PSSpell(String spellName, Magic.Spell spell) {
+        this.spellName = spellName;
+        this.spell = spell;
+        this.abilityTab = spell.getInnerTabSetting();
+        this.requiresAnItem = false;
+    }
 
-	public int getTimeToCast() {
-		return timeToCast;
-	}
+    public int getTimeToCast() {
+        return timeToCast;
+    }
 
-	public void setTimeToCast(int timeToCast) {
-		this.timeToCast = timeToCast;
-	}
+    public void setTimeToCast(int timeToCast) {
+        this.timeToCast = timeToCast;
+    }
 
-	public int getSpellPosition() {
-		return spellPosition;
-	}
+    public int getSpellPosition() {
+        return spellPosition;
+    }
 
-	public void setSpellPosition(int spellPosition) {
-		this.spellPosition = spellPosition;
-	}
+    public void setSpellPosition(int spellPosition) {
+        this.spellPosition = spellPosition;
+    }
 
-	public boolean requiresAnItem() {
-		return requiresAnItem;
-	}
+    public boolean requiresAnItem() {
+        return requiresAnItem;
+    }
 
-	public void setRequiresAnItem(boolean requiresAnItem) {
-		this.requiresAnItem = requiresAnItem;
-	}
+    public void setRequiresAnItem(boolean requiresAnItem) {
+        this.requiresAnItem = requiresAnItem;
+    }
 
-	public Magic.Spell getSpell() {
-		return spell;
-	}
+    public Magic.Spell getSpell() {
+        return spell;
+    }
 
-	public Magic.InnerAbilityTab getAbilityTab() {
-		return abilityTab;
-	}
+    public Magic.InnerAbilityTab getAbilityTab() {
+        return abilityTab;
+    }
 
-	public void setAbilityTab(Magic.InnerAbilityTab abilityTab) {
-		this.abilityTab = abilityTab;
-	}
+    public void setAbilityTab(Magic.InnerAbilityTab abilityTab) {
+        this.abilityTab = abilityTab;
+    }
 
-	public PSRune[] getRunes() {
-		return runes;
-	}
+    public PSRune[] getRunes() {
+        return runes;
+    }
 
-	public void setRunes(PSRune[] runes) {
-		this.runes = runes;
-	}
+    public void setRunes(PSRune[] runes) {
+        this.runes = runes;
+    }
 
-	@Override
-	public String toString() {
-		return this.spellName;
-	}
+    @Override
+    public String toString() {
+        return this.spellName;
+    }
 
 
 }

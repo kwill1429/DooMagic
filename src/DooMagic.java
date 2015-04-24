@@ -14,93 +14,93 @@ import java.awt.event.WindowEvent;
 
 public class DooMagic extends ActiveScript implements PaintListener
 {
-	private boolean shouldPaint = false;
-	private BankTask bankTask;
-	private CastSpellTask castSpellTask;
-	private AntiBanTask antiBanTask;
-	private DooMagicPaintUtil paintUtil = new DooMagicPaintUtil();
+    private boolean shouldPaint = false;
+    private BankTask bankTask;
+    private CastSpellTask castSpellTask;
+    private AntiBanTask antiBanTask;
+    private DooMagicPaintUtil paintUtil = new DooMagicPaintUtil();
 
-	@Override
-	public boolean onStart() {
-		Spells spells = new Spells();
+    @Override
+    public boolean onStart() {
+        Spells spells = new Spells();
 
-		DooMagicGlobal.script = this;
-		DooMagicGlobal.startingLvl = Skills.Skill.MAGIC.getCurrentLevel();
-		DooMagicGlobal.startingXP = Skills.Skill.MAGIC.getExperience();
-		DooMagicGlobal.availableSpells = spells.getSpells();
-		DooMagicGlobal.spellList = spells.getSpellList();
-		this.setName("DooMagic");
+        DooMagicGlobal.script = this;
+        DooMagicGlobal.startingLvl = Skills.Skill.MAGIC.getCurrentLevel();
+        DooMagicGlobal.startingXP = Skills.Skill.MAGIC.getExperience();
+        DooMagicGlobal.availableSpells = spells.getSpells();
+        DooMagicGlobal.spellList = spells.getSpellList();
+        this.setName("DooMagic");
 
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					DooMagicGUI frame = new DooMagicGUI();
-					frame.setVisible(true);
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DooMagicGUI frame = new DooMagicGUI();
+                    frame.setVisible(true);
 
-					frame.addWindowListener(new WindowAdapter() {
+                    frame.addWindowListener(new WindowAdapter() {
 
-						@Override
-						public void windowClosed(WindowEvent e) {
-							startScript();
-						}
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            startScript();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public void onStop() {
-		if (DooMagicGlobal.frame.isEnabled()) {
-			DooMagicGlobal.frame.dispose();
-		}
+    @Override
+    public void onStop() {
+        if (DooMagicGlobal.frame.isEnabled()) {
+            DooMagicGlobal.frame.dispose();
+        }
 
-		revoke(bankTask);
-		revoke(antiBanTask);
-		revoke(castSpellTask);
+        revoke(bankTask);
+        revoke(antiBanTask);
+        revoke(castSpellTask);
 
-		terminated(bankTask);
-		terminated(antiBanTask);
-		terminated(castSpellTask);
+        terminated(bankTask);
+        terminated(antiBanTask);
+        terminated(castSpellTask);
 
-		this.kill();
-	}
+        this.kill();
+    }
 
-	@Override
-	public void onRepaint(Graphics2D g) {
-		if (shouldPaint) {
-			paintUtil.createPaint(g);
-		}
-	}
+    @Override
+    public void onRepaint(Graphics2D g) {
+        if (shouldPaint) {
+            paintUtil.createPaint(g);
+        }
+    }
 
-	private void startScript() {
-		if (!Magic.canCastSpell(DooMagicGlobal.selectedSpell.getSpell())) {
-			System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
-			this.stop();
-		} else {
-			if (DooMagicGlobal.selectedSpell != null) {
-				if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-					Helpers.loadItemToUse();
-				}
+    private void startScript() {
+        if (!Magic.canCastSpell(DooMagicGlobal.selectedSpell.getSpell())) {
+            System.out.println("Stopping Script - Necessary Magic level requirement for selected spell not met");
+            this.stop();
+        } else {
+            if (DooMagicGlobal.selectedSpell != null) {
+                if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+                    Helpers.loadItemToUse();
+                }
 
-				DooMagicGlobal.startTime = getStartTime();
-				SkillData.MAGIC.resetStartData();
-				AntiBanTask.generateAntiBanCounter();
+                DooMagicGlobal.startTime = getStartTime();
+                SkillData.MAGIC.resetStartData();
+                AntiBanTask.generateAntiBanCounter();
 
-				shouldPaint = true;
+                shouldPaint = true;
 
-				bankTask = new BankTask();
-				provide(bankTask);
-				antiBanTask = new AntiBanTask();
-				provide(antiBanTask);
-				castSpellTask = new CastSpellTask();
-				provide(castSpellTask);
-			}
-		}
-	}
+                bankTask = new BankTask();
+                provide(bankTask);
+                antiBanTask = new AntiBanTask();
+                provide(antiBanTask);
+                castSpellTask = new CastSpellTask();
+                provide(castSpellTask);
+            }
+        }
+    }
 }

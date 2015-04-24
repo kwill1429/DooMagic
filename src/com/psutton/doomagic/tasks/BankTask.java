@@ -9,87 +9,89 @@ import com.psutton.doomagic.Helpers;
 import com.psutton.utilities.objects.PSRune;
 
 public class BankTask extends Node implements Task {
-	private PSRune[] runesNeeded;
-	private PSRune rune;
+    private PSRune[] runesNeeded;
+    private PSRune rune;
 
-	@Override
-	public void run() {
-		int numToWithdraw = 0;
+    @Override
+    public void run() {
+        int numToWithdraw = 0;
 
-		if (Bank.BankLocations.atBank()) {
-			Bank.open();
-			if (Bank.isOpen()) {
-				Bank.depositInventory();
-				Bank.setWithdrawNoted(true);
-				while (!Helpers.areRunesForSpellInInventory()) {
-					DooMagicGlobal.scriptStatus = "Withdrawing Runes";
-					this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
-					PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
+        if (Bank.BankLocations.atBank()) {
+            Bank.open();
 
-					if (runesToWithdraw == null) {
-						System.out.println("Necessary Runes are NOT in bank!");
-					} else {
-						for (int i = 0; i < runesToWithdraw.length; i++) {
-							rune = runesToWithdraw[i];
-							numToWithdraw = numToWithdraw(rune.getItemID(), rune.getNumOfRunes());
+            if (Bank.isOpen()) {
+                Bank.depositInventory();
+                Bank.setWithdrawNoted(true);
 
-							Bank.withdraw(rune.getItemID(), numToWithdraw);
-						}
-					}
-				}
-				while (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
-					DooMagicGlobal.scriptStatus = "Withdrawing Items";
-					if (Bank.getItem(DooMagicGlobal.itemToAlch) != null) {
-						numToWithdraw = numToWithdraw(DooMagicGlobal.itemToAlch, 1);
+                while (!Helpers.areRunesForSpellInInventory()) {
+                    DooMagicGlobal.scriptStatus = "Withdrawing Runes";
+                    this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
+                    PSRune[] runesToWithdraw = Helpers.areNecessaryRunesInBank(this.runesNeeded);
 
-						Bank.withdraw(DooMagicGlobal.itemToAlch, numToWithdraw);
-					}
-					else {
-						break;
-					}
-				}
-			}
-			Bank.close();
-		}
-		else {
-			DooMagicGlobal.script.revoke(this);
-		}
-	}
+                    if (runesToWithdraw == null) {
+                        System.out.println("Necessary Runes are NOT in bank!");
+                    } else {
+                        for (int i = 0; i < runesToWithdraw.length; i++) {
+                            rune = runesToWithdraw[i];
+                            numToWithdraw = numToWithdraw(rune.getItemID(), rune.getNumOfRunes());
 
-	@Override
-	public boolean shouldExecute() {
-		boolean needItems = false;
-		boolean needRunes = false;
+                            Bank.withdraw(rune.getItemID(), numToWithdraw);
+                        }
+                    }
+                }
 
-		if (Players.getLocal() != null) {
-			if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-				if (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
-					needItems = true;
-				}
-			}
+                while (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
+                    DooMagicGlobal.scriptStatus = "Withdrawing Items";
 
-			if (!Helpers.areRunesForSpellInInventory()) {
-				this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
-				needRunes = true;
-			}
+                    if (Bank.getItem(DooMagicGlobal.itemToAlch) != null) {
+                        numToWithdraw = numToWithdraw(DooMagicGlobal.itemToAlch, 1);
 
-			if (needItems || needRunes) {
-				return true;
-			}
-		}
+                        Bank.withdraw(DooMagicGlobal.itemToAlch, numToWithdraw);
+                    } else {
+                        break;
+                    }
+                }
+            }
+            Bank.close();
+        } else {
+            DooMagicGlobal.script.revoke(this);
+        }
+    }
 
-		return false;
-	}
+    @Override
+    public boolean shouldExecute() {
+        boolean needItems = false;
+        boolean needRunes = false;
 
-	private int numToWithdraw(int itemID, int numPerCast) {
-		int numOfItemInBank = Bank.getItemCount(true, itemID);
+        if (Players.getLocal() != null) {
+            if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
+                if (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
+                    needItems = true;
+                }
+            }
 
-		if (DooMagicGlobal.numOfCasts != 0) {
-			if (DooMagicGlobal.numOfCasts <= numOfItemInBank) {
-				return numPerCast * DooMagicGlobal.numOfCasts;
-			}
-		}
+            if (!Helpers.areRunesForSpellInInventory()) {
+                this.runesNeeded = Helpers.getRunesToWithdraw(DooMagicGlobal.selectedSpell.getRunes());
+                needRunes = true;
+            }
 
-		return numOfItemInBank;
-	}
+            if (needItems || needRunes) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int numToWithdraw(int itemID, int numPerCast) {
+        int numOfItemInBank = Bank.getItemCount(true, itemID);
+
+        if (DooMagicGlobal.numOfCasts != 0) {
+            if (DooMagicGlobal.numOfCasts <= numOfItemInBank) {
+                return numPerCast * DooMagicGlobal.numOfCasts;
+            }
+        }
+
+        return numOfItemInBank;
+    }
 }
