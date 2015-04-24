@@ -32,7 +32,7 @@ public class Spells {
 		PSRune lowAlchTwo = new PSRune(fireRune, 3);
 		PSRune[] lowAlchRunes = { lowAlchOne, lowAlchTwo };
 		lowAlch = new PSSpell("Low Level Alchemy", Magic.Spell.LOW_LEVEL_ALCHEMY);
-		lowAlch.setTimeToCast(2000);
+		lowAlch.setTimeToCast(1500);
 		lowAlch.setAbilityTab(Magic.InnerAbilityTab.SKILLING_SPELL);
 		lowAlch.setRequiresAnItem(true);
 		lowAlch.setRunes(lowAlchRunes);
@@ -42,7 +42,7 @@ public class Spells {
 		PSRune highAlchTwo = new PSRune(fireRune, 5);
 		PSRune[] highAlchRunes = { highAlchOne, highAlchTwo };
 		highAlch = new PSSpell("High Level Alchemy", Magic.Spell.HIGH_LEVEL_ALCHEMY);
-		highAlch.setTimeToCast(2000);
+		highAlch.setTimeToCast(1500);
 		highAlch.setAbilityTab(Magic.InnerAbilityTab.SKILLING_SPELL);
 		highAlch.setRequiresAnItem(true);
 		highAlch.setRunes(highAlchRunes);
