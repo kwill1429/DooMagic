@@ -8,6 +8,7 @@ import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.wrappers.node.Item;
 import com.epicbot.api.util.Time;
+import com.epicbot.api.util.filters.IdFilter;
 import com.psutton.doomagic.DooMagicGlobal;
 import com.psutton.doomagic.Helpers;
 import com.psutton.utilities.helpers.MagicHelper;
@@ -58,7 +59,8 @@ public class CastSpellTask extends Node implements Task {
         boolean hasItems = true;
 
         if (DooMagicGlobal.selectedSpell.requiresAnItem()) {
-            this.itemForSpell = Inventory.getItem(DooMagicGlobal.itemToAlchNoted);
+            IdFilter idFilter = new IdFilter(true, DooMagicGlobal.itemToAlchNoted);
+            this.itemForSpell = Inventory.getItem(idFilter);
 
             if (this.itemForSpell == null) {
                 hasItems = false;
