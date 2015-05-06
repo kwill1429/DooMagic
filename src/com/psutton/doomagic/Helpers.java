@@ -4,6 +4,7 @@ import com.epicbot.api.rs3.methods.tab.Equipment;
 import com.epicbot.api.rs3.methods.tab.inventory.Inventory;
 import com.epicbot.api.rs3.methods.widget.Bank;
 import com.epicbot.api.rs3.wrappers.node.Item;
+import com.epicbot.api.util.filters.IdFilter;
 import com.psutton.utilities.objects.PSRune;
 import com.psutton.utilities.objects.PSSpell;
 import com.psutton.utilities.objects.PSStaff;
@@ -11,6 +12,7 @@ import com.psutton.utilities.objects.PSStaff;
 import java.util.ArrayList;
 
 public class Helpers {
+    private static IdFilter itemFilter;
 
     public static PSRune[] areNecessaryRunesInBank(PSRune[] runes) {
         int numOfDifferentRunesNeeded = runes.length;
@@ -59,7 +61,8 @@ public class Helpers {
 
 
     public static boolean isRuneInBank(PSRune rune) {
-        if (Bank.getItemCount(true, rune.getItemID()) >= rune.getNumOfRunes()) {
+        itemFilter = new IdFilter(true, rune.getItemID());
+        if (Bank.getItemCount(true, itemFilter) >= rune.getNumOfRunes()) {
             return true;
         }
 
@@ -67,29 +70,13 @@ public class Helpers {
     }
 
     public static boolean isNotedItemInInventory(int itemID) {
-        if (Inventory.contains(itemID)) {
+        itemFilter = new IdFilter(true, itemID);
+
+        if (Inventory.contains(itemFilter)) {
             return true;
         }
 
         return false;
-    }
-
-    public static boolean areItemsInInventory(int[] items, int[] quantities) {
-        if (items != null) {
-            for (int i = 0; i < items.length; i++) {
-                if (quantities[i] == -1) {
-                    if (!Inventory.contains(items[i])) {
-                        return false;
-                    }
-                } else {
-                    if (Inventory.getCount(items[i]) < quantities[i]) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return true;
     }
 
     public static PSRune[] getRunesToWithdraw(PSRune[] runes) {
@@ -136,8 +123,10 @@ public class Helpers {
     }
 
     public static boolean isValidStaffEquipped(PSStaff[] staves) {
+
         for (int i = 0; i < staves.length; i++) {
-            if (Equipment.containsOneOf(staves[i].getItemID())) {
+            itemFilter = new IdFilter(true, staves[i].getItemID());
+            if (Equipment.containsOneOf(itemFilter)) {
                 return true;
             }
         }
@@ -193,8 +182,10 @@ public class Helpers {
     }
 
     private static boolean hasEnoughOfRune(int runeID, int numOfRunes) {
-        if (Inventory.contains(runeID)) {
-            if (Inventory.getCount(true, runeID) >= numOfRunes) {
+        itemFilter = new IdFilter(true, runeID);
+
+        if (Inventory.contains(itemFilter)) {
+            if (Inventory.getCount(true, itemFilter) >= numOfRunes) {
                 return true;
             }
         }
