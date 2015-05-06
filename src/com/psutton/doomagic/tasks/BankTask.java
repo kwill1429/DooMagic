@@ -4,6 +4,7 @@ import com.epicbot.api.concurrent.Task;
 import com.epicbot.api.concurrent.node.Node;
 import com.epicbot.api.rs3.methods.interactive.Players;
 import com.epicbot.api.rs3.methods.widget.Bank;
+import com.epicbot.api.util.filters.IdFilter;
 import com.psutton.doomagic.DooMagicGlobal;
 import com.psutton.doomagic.Helpers;
 import com.psutton.utilities.objects.PSRune;
@@ -11,6 +12,7 @@ import com.psutton.utilities.objects.PSRune;
 public class BankTask extends Node implements Task {
     private PSRune[] runesNeeded;
     private PSRune rune;
+    private IdFilter itemFilter;
 
     @Override
     public void run() {
@@ -35,18 +37,20 @@ public class BankTask extends Node implements Task {
                             rune = runesToWithdraw[i];
                             numToWithdraw = numToWithdraw(rune.getItemID(), rune.getNumOfRunes());
 
-                            Bank.withdraw(rune.getItemID(), numToWithdraw);
+                            itemFilter = new IdFilter(true, rune.getItemID());
+                            Bank.withdraw(itemFilter, numToWithdraw);
                         }
                     }
                 }
 
                 while (!Helpers.isNotedItemInInventory(DooMagicGlobal.itemToAlchNoted)) {
                     DooMagicGlobal.scriptStatus = "Withdrawing Items";
+                    itemFilter = new IdFilter(true, DooMagicGlobal.itemToAlch);
 
-                    if (Bank.getItem(DooMagicGlobal.itemToAlch) != null) {
+                    if (Bank.getItem(itemFilter) != null) {
                         numToWithdraw = numToWithdraw(DooMagicGlobal.itemToAlch, 1);
 
-                        Bank.withdraw(DooMagicGlobal.itemToAlch, numToWithdraw);
+                        Bank.withdraw(itemFilter, numToWithdraw);
                     } else {
                         break;
                     }
@@ -84,7 +88,9 @@ public class BankTask extends Node implements Task {
     }
 
     private int numToWithdraw(int itemID, int numPerCast) {
-        int numOfItemInBank = Bank.getItemCount(true, itemID);
+        itemFilter = new IdFilter(true, itemID);
+
+        int numOfItemInBank = Bank.getItemCount(true, itemFilter);
 
         if (DooMagicGlobal.numOfCasts != 0) {
             if (DooMagicGlobal.numOfCasts <= numOfItemInBank) {
