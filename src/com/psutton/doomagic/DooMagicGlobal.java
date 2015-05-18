@@ -11,7 +11,7 @@ public class DooMagicGlobal {
     public static int itemToAlch, itemToAlchNoted;
     public static int startingLvl, startingXP;
     public static long startTime;
-    public final static String scriptVersion = "v1.30";
+    public final static String scriptVersion = "v1.31";
     public final static String scriptName = "DooMagic";
     public static String scriptStatus = "Starting Up";
     public static DooMagicGUI frame;
