@@ -73,10 +73,9 @@ public class Helpers {
         itemFilter = new IdFilter(true, itemID);
 
         if (Inventory.contains(itemFilter)) {
-            System.out.println("Is In inventory");
             return true;
         }
-        System.out.println("Is not in inventory");
+
         return false;
     }
 
