@@ -73,9 +73,10 @@ public class Helpers {
         itemFilter = new IdFilter(true, itemID);
 
         if (Inventory.contains(itemFilter)) {
+            System.out.println("Is In inventory");
             return true;
         }
-
+        System.out.println("Is not in inventory");
         return false;
     }
 
@@ -140,12 +141,24 @@ public class Helpers {
             itemToAlch = Inventory.getItemAt(0);
             if (itemToAlch != null) {
                 DooMagicGlobal.itemToAlch = itemToAlch.getID();
-                DooMagicGlobal.itemToAlchNoted = DooMagicGlobal.itemToAlch + 1;
+                if (Helpers.isItemNoteable(itemToAlch)) {
+                    DooMagicGlobal.itemToAlchNoted = DooMagicGlobal.itemToAlch + 1;
+                } else {
+                    DooMagicGlobal.itemToAlchNoted = DooMagicGlobal.itemToAlch;
+                }
             }
         } else {
             System.out.println("Inventory is setup incorrectly to detect item to use.");
             DooMagicGlobal.script.stop();
         }
+    }
+
+    public static boolean isItemNoteable(Item item) {
+        if (item.getStackSize() > 1) {
+            return false;
+        }
+
+        return true;
     }
 
     private static boolean meetsRuneRequirement(PSRune rune) {
